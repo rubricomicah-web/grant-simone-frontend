@@ -4,14 +4,14 @@
 <head>
 
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Grant Simone</title>
+<title>Grant Simone AI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet"
 />
 
@@ -29,7 +29,7 @@ font-family:'Inter',sans-serif;
 
 background:
 linear-gradient(
-rgba(0,0,0,.84),
+rgba(0,0,0,.86),
 rgba(0,0,0,.92)
 ),
 url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
@@ -38,15 +38,14 @@ background-size:cover;
 background-position:center;
 background-attachment:fixed;
 
-min-height:100vh;
+height:100vh;
+overflow:hidden;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-padding:20px;
-
-overflow:hidden;
+padding:18px;
 
 color:white;
 }
@@ -54,26 +53,157 @@ color:white;
 #app{
 
 width:100%;
-max-width:1300px;
-height:94vh;
+max-width:1400px;
+height:95vh;
+
+display:flex;
+overflow:hidden;
+
+border-radius:32px;
 
 background:
-rgba(12,12,12,.48);
+rgba(12,12,12,.55);
 
-backdrop-filter:blur(22px);
+backdrop-filter:blur(26px);
 
 border:
 1px solid rgba(255,255,255,.06);
 
-border-radius:30px;
-
 box-shadow:
-0 25px 80px rgba(0,0,0,.55),
-0 0 40px rgba(212,175,55,.08);
+0 25px 90px rgba(0,0,0,.6);
+}
+
+/* SIDEBAR */
+
+#sidebar{
+
+width:290px;
+
+background:
+rgba(255,255,255,.03);
+
+border-right:
+1px solid rgba(255,255,255,.05);
+
+padding:28px 22px;
 
 display:flex;
 flex-direction:column;
+}
 
+.sidebar-logo{
+
+display:flex;
+align-items:center;
+gap:14px;
+
+margin-bottom:34px;
+}
+
+.sidebar-logo img{
+
+width:54px;
+height:54px;
+
+border-radius:50%;
+
+border:
+2px solid rgba(212,175,55,.45);
+}
+
+.sidebar-logo h1{
+
+font-size:22px;
+font-weight:700;
+}
+
+.sidebar-logo p{
+
+font-size:13px;
+color:rgba(255,255,255,.55);
+margin-top:4px;
+}
+
+.sidebar-box{
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+border-radius:22px;
+
+padding:20px;
+
+margin-bottom:18px;
+}
+
+.sidebar-box h3{
+
+font-size:14px;
+font-weight:700;
+
+margin-bottom:12px;
+
+color:#f5d76e;
+}
+
+.sidebar-box p{
+
+font-size:13px;
+
+line-height:1.7;
+
+color:
+rgba(255,255,255,.72);
+}
+
+.quick-btn{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:16px;
+
+margin-top:10px;
+
+background:
+rgba(255,255,255,.05);
+
+color:white;
+
+font-size:14px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.quick-btn:hover{
+
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#f5d76e
+);
+
+color:black;
+}
+
+/* MAIN */
+
+#main{
+
+flex:1;
+
+display:flex;
+flex-direction:column;
 overflow:hidden;
 }
 
@@ -91,33 +221,28 @@ border-bottom:
 1px solid rgba(255,255,255,.05);
 }
 
-.logo{
+.header-left{
 
 display:flex;
 align-items:center;
 gap:14px;
 }
 
-.avatar{
+.header-left img{
 
-width:52px;
-height:52px;
+width:50px;
+height:50px;
 
 border-radius:50%;
-
-object-fit:cover;
-
-border:
-2px solid rgba(212,175,55,.45);
 }
 
-.logo h1{
+.header-left h2{
 
-font-size:22px;
-font-weight:600;
+font-size:21px;
+font-weight:700;
 }
 
-.logo p{
+.header-left p{
 
 font-size:13px;
 color:rgba(255,255,255,.55);
@@ -125,19 +250,19 @@ color:rgba(255,255,255,.55);
 
 .status{
 
-padding:12px 18px;
+padding:10px 16px;
 
-border-radius:18px;
+border-radius:999px;
 
 background:
-rgba(255,255,255,.03);
+rgba(212,175,55,.08);
 
 border:
-1px solid rgba(212,175,55,.12);
+1px solid rgba(212,175,55,.14);
 
 font-size:13px;
 
-color:#d4af37;
+color:#f5d76e;
 }
 
 /* CHAT */
@@ -148,15 +273,15 @@ flex:1;
 
 overflow-y:auto;
 
-padding:30px;
+padding:26px;
 
 scroll-behavior:smooth;
 }
 
 .message{
 
-margin-bottom:24px;
 display:flex;
+margin-bottom:24px;
 }
 
 .message.user{
@@ -169,15 +294,14 @@ justify-content:flex-start;
 
 .bubble{
 
-max-width:80%;
+max-width:78%;
 
-padding:18px 20px;
+padding:18px 22px;
 
-border-radius:22px;
-
-line-height:1.7;
+border-radius:24px;
 
 font-size:15px;
+line-height:1.8;
 }
 
 .user .bubble{
@@ -191,9 +315,9 @@ linear-gradient(
 
 color:black;
 
-border-bottom-right-radius:8px;
-
 font-weight:600;
+
+border-bottom-right-radius:10px;
 }
 
 .ai .bubble{
@@ -204,16 +328,221 @@ rgba(255,255,255,.04);
 border:
 1px solid rgba(255,255,255,.06);
 
-border-bottom-left-radius:8px;
+border-bottom-left-radius:10px;
 
-color:rgba(255,255,255,.92);
+color:
+rgba(255,255,255,.95);
+}
+
+/* TYPING */
+
+.typing{
+
+display:flex;
+gap:6px;
+
+margin-top:12px;
+}
+
+.typing span{
+
+width:8px;
+height:8px;
+
+border-radius:50%;
+
+background:#f5d76e;
+
+animation:bounce 1.4s infinite;
+}
+
+.typing span:nth-child(2){
+animation-delay:.2s;
+}
+
+.typing span:nth-child(3){
+animation-delay:.4s;
+}
+
+@keyframes bounce{
+
+0%,80%,100%{
+transform:scale(0);
+opacity:.3;
+}
+
+40%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+/* GRANT GRID */
+
+.grant-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:18px;
+
+margin-top:10px;
+}
+
+.grant-card{
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+border-radius:24px;
+
+padding:22px;
+
+transition:.3s;
+
+position:relative;
+
+overflow:hidden;
+}
+
+.grant-card:hover{
+
+transform:translateY(-3px);
+
+border:
+1px solid rgba(212,175,55,.25);
+
+box-shadow:
+0 15px 40px rgba(212,175,55,.08);
+}
+
+.grant-title{
+
+font-size:17px;
+font-weight:700;
+
+line-height:1.5;
+
+margin-bottom:18px;
+
+color:#f5d76e;
+}
+
+.grant-label{
+
+font-size:11px;
+
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:
+rgba(255,255,255,.42);
+
+margin-bottom:4px;
+}
+
+.grant-value{
+
+font-size:14px;
+
+line-height:1.7;
+
+margin-bottom:16px;
+
+color:
+rgba(255,255,255,.9);
+}
+
+.grant-link{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+padding:12px 18px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#f5d76e
+);
+
+color:black;
+
+font-size:14px;
+font-weight:700;
+
+text-decoration:none;
+
+transition:.25s;
+}
+
+.grant-link:hover{
+transform:scale(1.04);
+}
+
+.badge{
+
+display:inline-block;
+
+margin-top:16px;
+
+padding:8px 14px;
+
+border-radius:999px;
+
+font-size:11px;
+font-weight:800;
+
+letter-spacing:.06em;
+
+text-transform:uppercase;
+
+color:white;
+}
+
+/* PROPOSAL */
+
+.proposal-card{
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(212,175,55,.16);
+
+border-radius:24px;
+
+padding:28px;
+
+line-height:1.9;
+}
+
+.proposal-title{
+
+font-size:22px;
+font-weight:700;
+
+margin-bottom:20px;
+
+color:#f5d76e;
 }
 
 /* INPUT */
 
 #input-area{
 
-padding:22px 24px;
+padding:22px;
 
 border-top:
 1px solid rgba(255,255,255,.05);
@@ -225,7 +554,7 @@ display:flex;
 align-items:flex-end;
 gap:14px;
 
-padding:14px 16px;
+padding:16px;
 
 border-radius:24px;
 
@@ -233,7 +562,7 @@ background:
 rgba(255,255,255,.04);
 
 border:
-1px solid rgba(212,175,55,.08);
+1px solid rgba(255,255,255,.06);
 }
 
 textarea{
@@ -245,15 +574,15 @@ border:none;
 outline:none;
 resize:none;
 
-max-height:180px;
-min-height:28px;
+font-family:'Inter',sans-serif;
 
 font-size:15px;
 line-height:1.7;
 
 color:white;
 
-font-family:'Inter',sans-serif;
+max-height:180px;
+min-height:26px;
 }
 
 textarea::placeholder{
@@ -262,8 +591,8 @@ color:rgba(255,255,255,.35);
 
 button{
 
-width:56px;
-height:56px;
+width:58px;
+height:58px;
 
 border:none;
 
@@ -283,230 +612,33 @@ font-weight:700;
 
 cursor:pointer;
 
-transition:.3s;
+transition:.25s;
 }
 
 button:hover{
-
 transform:scale(1.05);
 }
 
-/* TYPING */
+/* MOBILE */
 
-.typing{
-
-display:flex;
-gap:6px;
-padding:4px 0;
-}
-
-.typing span{
-
-width:8px;
-height:8px;
-
-border-radius:50%;
-
-background:#d4af37;
-
-animation:bounce 1.4s infinite;
-}
-
-.typing span:nth-child(2){
-animation-delay:.2s;
-}
-
-.typing span:nth-child(3){
-animation-delay:.4s;
-}
-
-@keyframes bounce{
-
-0%,80%,100%{
-transform:scale(0);
-opacity:.4;
-}
-
-40%{
-transform:scale(1);
-opacity:1;
-}
-}
-
-/* GRANT CARDS */
-
-.grant-card{
-
-background:
-rgba(255,255,255,.04);
-
-border:
-1px solid rgba(255,255,255,.08);
-
-border-radius:22px;
-
-padding:22px;
-
-margin-bottom:18px;
-
-backdrop-filter:blur(12px);
-
-transition:.3s;
-}
-
-.grant-card:hover{
-
-transform:translateY(-2px);
-
-border:
-1px solid rgba(212,175,55,.30);
-
-box-shadow:
-0 10px 35px rgba(212,175,55,.08);
-}
-
-.grant-title{
-
-font-size:18px;
-font-weight:700;
-
-margin-bottom:18px;
-
-color:#f5d76e;
-}
-
-.grant-section{
-
-margin-bottom:14px;
-}
-
-.grant-label{
-
-font-size:12px;
-
-text-transform:uppercase;
-
-letter-spacing:.08em;
-
-color:
-rgba(255,255,255,.45);
-
-margin-bottom:5px;
-}
-
-.grant-value{
-
-font-size:15px;
-
-line-height:1.7;
-
-color:
-rgba(255,255,255,.92);
-}
-
-.grant-link{
-
-display:inline-block;
-
-margin-top:14px;
-
-padding:12px 18px;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-135deg,
-#d4af37,
-#f5d76e
-);
-
-color:black;
-
-font-weight:700;
-
-text-decoration:none;
-
-transition:.3s;
-}
-
-.grant-link:hover{
-
-transform:scale(1.03);
-}
-
-.recommendation-badge{
-
-display:inline-block;
-
-margin-top:16px;
-
-padding:8px 14px;
-
-border-radius:999px;
-
-font-size:12px;
-
-font-weight:700;
-
-color:white;
-
-text-transform:uppercase;
-
-letter-spacing:.05em;
-}
-
-/* PROPOSAL CARD */
-
-.proposal-card{
-
-background:
-rgba(255,255,255,.04);
-
-border:
-1px solid rgba(212,175,55,.18);
-
-border-radius:24px;
-
-padding:24px;
-
-line-height:1.9;
-
-backdrop-filter:blur(14px);
-
-box-shadow:
-0 10px 40px rgba(212,175,55,.06);
-}
-
-.proposal-header{
-
-font-size:20px;
-font-weight:700;
-
-margin-bottom:18px;
-
-color:#f5d76e;
-}
-
-.proposal-content{
-
-font-size:15px;
-
-color:
-rgba(255,255,255,.92);
-
-white-space:normal;
-}
-
-@media(max-width:768px){
+@media(max-width:980px){
 
 #app{
+flex-direction:column;
 height:100vh;
 border-radius:0;
 }
 
+#sidebar{
+display:none;
+}
+
 .bubble{
 max-width:92%;
+}
+
+.grant-grid{
+grid-template-columns:1fr;
 }
 
 }
@@ -519,12 +651,13 @@ max-width:92%;
 
 <div id="app">
 
-<div id="header">
+<!-- SIDEBAR -->
 
-<div class="logo">
+<div id="sidebar">
+
+<div class="sidebar-logo">
 
 <img
-class="avatar"
 src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 />
 
@@ -535,13 +668,81 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
+<div class="sidebar-box">
+
+<h3>What I Can Do</h3>
+
+<p>
+
+• Find grants by state<br><br>
+
+• Match funding opportunities<br><br>
+
+• Help nonprofits & businesses<br><br>
+
+• Generate grant proposals<br><br>
+
+• Federal, private & local grants
+
+</p>
+
+</div>
+
+<div class="sidebar-box">
+
+<h3>Quick Prompts</h3>
+
+<button class="quick-btn"
+onclick="quickPrompt('Find grants for my nonprofit in California')">
+California Nonprofit Grants
+</button>
+
+<button class="quick-btn"
+onclick="quickPrompt('Find grants for women owned business in Texas')">
+Women-Owned Business
+</button>
+
+<button class="quick-btn"
+onclick="quickPrompt('Generate a grant proposal for my NGO')">
+Generate Proposal
+</button>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div id="main">
+
+<!-- HEADER -->
+
+<div id="header">
+
+<div class="header-left">
+
+<img
+src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
+/>
+
+<div>
+<h2>Grant Simone</h2>
+<p>Funding Expert Assistant</p>
+</div>
+
+</div>
+
 <div class="status">
 ● Online
 </div>
 
 </div>
 
+<!-- CHAT -->
+
 <div id="chat-container"></div>
+
+<!-- INPUT -->
 
 <div id="input-area">
 
@@ -549,13 +750,15 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 <textarea
 id="messageInput"
-placeholder="Ask about grants, funding opportunities, or proposal generation..."
 rows="1"
+placeholder="Ask about grants, funding opportunities, or proposal generation..."
 ></textarea>
 
 <button id="sendBtn">
 ↑
 </button>
+
+</div>
 
 </div>
 
@@ -589,30 +792,42 @@ document.getElementById("sendBtn");
 window.onload = ()=>{
 
 addMessage(
-`Hello! I'm Grant Simone.
 
-I can help you:
+`Hello! 👋
 
-• Find grants
-• Match funding opportunities
-• Generate grant proposals
-• Support nonprofits, NGOs, startups, and businesses
+I'm Grant Simone.
 
-Try asking:
-"Find grants for my nonprofit in Texas"
-`,
+Tell me:
+
+• your business type
+• your state
+• what funding you need
+
+and I'll find the best grants for you.`,
+
 "ai"
+
 );
 
 };
 
-/* AUTO RESIZE */
+/* QUICK PROMPT */
+
+function quickPrompt(text){
+
+input.value = text;
+
+sendMessage();
+
+}
+
+/* AUTO HEIGHT */
 
 input.addEventListener("input",()=>{
 
 input.style.height="auto";
 
-input.style.height=
+input.style.height =
 input.scrollHeight + "px";
 
 });
@@ -634,13 +849,9 @@ bubble.className =
 "bubble";
 
 if(isHTML){
-
 bubble.innerHTML = content;
-
 }else{
-
 bubble.innerText = content;
-
 }
 
 wrapper.appendChild(bubble);
@@ -665,23 +876,29 @@ wrapper.className =
 wrapper.id = "typing";
 
 wrapper.innerHTML = `
+
 <div class="bubble">
 
-<div style="margin-bottom:10px;font-weight:600;color:#f5d76e;">
+<div style="
+font-weight:700;
+color:#f5d76e;
+margin-bottom:10px;
+">
 Grant Simone
 </div>
 
-<div id="loadingText">
-Searching verified funding databases...
+<div id="typingText">
+Searching grants in your state...
 </div>
 
-<div class="typing" style="margin-top:12px;">
+<div class="typing">
 <span></span>
 <span></span>
 <span></span>
 </div>
 
 </div>
+
 `;
 
 chatContainer.appendChild(wrapper);
@@ -689,13 +906,13 @@ chatContainer.appendChild(wrapper);
 chatContainer.scrollTop =
 chatContainer.scrollHeight;
 
-const phases = [
+const texts = [
 
-"Searching verified funding databases...",
-"Checking federal grant programs...",
-"Scanning nonprofit funding opportunities...",
-"Matching grants to your business...",
-"Preparing recommendations..."
+"Searching grants in your state...",
+"Checking federal opportunities...",
+"Filtering business eligibility...",
+"Finding verified funding sources...",
+"Preparing your recommendations..."
 
 ];
 
@@ -705,22 +922,24 @@ const interval =
 setInterval(()=>{
 
 const el =
-document.getElementById("loadingText");
+document.getElementById("typingText");
 
 if(!el){
 
 clearInterval(interval);
 return;
-}
-
-i = (i + 1) % phases.length;
-
-el.innerText =
-phases[i];
-
-},2500);
 
 }
+
+i = (i + 1) % texts.length;
+
+el.innerText = texts[i];
+
+},2200);
+
+}
+
+/* REMOVE TYPING */
 
 function removeTyping(){
 
@@ -733,7 +952,7 @@ typing.remove();
 
 }
 
-/* DETECT PROPOSAL */
+/* PROPOSAL DETECTOR */
 
 function isProposal(text){
 
@@ -741,13 +960,12 @@ const lower =
 text.toLowerCase();
 
 return (
-lower.includes("proposal") ||
-lower.includes("grant proposal")
+lower.includes("proposal")
 );
 
 }
 
-/* FETCH WITH TIMEOUT */
+/* FETCH */
 
 async function fetchWithTimeout(
 url,
@@ -764,8 +982,6 @@ setTimeout(
 timeout
 );
 
-try{
-
 const response =
 await fetch(
 url,
@@ -779,47 +995,41 @@ clearTimeout(timeoutId);
 
 return response;
 
-}catch(error){
-
-clearTimeout(timeoutId);
-
-throw error;
-
 }
+
+/* BADGE COLOR */
+
+function badgeColor(text){
+
+const lower =
+(text || "").toLowerCase();
+
+if(lower.includes("strong"))
+return "#22c55e";
+
+if(lower.includes("medium"))
+return "#f59e0b";
+
+return "#ef4444";
 
 }
 
 /* RENDER GRANTS */
 
-function renderGrantCards(grants){
+function renderGrants(grants){
 
-let html = "";
+let html =
+`<div class="grant-grid">`;
 
 grants.forEach(grant=>{
-
-const recommendation =
-(grant.recommendation || "Strong Match")
-.toLowerCase();
-
-let badgeColor = "#22c55e";
-
-if(recommendation.includes("medium")){
-badgeColor="#f59e0b";
-}
-
-if(recommendation.includes("low")){
-badgeColor="#ef4444";
-}
 
 html += `
 
 <div class="grant-card">
 
 <div class="grant-title">
-${grant.grantName || "Verified Grant Opportunity"}
+${grant.grantName || "Grant Opportunity"}
 </div>
-
-<div class="grant-section">
 
 <div class="grant-label">
 Funding Amount
@@ -829,10 +1039,6 @@ Funding Amount
 ${grant.amount || "Varies"}
 </div>
 
-</div>
-
-<div class="grant-section">
-
 <div class="grant-label">
 Purpose
 </div>
@@ -841,18 +1047,12 @@ Purpose
 ${grant.purpose || "Business Support"}
 </div>
 
-</div>
-
-<div class="grant-section">
-
 <div class="grant-label">
 Eligibility
 </div>
 
 <div class="grant-value">
-${grant.eligibility || "Check requirements"}
-</div>
-
+${grant.eligibility || "Check Requirements"}
 </div>
 
 <a
@@ -868,8 +1068,10 @@ Apply for Grant →
 <br>
 
 <div
-class="recommendation-badge"
-style="background:${badgeColor}"
+class="badge"
+style="
+background:${badgeColor(grant.recommendation)}
+"
 >
 
 ${grant.recommendation || "Strong Match"}
@@ -882,11 +1084,13 @@ ${grant.recommendation || "Strong Match"}
 
 });
 
+html += `</div>`;
+
 return html;
 
 }
 
-/* SEND MESSAGE */
+/* SEND */
 
 async function sendMessage(){
 
@@ -910,10 +1114,10 @@ GRANT_SEARCH_API;
 let payload = {
 
 businessType:
-"All businesses, nonprofits, NGOs, startups, and organizations",
+"Business, nonprofit, NGO, startup",
 
 state:
-"All United States",
+"United States",
 
 keywords:
 message
@@ -928,13 +1132,13 @@ PROPOSAL_API;
 payload = {
 
 businessName:
-"Business Organization",
+"My Organization",
 
 businessType:
-"Business or Nonprofit",
+"Business",
 
 fundingPurpose:
-"Growth and Funding",
+"Growth Funding",
 
 grantName:
 message
@@ -971,40 +1175,75 @@ await response.json();
 
 removeTyping();
 
-/* GRANTS */
+/* PROPOSAL */
 
-if(endpoint === GRANT_SEARCH_API){
+if(endpoint === PROPOSAL_API){
 
-const userMessage =
+const proposal =
+data.proposalNarrative ||
+data.proposal ||
+data.content ||
+data.message ||
+JSON.stringify(data);
+
+const html = `
+
+<div class="proposal-card">
+
+<div class="proposal-title">
+Grant Proposal
+</div>
+
+<div>
+${proposal.replace(/\n/g,"<br>")}
+</div>
+
+</div>
+
+`;
+
+addMessage(html,"ai",true);
+
+return;
+
+}
+
+/* FILTER STATE */
+
+const lowerMessage =
 message.toLowerCase();
 
 const states = [
+
 "california",
 "texas",
 "florida",
 "new york",
 "michigan",
-"missouri",
-"wisconsin"
+"wisconsin",
+"missouri"
+
 ];
 
 let detectedState = "";
 
 states.forEach(state=>{
 
-if(userMessage.includes(state)){
+if(lowerMessage.includes(state)){
+
 detectedState = state;
+
 }
 
 });
 
-let filteredGrants =
+let grants =
 data.grants || [];
 
 if(detectedState){
 
-filteredGrants =
-filteredGrants.filter(grant=>{
+grants =
+grants.filter(grant=>{
 
 const text =
 JSON.stringify(grant)
@@ -1016,81 +1255,42 @@ return text.includes(detectedState);
 
 }
 
-if(filteredGrants.length === 0){
+if(grants.length === 0){
 
-filteredGrants =
-data.grants || [];
+addMessage(
+
+`I couldn't find exact grants for that state yet.
+
+Try adding:
+• business type
+• nonprofit or for-profit
+• city/state
+• funding purpose`,
+
+"ai"
+
+);
+
+return;
 
 }
 
-if(filteredGrants.length > 0){
+/* CONVERSATIONAL RESPONSE */
+
+addMessage(
+
+`I found ${grants.length} funding opportunities that may match your request.
+
+Here are the best recommendations 👇`,
+
+"ai"
+
+);
 
 const cards =
-renderGrantCards(filteredGrants);
+renderGrants(grants);
 
 addMessage(cards,"ai",true);
-
-}else{
-
-addMessage(
-"No verified grants found currently.",
-"ai"
-);
-
-}
-
-}
-
-/* PROPOSAL */
-
-else{
-
-console.log("Proposal Response:", data);
-
-let proposalText = "";
-
-proposalText =
-data.proposalNarrative ||
-data.proposal ||
-data.content ||
-data.response ||
-data.message ||
-"";
-
-if(typeof data === "string"){
-proposalText = data;
-}
-
-if(!proposalText){
-
-proposalText =
-JSON.stringify(data,null,2);
-
-}
-
-const formattedProposal = `
-
-<div class="proposal-card">
-
-<div class="proposal-header">
-Grant Proposal
-</div>
-
-<div class="proposal-content">
-${proposalText.replace(/\n/g,"<br>")}
-</div>
-
-</div>
-
-`;
-
-addMessage(
-formattedProposal,
-"ai",
-true
-);
-
-}
 
 }catch(error){
 
@@ -1098,21 +1298,14 @@ console.error(error);
 
 removeTyping();
 
-if(error.name === "AbortError"){
-
 addMessage(
-"The request took too long. Please try again.",
+
+`Something went wrong while connecting to the funding database.
+
+Please try again in a few seconds.`,
+
 "ai"
-);
 
-return;
-
-}
-
-addMessage(
-`Connection Error:
-${error.message}`,
-"ai"
 );
 
 }
