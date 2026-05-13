@@ -6,7 +6,7 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 />
 
 <title>Grant Simone AI</title>
@@ -30,6 +30,17 @@ rel="stylesheet"
     font-family:'Inter',sans-serif;
 }
 
+html,
+body{
+
+    height:100%;
+    min-height:100dvh;
+
+    background:black;
+
+    overflow-x:hidden;
+}
+
 body{
 
     background:
@@ -44,12 +55,13 @@ body{
     background-attachment:fixed;
 
     color:white;
-    overflow:hidden;
 }
 
 .app{
+
     display:flex;
-    height:100vh;
+
+    min-height:100dvh;
 }
 
 /* SIDEBAR */
@@ -182,6 +194,8 @@ body{
 
     display:flex;
     flex-direction:column;
+
+    min-height:100dvh;
 }
 
 /* TOPBAR */
@@ -249,6 +263,10 @@ body{
 
     overflow-y:auto;
 
+    min-height:0;
+
+    -webkit-overflow-scrolling:touch;
+
     padding:34px;
 }
 
@@ -295,116 +313,6 @@ body{
     border-radius:24px;
 
     font-weight:600;
-}
-
-/* GRANT CARDS */
-
-.grant-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:22px;
-
-    margin-top:28px;
-}
-
-.grant-card{
-
-    background:
-    rgba(255,255,255,0.03);
-
-    border:
-    1px solid rgba(255,213,79,0.14);
-
-    border-radius:28px;
-
-    padding:24px;
-
-    transition:0.3s;
-}
-
-.grant-card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:#FFD54F;
-}
-
-.badge{
-
-    display:inline-block;
-
-    background:
-    rgba(255,213,79,0.12);
-
-    color:#FFD54F;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    font-size:13px;
-
-    margin-bottom:16px;
-}
-
-.grant-card h3{
-
-    font-size:24px;
-
-    margin-bottom:14px;
-}
-
-.grant-card p{
-
-    color:#bbb;
-
-    line-height:1.8;
-
-    margin-bottom:22px;
-}
-
-.card-buttons{
-
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
-
-.card-buttons button{
-
-    border:none;
-
-    padding:13px 18px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-.view-btn{
-
-    background:#FFD54F;
-    color:black;
-}
-
-.save-btn{
-
-    background:
-    rgba(255,255,255,0.06);
-
-    color:white;
-}
-
-.proposal-btn{
-
-    background:#1f1f1f;
-    color:#FFD54F;
 }
 
 /* INPUT */
@@ -484,7 +392,7 @@ body{
 @media(max-width:900px){
 
     body{
-        overflow:hidden;
+        overflow-x:hidden;
     }
 
     .sidebar{
@@ -493,6 +401,7 @@ body{
 
     .main{
         width:100%;
+        min-height:100dvh;
     }
 
     .topbar{
@@ -528,7 +437,10 @@ body{
     .chat-area{
 
         padding:18px;
-        padding-bottom:130px;
+
+        padding-bottom:
+        calc(130px + env(safe-area-inset-bottom));
+
     }
 
     .assistant-message{
@@ -553,26 +465,6 @@ body{
         padding:16px 18px;
     }
 
-    .grant-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .grant-card{
-
-        padding:22px;
-    }
-
-    .grant-card h3{
-
-        font-size:22px;
-    }
-
-    .grant-card p{
-
-        font-size:15px;
-    }
-
     .input-area{
 
         position:fixed;
@@ -582,6 +474,9 @@ body{
         right:0;
 
         padding:14px;
+
+        padding-bottom:
+        calc(14px + env(safe-area-inset-bottom));
 
         background:
         linear-gradient(
