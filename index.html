@@ -48,6 +48,8 @@ display:flex;
 height:100vh;
 }
 
+/* SIDEBAR */
+
 .sidebar{
 
 width:320px;
@@ -171,6 +173,8 @@ color:#777;
 font-size:14px;
 }
 
+/* MAIN */
+
 .main{
 
 height:100dvh;
@@ -251,6 +255,8 @@ font-size:14px;
 font-weight:600;
 }
 
+/* CHAT */
+
 .chat{
 
 flex:1;
@@ -292,8 +298,6 @@ border:
 position:relative;
 
 z-index:1;
-
-overflow:hidden;
 }
 
 .user{
@@ -307,6 +311,8 @@ margin-left:auto;
 font-weight:bold;
 }
 
+/* GRANTS */
+
 .grants-grid{
 
 display:grid;
@@ -317,8 +323,6 @@ repeat(auto-fit,minmax(320px,1fr));
 gap:24px;
 
 margin-top:24px;
-
-align-items:stretch;
 }
 
 .grant-card{
@@ -340,8 +344,6 @@ transition:0.25s;
 position:relative;
 
 z-index:2;
-
-height:100%;
 }
 
 .grant-card:hover{
@@ -428,6 +430,8 @@ background:#1b1b1b;
 
 color:white;
 }
+
+/* INPUT */
 
 .input-area{
 
@@ -523,6 +527,8 @@ font-weight:bold;
 cursor:pointer;
 }
 
+/* MODAL */
+
 .custom-modal-overlay{
 
 position:fixed;
@@ -609,6 +615,8 @@ gap:14px;
 
 flex-wrap:wrap;
 }
+
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -766,5 +774,525 @@ max-width:980px;
 </head>
 
 <body>
+
+<div class="app">
+
+<div class="sidebar">
+
+<div class="logo">
+
+<img
+src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
+/>
+
+<div>
+
+<h1>Grant Simone</h1>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
+</div>
+
+</div>
+
+<button class="new-chat">
++ New Conversation
+</button>
+
+<div class="sidebar-title">
+RECENT CONVERSATIONS
+</div>
+
+<div id="savedContainer"></div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<div class="top-left">
+
+<img
+src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
+/>
+
+<div>
+
+<h1>Grant Simone</h1>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
+</div>
+
+</div>
+
+<div class="online">
+● Online
+</div>
+
+</div>
+
+<div
+class="chat"
+id="chat"
+>
+
+<div class="message bot">
+
+Hi! I'm Grant Simone.
+
+<br><br>
+
+Tell me about your business,
+nonprofit,
+startup,
+or funding goals
+and I'll help you find
+the best grants available.
+
+</div>
+
+</div>
+
+<div class="input-area">
+
+<div class="input-wrap">
+
+<input
+id="userInput"
+placeholder="Ask about grants, funding, nonprofits..."
+/>
+
+<button
+class="send-btn"
+onclick="sendMessage()"
+>
+↑
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const chat =
+document.getElementById("chat");
+
+let savedGrants = [];
+
+/* SEND */
+
+async function sendMessage(){
+
+const input =
+document.getElementById("userInput");
+
+const text =
+input.value.trim();
+
+if(!text) return;
+
+chat.innerHTML += `
+
+<div class="message user">
+${text}
+</div>
+
+`;
+
+input.value = "";
+
+chat.scrollTop =
+chat.scrollHeight;
+
+try{
+
+const response = await fetch(
+"https://grant-simone-backend-production.up.railway.app/chat",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+message:text
+})
+}
+);
+
+const data =
+await response.json();
+
+if(data.grants){
+
+showGrantCards(data.grants);
+
+}else{
+
+chat.innerHTML += `
+
+<div class="message bot">
+${data.response}
+</div>
+
+`;
+
+}
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}catch(error){
+
+chat.innerHTML += `
+
+<div class="message bot">
+Something went wrong.
+</div>
+
+`;
+
+console.error(error);
+
+}
+
+}
+
+/* SHOW CARDS */
+
+function showGrantCards(grants){
+
+const cardsHTML =
+grants.map(grant => `
+
+<div class="grant-card">
+
+<div class="badge">
+${grant.amount || "Funding"}
+</div>
+
+<div class="grant-title">
+${grant.title}
+</div>
+
+<div class="grant-desc">
+${grant.description}
+</div>
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="
+openGrantModal(
+'${grant.title}',
+'${grant.amount}',
+'${grant.description}',
+'${grant.link}'
+)
+"
+>
+View Details
+</button>
+
+<button
+class="btn secondary"
+onclick="
+saveGrant(
+'${grant.title}'
+)
+"
+>
+Save
+</button>
+
+<button
+class="btn secondary"
+onclick="
+downloadPDF(
+'${grant.title}'
+)
+"
+>
+PDF
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+chat.innerHTML += `
+
+<div class="message bot">
+
+<p>
+Here are the best grant opportunities I found for your business:
+</p>
+
+<div class="grants-grid">
+
+${cardsHTML}
+
+</div>
+
+</div>
+
+`;
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+/* SAVE */
+
+function saveGrant(name){
+
+if(savedGrants.includes(name)){
+return;
+}
+
+savedGrants.push(name);
+
+renderSavedGrants();
+
+}
+
+/* RENDER SAVED */
+
+function renderSavedGrants(){
+
+const container =
+document.getElementById("savedContainer");
+
+let html = "";
+
+savedGrants.forEach((grant)=>{
+
+html += `
+
+<div
+class="saved-card"
+onclick="
+openSavedGrant(
+'${grant}'
+)
+"
+>
+
+<h3>
+⭐ ${grant}
+</h3>
+
+<p>
+Saved Grant
+</p>
+
+</div>
+
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+
+/* OPEN SAVED */
+
+function openSavedGrant(name){
+
+if(name === "SBA Microloan Program"){
+
+openGrantModal(
+'SBA Microloan Program',
+'$50,000 Funding',
+'This grant helps startups and small businesses access working capital and expansion funding.',
+'https://www.sba.gov'
+);
+
+}
+
+else if(name === "Amber Grant"){
+
+openGrantModal(
+'Amber Grant',
+'Women-Owned',
+'Monthly funding opportunities for women-owned businesses and startups.',
+'https://ambergrantsforwomen.com'
+);
+
+}
+
+}
+
+/* MODAL */
+
+function openGrantModal(
+title,
+amount,
+desc,
+link
+){
+
+closeGrantModal();
+
+const modal =
+document.createElement("div");
+
+modal.id =
+"grantModal";
+
+modal.innerHTML = `
+
+<div class="custom-modal-overlay">
+
+<div class="custom-modal">
+
+<button
+class="close-modal"
+onclick="closeGrantModal()"
+>
+✕
+</button>
+
+<div class="badge">
+${amount}
+</div>
+
+<h1 class="modal-title">
+${title}
+</h1>
+
+<p class="modal-desc">
+${desc}
+</p>
+
+<div class="modal-actions">
+
+<a
+href="${link}"
+target="_blank"
+class="btn primary"
+style="text-decoration:none;"
+>
+Official Website
+</a>
+
+<button
+class="btn secondary"
+onclick="
+downloadPDF(
+'${title}'
+)
+"
+>
+Download PDF
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+document.body.appendChild(modal);
+
+}
+
+/* CLOSE MODAL */
+
+function closeGrantModal(){
+
+const modal =
+document.getElementById("grantModal");
+
+if(modal){
+modal.remove();
+}
+
+}
+
+/* REAL PDF */
+
+async function downloadPDF(name){
+
+const { jsPDF } =
+window.jspdf;
+
+const doc =
+new jsPDF();
+
+doc.setFont("helvetica");
+
+doc.setFontSize(22);
+
+doc.text(
+"Grant Proposal",
+20,
+30
+);
+
+doc.setFontSize(16);
+
+doc.text(
+`Grant Name: ${name}`,
+20,
+50
+);
+
+doc.setFontSize(12);
+
+doc.text(
+"Generated by Grant Simone AI",
+20,
+70
+);
+
+doc.text(
+"This proposal outlines funding opportunities and business expansion strategies.",
+20,
+90
+);
+
+doc.text(
+"The funding may be used for staffing, marketing, equipment, operational costs, and growth initiatives.",
+20,
+110,
+{
+maxWidth:170
+}
+);
+
+doc.text(
+"Prepared for small business funding assistance.",
+20,
+150
+);
+
+doc.save(
+"grant-proposal.pdf"
+);
+
+}
+
+</script>
+
 </body>
 </html>
