@@ -960,15 +960,9 @@ chat.scrollHeight;
 
 }catch(error){
 
-chat.innerHTML += `
-
-<div class="message bot">
-Something went wrong.
-</div>
-
-`;
-
 console.error(error);
+
+alert("Error generating PDF.");
 
 }
 
