@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8"/>
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 />
 
 <title>Grant Simone AI</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
 href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet"
 />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
 
@@ -25,13 +24,35 @@ rel="stylesheet"
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Inter',sans-serif;
 }
 
+html,
 body{
 
-font-family:'Inter',sans-serif;
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+background:#000;
+
+color:white;
+}
+
+/* APP */
+
+.app{
+
+width:100%;
+height:100dvh;
 
 background:
+radial-gradient(
+circle at top right,
+rgba(255,215,0,0.10),
+transparent 30%
+),
 linear-gradient(
 rgba(0,0,0,.92),
 rgba(0,0,0,.96)
@@ -41,49 +62,15 @@ url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65AD
 background-size:cover;
 background-position:center;
 
-height:100vh;
-
-overflow:hidden;
-
 display:flex;
-justify-content:center;
-align-items:center;
-
-padding:18px;
-
-color:white;
-}
-
-/* APP */
-
-#app{
-
-width:100%;
-height:95vh;
-
-display:flex;
-
 overflow:hidden;
-
-border-radius:34px;
-
-background:
-rgba(10,10,10,.58);
-
-backdrop-filter:blur(30px);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-box-shadow:
-0 30px 120px rgba(0,0,0,.7);
 }
 
 /* SIDEBAR */
 
-#sidebar{
+.sidebar{
 
-width:310px;
+width:300px;
 
 background:
 rgba(255,255,255,.03);
@@ -102,20 +89,20 @@ display:flex;
 align-items:center;
 gap:14px;
 
-margin-bottom:26px;
+margin-bottom:28px;
 }
 
 .logo img{
 
-width:58px;
-height:58px;
+width:60px;
+height:60px;
 
 border-radius:50%;
 }
 
 .logo h1{
 
-font-size:22px;
+font-size:24px;
 font-weight:700;
 }
 
@@ -123,8 +110,7 @@ font-weight:700;
 
 font-size:13px;
 
-color:
-rgba(255,255,255,.5);
+color:#9d9d9d;
 }
 
 .new-chat{
@@ -140,21 +126,19 @@ border-radius:18px;
 background:
 linear-gradient(
 135deg,
-#d4af37,
-#f5d76e
+#E9C84A,
+#FFD54F
 );
 
-color:black;
-
-font-size:15px;
+font-size:16px;
 font-weight:700;
 
 cursor:pointer;
 
-margin-bottom:24px;
+margin-bottom:26px;
 }
 
-.sidebar-title{
+.section-title{
 
 font-size:12px;
 
@@ -162,71 +146,56 @@ text-transform:uppercase;
 
 letter-spacing:.08em;
 
-color:
-rgba(255,255,255,.4);
+color:#8d8d8d;
 
 margin-bottom:14px;
 }
 
-.history-item{
+.history-item,
+.saved-item{
+
+background:#111;
+
+border:
+1px solid rgba(255,255,255,.05);
 
 padding:14px;
 
 border-radius:16px;
-
-background:
-rgba(255,255,255,.04);
 
 margin-bottom:12px;
 
 cursor:pointer;
 
-transition:.25s;
+transition:.3s;
 }
 
-.history-item:hover{
+.history-item:hover,
+.saved-item:hover{
 
-background:
-rgba(212,175,55,.08);
-}
+border-color:
+rgba(255,215,0,.3);
 
-.saved-item{
-
-display:block;
-
-padding:14px;
-
-border-radius:16px;
-
-background:
-rgba(255,255,255,.04);
-
-margin-bottom:12px;
-
-color:white;
-
-text-decoration:none;
-
-font-size:13px;
+transform:translateY(-2px);
 }
 
 /* MAIN */
 
-#main{
+.main{
 
 flex:1;
 
 display:flex;
 flex-direction:column;
 
-overflow:hidden;
+height:100dvh;
 }
 
 /* HEADER */
 
-#header{
+.header{
 
-padding:24px 30px;
+padding:20px 24px;
 
 display:flex;
 justify-content:space-between;
@@ -234,164 +203,235 @@ align-items:center;
 
 border-bottom:
 1px solid rgba(255,255,255,.05);
+
+background:
+rgba(0,0,0,.35);
+
+backdrop-filter:blur(20px);
 }
 
-.header-left{
+.profile{
 
 display:flex;
 align-items:center;
 gap:14px;
 }
 
-.header-left img{
+.profile img{
 
-width:56px;
-height:56px;
+width:54px;
+height:54px;
 
 border-radius:50%;
 }
 
-.header-left h2{
+.profile h2{
 
 font-size:24px;
 font-weight:700;
 }
 
-.header-left p{
+.profile p{
 
 font-size:13px;
 
-color:
-rgba(255,255,255,.5);
+color:#9d9d9d;
 }
 
-.status{
+.online{
 
 padding:10px 16px;
 
 border-radius:999px;
 
 background:
-rgba(212,175,55,.08);
+rgba(255,215,0,.08);
 
 border:
-1px solid rgba(212,175,55,.16);
+1px solid rgba(255,215,0,.14);
 
-color:#f5d76e;
+color:#FFD54F;
 
 font-size:13px;
 }
 
-/* CHAT */
+/* HERO */
 
-#chat{
+.hero{
 
 flex:1;
 
 overflow-y:auto;
 
-padding:30px;
-
-scroll-behavior:smooth;
-}
-
-.message{
+padding:50px 24px 160px;
 
 display:flex;
-
-margin-bottom:24px;
-
-animation:fade .25s ease;
+flex-direction:column;
+align-items:center;
 }
 
-@keyframes fade{
+.hero h1{
 
-from{
-opacity:0;
-transform:translateY(10px);
+font-size:72px;
+font-weight:300;
+
+text-align:center;
+
+line-height:1.1;
 }
 
-to{
-opacity:1;
-transform:none;
+.gold-line{
+
+width:120px;
+height:4px;
+
+background:#FFD54F;
+
+border-radius:999px;
+
+margin:30px 0;
 }
 
+.hero-text{
+
+max-width:900px;
+
+text-align:center;
+
+font-size:24px;
+
+line-height:1.7;
+
+color:#b0b0b0;
 }
 
-.message.user{
-justify-content:flex-end;
+/* PROMPTS */
+
+.quick-prompts{
+
+width:100%;
+max-width:1100px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:22px;
+
+margin-top:50px;
 }
 
-.message.ai{
-justify-content:flex-start;
-}
+.prompt-card{
 
-.bubble{
+background:#121212;
 
-max-width:88%;
+border:
+1px solid rgba(255,215,0,0.10);
 
-padding:22px;
+padding:28px;
 
 border-radius:24px;
 
-font-size:15px;
-line-height:1.8;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+font-size:24px;
+
+cursor:pointer;
+
+transition:.3s;
 }
 
-.user .bubble{
+.prompt-card:hover{
+
+transform:translateY(-3px);
+
+border-color:#FFD54F;
+
+box-shadow:
+0 0 40px rgba(255,215,0,.12);
+}
+
+.prompt-card span:last-child{
+
+color:#FFD54F;
+
+font-size:28px;
+}
+
+/* MESSAGES */
+
+.messages{
+
+width:100%;
+max-width:1100px;
+
+margin-top:40px;
+
+display:flex;
+flex-direction:column;
+
+gap:18px;
+}
+
+.user-message{
+
+align-self:flex-end;
 
 background:
 linear-gradient(
 135deg,
-#d4af37,
-#f5d76e
+#E9C84A,
+#FFD54F
 );
 
 color:black;
 
-font-weight:700;
+padding:18px 22px;
 
-border-bottom-right-radius:10px;
+border-radius:24px 24px 6px 24px;
+
+max-width:75%;
+
+font-size:17px;
+font-weight:600;
 }
 
-.ai .bubble{
+.ai-message{
 
-background:
-rgba(255,255,255,.04);
+align-self:flex-start;
+
+background:#121212;
 
 border:
 1px solid rgba(255,255,255,.05);
 
-border-bottom-left-radius:10px;
+padding:22px;
+
+border-radius:24px 24px 24px 6px;
+
+max-width:85%;
+
+line-height:1.7;
+
+font-size:16px;
 }
 
 /* GRANTS */
 
-.grant-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
-
-gap:18px;
-
-margin-top:18px;
-}
-
 .grant-card{
 
-padding:22px;
-
-border-radius:24px;
-
-background:
-rgba(255,255,255,.04);
+background:#151515;
 
 border:
-1px solid rgba(255,255,255,.05);
+1px solid rgba(255,255,255,.06);
 
-position:relative;
+padding:24px;
+
+border-radius:22px;
+
+margin-top:20px;
 }
 
 .match{
@@ -407,42 +447,26 @@ background:#22c55e;
 font-size:11px;
 font-weight:800;
 
-margin-bottom:14px;
+margin-bottom:16px;
 }
 
 .grant-title{
 
-font-size:18px;
+font-size:24px;
 font-weight:700;
 
-line-height:1.6;
+color:#FFD54F;
 
-margin-bottom:14px;
-
-color:#f5d76e;
+margin-bottom:16px;
 }
 
-.grant-label{
-
-font-size:11px;
-
-text-transform:uppercase;
-
-letter-spacing:.08em;
-
-color:
-rgba(255,255,255,.4);
-
-margin-bottom:5px;
-}
-
-.grant-value{
-
-font-size:14px;
+.grant-description{
 
 line-height:1.7;
 
-margin-bottom:14px;
+color:#d0d0d0;
+
+margin-bottom:18px;
 }
 
 .actions{
@@ -450,28 +474,23 @@ margin-bottom:14px;
 display:flex;
 gap:12px;
 
-margin-top:18px;
-
 flex-wrap:wrap;
 }
 
-.apply-btn,
-.proposal-btn{
+.action-btn{
 
-display:inline-flex;
-align-items:center;
-justify-content:center;
-
-padding:12px 18px;
+padding:14px 18px;
 
 border-radius:14px;
+
+text-decoration:none;
 
 font-size:14px;
 font-weight:700;
 
-text-decoration:none;
-
 cursor:pointer;
+
+border:none;
 }
 
 .apply-btn{
@@ -479,124 +498,180 @@ cursor:pointer;
 background:
 linear-gradient(
 135deg,
-#d4af37,
-#f5d76e
+#E9C84A,
+#FFD54F
 );
 
 color:black;
 }
 
-.proposal-btn{
+.secondary-btn{
 
-background:
-rgba(255,255,255,.08);
+background:#1c1c1c;
 
 border:
-1px solid rgba(255,255,255,.08);
+1px solid rgba(255,255,255,.06);
 
 color:white;
 }
 
-/* PROPOSAL */
+/* PROPOSAL MODAL */
 
-.proposal-preview{
+.modal{
 
-margin-top:20px;
+position:fixed;
 
-padding:24px;
-
-border-radius:24px;
+inset:0;
 
 background:
-rgba(255,255,255,.03);
+rgba(0,0,0,.75);
 
-border:
-1px solid rgba(212,175,55,.12);
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+
+padding:20px;
 }
 
-.proposal-header{
+.modal-content{
+
+width:100%;
+max-width:900px;
+
+max-height:90vh;
+
+overflow-y:auto;
+
+background:#0f0f0f;
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:30px;
+
+padding:30px;
+}
+
+.modal-header{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
 
-margin-bottom:20px;
+margin-bottom:28px;
 }
 
-.proposal-header h2{
+.modal-header h2{
 
-font-size:22px;
+font-size:32px;
 
-color:#f5d76e;
+color:#FFD54F;
 }
 
-.pdf-btn{
+.close-btn{
 
-padding:12px 18px;
+background:none;
+border:none;
 
-border-radius:14px;
+font-size:34px;
 
-background:
-linear-gradient(
-135deg,
-#d4af37,
-#f5d76e
-);
+color:white;
 
-color:black;
-
-font-size:14px;
-font-weight:700;
-
-text-decoration:none;
+cursor:pointer;
 }
 
-/* INPUT */
+/* PROPOSAL */
 
-#input-area{
+.proposal-section{
 
-padding:22px;
-
-border-top:
-1px solid rgba(255,255,255,.05);
+margin-bottom:30px;
 }
 
-#input-wrap{
+.proposal-section h3{
 
-display:flex;
+font-size:20px;
+
+margin-bottom:12px;
+
+color:#FFD54F;
+}
+
+.proposal-section p{
+
+line-height:1.8;
+
+color:#d0d0d0;
+}
+
+.timeline{
+
+display:grid;
 gap:14px;
+}
 
-padding:14px;
+.timeline-item{
 
-border-radius:24px;
+background:#181818;
 
-background:
-rgba(255,255,255,.04);
+padding:18px;
+
+border-radius:16px;
 
 border:
 1px solid rgba(255,255,255,.05);
 }
 
-textarea{
+/* INPUT */
+
+.chat-box{
+
+position:fixed;
+
+left:320px;
+right:20px;
+bottom:20px;
+
+background:#0d0d0d;
+
+border:
+1px solid rgba(255,255,255,.06);
+
+border-radius:28px;
+
+padding:14px;
+
+display:flex;
+align-items:center;
+gap:16px;
+
+z-index:999;
+}
+
+.chat-box input{
 
 flex:1;
 
-background:transparent;
+background:none;
 border:none;
 outline:none;
-resize:none;
-
-font-family:'Inter',sans-serif;
-
-font-size:15px;
 
 color:white;
+
+font-size:20px;
 }
 
-#send{
+.chat-box input::placeholder{
 
-width:58px;
-height:58px;
+color:#777;
+}
+
+.send-btn{
+
+width:64px;
+height:64px;
 
 border:none;
 
@@ -605,81 +680,103 @@ border-radius:50%;
 background:
 linear-gradient(
 135deg,
-#d4af37,
-#f5d76e
+#E9C84A,
+#FFD54F
 );
 
-font-size:22px;
-font-weight:700;
+font-size:28px;
 
 cursor:pointer;
+}
+
+/* LOADING */
+
+.loading{
+
+display:none;
+
+margin-top:20px;
+
+font-size:16px;
+
+color:#FFD54F;
 }
 
 /* MOBILE */
 
 @media(max-width:768px){
 
-body{
-padding:0;
-}
-
-#app{
-
-height:100vh;
-
-border-radius:0;
-
-display:block;
-}
-
-#sidebar{
+.sidebar{
 display:none;
 }
 
-#main{
-height:100vh;
+.hero h1{
+font-size:48px;
 }
 
-#header{
-padding:18px;
+.hero-text{
+font-size:18px;
 }
 
-#chat{
-padding:16px;
-}
-
-.bubble{
-max-width:100%;
-font-size:14px;
-}
-
-.grant-grid{
+.quick-prompts{
 grid-template-columns:1fr;
 }
 
-#input-area{
-padding:14px;
+.prompt-card{
+font-size:18px;
+padding:22px;
+}
+
+.chat-box{
+
+left:10px;
+right:10px;
+bottom:10px;
+
+padding:
+12px
+12px
+calc(12px + env(safe-area-inset-bottom));
+}
+
+.send-btn{
+
+width:56px;
+height:56px;
+
+font-size:22px;
+}
+
+.chat-box input{
+font-size:16px;
+}
+
+.user-message,
+.ai-message{
+
+max-width:100%;
+}
+
+.modal-content{
+padding:20px;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div id="app">
+<div class="app">
 
 <!-- SIDEBAR -->
 
-<div id="sidebar">
+<div class="sidebar">
 
 <div class="logo">
 
-<img
-src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
-/>
+<img src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg">
 
 <div>
 <h1>Grant Simone</h1>
@@ -695,7 +792,7 @@ onclick="newChat()"
 + New Conversation
 </button>
 
-<div class="sidebar-title">
+<div class="section-title">
 Recent Conversations
 </div>
 
@@ -703,7 +800,7 @@ Recent Conversations
 
 <br>
 
-<div class="sidebar-title">
+<div class="section-title">
 Saved Grants
 </div>
 
@@ -713,15 +810,13 @@ Saved Grants
 
 <!-- MAIN -->
 
-<div id="main">
+<div class="main">
 
-<div id="header">
+<div class="header">
 
-<div class="header-left">
+<div class="profile">
 
-<img
-src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
-/>
+<img src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg">
 
 <div>
 <h2>Grant Simone</h2>
@@ -730,29 +825,150 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
-<div class="status">
+<div class="online">
 ● Online
 </div>
 
 </div>
 
-<div id="chat"></div>
+<div class="hero">
 
-<div id="input-area">
+<h1>
+How can I help you today?
+</h1>
 
-<div id="input-wrap">
+<div class="gold-line"></div>
 
-<textarea
-id="message"
-rows="1"
-placeholder="Ask about grants, proposal generation, nonprofit funding..."
-></textarea>
+<div class="hero-text">
 
-<button id="send">
+I'm Grant Simone, your AI grant funding consultant for all U.S. states,
+businesses, nonprofits, NGOs, startups, and organizations.
+
+</div>
+
+<!-- PROMPTS -->
+
+<div class="quick-prompts">
+
+<button
+class="prompt-card"
+onclick="quickPrompt('Find grants for my business')"
+>
+<span>Find grants for my business</span>
+<span>→</span>
+</button>
+
+<button
+class="prompt-card"
+onclick="quickPrompt('Government funding opportunities')"
+>
+<span>Government funding opportunities</span>
+<span>→</span>
+</button>
+
+<button
+class="prompt-card"
+onclick="quickPrompt('Nonprofit grants')"
+>
+<span>Nonprofit grants</span>
+<span>→</span>
+</button>
+
+<button
+class="prompt-card"
+onclick="quickPrompt('Startup funding options')"
+>
+<span>Startup funding options</span>
+<span>→</span>
+</button>
+
+</div>
+
+<div class="messages" id="messages"></div>
+
+<div
+class="loading"
+id="loading"
+>
+Grant Simone is analyzing funding opportunities...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- INPUT -->
+
+<div class="chat-box">
+
+<input
+type="text"
+id="messageInput"
+placeholder="Ask about grants, funding, proposals, nonprofits, startups..."
+>
+
+<button
+class="send-btn"
+id="sendBtn"
+>
 ↑
 </button>
 
 </div>
+
+<!-- PROPOSAL MODAL -->
+
+<div
+class="modal"
+id="proposalModal"
+>
+
+<div
+class="modal-content"
+id="proposalContent"
+>
+
+<div class="modal-header">
+
+<h2>
+Grant Proposal Preview
+</h2>
+
+<button
+class="close-btn"
+onclick="closeProposal()"
+>
+×
+</button>
+
+</div>
+
+<div id="proposalBody"></div>
+
+<div
+style="
+display:flex;
+gap:14px;
+margin-top:30px;
+flex-wrap:wrap;
+"
+>
+
+<button
+class="action-btn apply-btn"
+onclick="downloadPDF()"
+>
+Download PDF
+</button>
+
+<button
+class="action-btn secondary-btn"
+onclick="window.print()"
+>
+Print Proposal
+</button>
 
 </div>
 
@@ -765,14 +981,23 @@ placeholder="Ask about grants, proposal generation, nonprofit funding..."
 const API =
 "https://grant-agent-backend-production.up.railway.app/grant-search";
 
-const chat =
-document.getElementById("chat");
-
 const input =
-document.getElementById("message");
+document.getElementById("messageInput");
 
 const sendBtn =
-document.getElementById("send");
+document.getElementById("sendBtn");
+
+const messages =
+document.getElementById("messages");
+
+const loading =
+document.getElementById("loading");
+
+const historyContainer =
+document.getElementById("history");
+
+const savedContainer =
+document.getElementById("saved");
 
 /* STORAGE */
 
@@ -786,78 +1011,92 @@ JSON.parse(
 localStorage.getItem("grantSimoneSaved")
 ) || [];
 
-/* INIT */
+/* QUICK PROMPT */
 
-window.onload = ()=>{
+function quickPrompt(text){
 
-addMessage(
+input.value = text;
 
-`Welcome to Grant Simone.
-
-Your AI funding consultant for:
-
-• nonprofits
-• startups
-• women-owned businesses
-• small businesses
-• NGOs
-
-Tell me about your organization and funding goals.`,
-
-"ai"
-
-);
-
-renderHistory();
-
-renderSaved();
-
-};
-
-/* MESSAGE */
-
-function addMessage(content,type,isHTML=false){
-
-const wrapper =
-document.createElement("div");
-
-wrapper.className =
-`message ${type}`;
-
-const bubble =
-document.createElement("div");
-
-bubble.className =
-"bubble";
-
-if(isHTML){
-bubble.innerHTML = content;
-}else{
-bubble.innerText = content;
-}
-
-wrapper.appendChild(bubble);
-
-chat.appendChild(wrapper);
-
-chat.scrollTop =
-chat.scrollHeight;
+sendMessage();
 
 }
 
-/* HISTORY */
+/* NEW CHAT */
 
-function saveConversation(message){
+function newChat(){
+
+messages.innerHTML = "";
+
+}
+
+/* USER MESSAGE */
+
+function addUserMessage(text){
+
+const div =
+document.createElement("div");
+
+div.className =
+"user-message";
+
+div.innerText =
+text;
+
+messages.appendChild(div);
+
+scrollBottom();
+
+}
+
+/* AI MESSAGE */
+
+function addAIMessage(html){
+
+const div =
+document.createElement("div");
+
+div.className =
+"ai-message";
+
+div.innerHTML =
+html;
+
+messages.appendChild(div);
+
+scrollBottom();
+
+}
+
+/* SCROLL */
+
+function scrollBottom(){
+
+setTimeout(()=>{
+
+window.scrollTo({
+
+top:
+document.body.scrollHeight,
+
+behavior:
+"smooth"
+
+});
+
+},100);
+
+}
+
+/* SAVE CONVERSATION */
+
+function saveConversation(text){
 
 conversations.unshift({
 
-title:
-message.substring(0,45),
+text,
 
 date:
-new Date().toLocaleDateString(),
-
-message
+new Date().toLocaleDateString()
 
 });
 
@@ -870,18 +1109,15 @@ renderHistory();
 
 }
 
+/* HISTORY */
+
 function renderHistory(){
 
-const container =
-document.getElementById("history");
-
-if(!container) return;
-
-container.innerHTML = "";
+historyContainer.innerHTML = "";
 
 conversations
 .slice(0,8)
-.forEach((item)=>{
+.forEach(item=>{
 
 const div =
 document.createElement("div");
@@ -891,7 +1127,7 @@ div.className =
 
 div.innerHTML = `
 
-<b>${item.title}</b>
+<b>${item.text.substring(0,40)}</b>
 
 <br><br>
 
@@ -901,27 +1137,19 @@ div.innerHTML = `
 
 div.onclick = ()=>{
 
-restoreChat(item.message);
+input.value = item.text;
+
+input.focus();
 
 };
 
-container.appendChild(div);
+historyContainer.appendChild(div);
 
 });
 
 }
 
-function restoreChat(message){
-
-if(!input) return;
-
-input.value = message;
-
-input.focus();
-
-}
-
-/* SAVED */
+/* SAVE GRANT */
 
 function saveGrant(title,url){
 
@@ -939,82 +1167,168 @@ renderSaved();
 
 }
 
+/* RENDER SAVED */
+
 function renderSaved(){
 
-const container =
-document.getElementById("saved");
+savedContainer.innerHTML = "";
 
-container.innerHTML = "";
+savedGrants
+.slice(0,8)
+.forEach(item=>{
 
-savedGrants.slice(0,8).forEach(grant=>{
+const div =
+document.createElement("div");
 
-container.innerHTML += `
+div.className =
+"saved-item";
 
-<a
-href="${grant.url}"
-target="_blank"
-class="saved-item"
->
+div.innerHTML = `
 
-❤️ ${grant.title}
+<b>${item.title}</b>
 
-</a>
+<br><br>
+
+<small>Saved Grant</small>
 
 `;
+
+div.onclick = ()=>{
+
+window.open(
+item.url,
+"_blank"
+);
+
+};
+
+savedContainer.appendChild(div);
 
 });
 
 }
 
-/* NEW CHAT */
+/* GENERATE PROPOSAL */
 
-function newChat(){
+function generateProposal(title){
 
-chat.innerHTML = "";
+document.getElementById(
+"proposalModal"
+).style.display =
+"flex";
 
-addMessage(
-"New conversation started 👋",
-"ai"
-);
+document.getElementById(
+"proposalBody"
+).innerHTML = `
 
-}
+<div id="proposalPreview">
 
-/* TYPING */
+<div class="proposal-section">
 
-function showTyping(){
+<h3>Executive Summary</h3>
 
-const typing =
-document.createElement("div");
+<p>
 
-typing.id =
-"typing";
+This proposal seeks funding support to expand operational capacity,
+increase community outreach, and improve long-term sustainability
+through strategic funding initiatives for ${title}.
 
-typing.className =
-"message ai";
+</p>
 
-typing.innerHTML = `
+</div>
 
-<div class="bubble">
-Grant Simone is preparing your funding recommendations...
+<div class="proposal-section">
+
+<h3>Funding Strategy</h3>
+
+<p>
+
+The organization plans to use grant funding to strengthen staffing,
+improve operations, scale services, and increase measurable impact.
+
+</p>
+
+</div>
+
+<div class="proposal-section">
+
+<h3>Project Timeline</h3>
+
+<div class="timeline">
+
+<div class="timeline-item">
+Month 1 — Planning & onboarding
+</div>
+
+<div class="timeline-item">
+Month 2 — Community implementation
+</div>
+
+<div class="timeline-item">
+Month 3 — Evaluation & reporting
+</div>
+
+<div class="timeline-item">
+Month 4 — Expansion strategy
+</div>
+
+</div>
+
+</div>
+
+<div class="proposal-section">
+
+<h3>Expected Outcomes</h3>
+
+<p>
+
+• Increased funding access
+
+<br><br>
+
+• Expanded community reach
+
+<br><br>
+
+• Improved organizational growth
+
+<br><br>
+
+• Long-term sustainability
+
+</p>
+
+</div>
+
 </div>
 
 `;
 
-chat.appendChild(typing);
+}
 
-chat.scrollTop =
-chat.scrollHeight;
+/* CLOSE PROPOSAL */
+
+function closeProposal(){
+
+document.getElementById(
+"proposalModal"
+).style.display =
+"none";
 
 }
 
-function removeTyping(){
+/* PDF */
 
-const typing =
-document.getElementById("typing");
+function downloadPDF(){
 
-if(typing){
-typing.remove();
-}
+const element =
+document.getElementById(
+"proposalPreview"
+);
+
+html2pdf()
+.from(element)
+.save("Grant-Simone-Proposal.pdf");
 
 }
 
@@ -1022,18 +1336,19 @@ typing.remove();
 
 async function sendMessage(){
 
-const message =
+const text =
 input.value.trim();
 
-if(!message) return;
+if(!text) return;
 
-addMessage(message,"user");
+addUserMessage(text);
 
-saveConversation(message);
+saveConversation(text);
 
-input.value="";
+input.value = "";
 
-showTyping();
+loading.style.display =
+"block";
 
 try{
 
@@ -1048,9 +1363,7 @@ headers:{
 
 body:JSON.stringify({
 
-businessType:"Business",
-state:"California",
-keywords:message
+query:text
 
 })
 
@@ -1059,64 +1372,36 @@ keywords:message
 const data =
 await response.json();
 
-removeTyping();
+loading.style.display =
+"none";
 
 if(
-!data.grants ||
-data.grants.length===0
+data.results &&
+data.results.length > 0
 ){
 
-addMessage(
-
-`I couldn't find exact matches.
-
-Please include:
-• your state
-• organization type
-• business category
-• funding goal`,
-
-"ai"
-
-);
-
-return;
-
-}
-
-addMessage(
-
-`I found ${data.grants.length} funding opportunities that may fit your request.`,
-
-"ai"
-
-);
-
-let html =
-`<div class="grant-grid">`;
-
-data.grants.slice(0,8).forEach(grant=>{
+data.results
+.slice(0,5)
+.forEach(grant=>{
 
 const title =
-grant.grantName ||
+grant.title ||
 "Grant Opportunity";
 
+const description =
+grant.description ||
+"Funding opportunity available.";
+
 const url =
-grant.applicationUrl ||
+grant.link ||
 "#";
 
-const purpose =
-grant.purpose ||
-"Business Support";
-
-const eligibility =
-grant.eligibility ||
-"Check requirements";
-
 const score =
-Math.floor(Math.random()*10)+90;
+Math.floor(
+Math.random()*10
+)+90;
 
-html += `
+addAIMessage(`
 
 <div class="grant-card">
 
@@ -1128,20 +1413,8 @@ ${score}% MATCH
 ${title}
 </div>
 
-<div class="grant-label">
-Purpose
-</div>
-
-<div class="grant-value">
-${purpose}
-</div>
-
-<div class="grant-label">
-Eligibility
-</div>
-
-<div class="grant-value">
-${eligibility}
+<div class="grant-description">
+${description}
 </div>
 
 <div class="actions">
@@ -1149,45 +1422,61 @@ ${eligibility}
 <a
 href="${url}"
 target="_blank"
-class="apply-btn"
+class="action-btn apply-btn"
 >
-Apply →
+View Grant →
 </a>
 
-<div
-class="proposal-btn"
-onclick="saveGrant('${title.replace(/'/g,"")}','${url}')"
+<button
+class="action-btn secondary-btn"
+onclick="saveGrant('${title}','${url}')"
 >
 Save
-</div>
+</button>
+
+<button
+class="action-btn secondary-btn"
+onclick="generateProposal('${title}')"
+>
+Generate Proposal
+</button>
 
 </div>
 
 </div>
 
-`;
+`);
 
 });
 
-html += `</div>`;
+}else{
 
-addMessage(html,"ai",true);
+addAIMessage(`
+
+I couldn't find exact matches.
+
+Please include:
+• your state
+• organization type
+• business category
+• funding goals
+
+`);
+
+}
 
 }catch(error){
 
-removeTyping();
+loading.style.display =
+"none";
 
-console.error(error);
+addAIMessage(`
 
-addMessage(
+Something went wrong while connecting to the funding server.
 
-`Something went wrong while connecting to the funding server.
+Please try again.
 
-Please try again.`,
-
-"ai"
-
-);
+`);
 
 }
 
@@ -1195,24 +1484,15 @@ Please try again.`,
 
 /* EVENTS */
 
-if(sendBtn){
-
-sendBtn.onclick = ()=>{
-
-sendMessage();
-
-};
-
-}
-
-if(input){
+sendBtn.onclick =
+sendMessage;
 
 input.addEventListener(
 "keydown",
 function(e){
 
 if(
-e.key === "Enter"
+e.key==="Enter"
 &&
 !e.shiftKey
 ){
@@ -1226,7 +1506,11 @@ sendMessage();
 }
 );
 
-}
+/* INIT */
+
+renderHistory();
+
+renderSaved();
 
 </script>
 
