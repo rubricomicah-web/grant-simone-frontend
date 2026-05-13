@@ -1305,6 +1305,7 @@ doc.setFont(
 
 doc.text(clean,20,y);
 
+y += 6;
 }else{
 
 doc.setFont(
@@ -1320,12 +1321,12 @@ line,
 
 doc.text(wrapped,20,y);
 
-y += wrapped.length * 7;
+y += wrapped.length * 6;
 
 }
 
-y += 10;
-
+y += 4;
+  
 });
 
 doc.save(`${name}.pdf`);
