@@ -483,7 +483,7 @@ box-shadow:
 0 0 25px rgba(0,0,0,0.4);
 }
 
-.input-wrap input{
+.input-wrap textarea{
 
 flex:1;
 
@@ -498,6 +498,16 @@ color:white;
 font-size:16px;
 
 padding:14px 10px;
+
+resize:none;
+
+overflow-y:auto;
+
+min-height:24px;
+
+max-height:220px;
+
+line-height:1.6;
 }
 
 .send-btn{
@@ -867,10 +877,11 @@ the best grants available.
 
 <div class="input-wrap">
 
-<input
+<textarea
 id="userInput"
 placeholder="Ask about grants, funding, nonprofits..."
-/>
+rows="1"
+></textarea>
 
 <button
 class="send-btn"
@@ -896,7 +907,44 @@ let savedGrants =
 JSON.parse(
 localStorage.getItem("savedGrants")
 ) || [];
-  
+
+const userInput =
+document.getElementById("userInput");
+
+/* ENTER TO SEND */
+
+userInput.addEventListener(
+"keydown",
+function(e){
+
+if(
+e.key === "Enter" &&
+!e.shiftKey
+){
+
+e.preventDefault();
+
+sendMessage();
+
+}
+
+}
+);
+
+/* AUTO EXPAND TEXTAREA */
+
+userInput.addEventListener(
+"input",
+function(){
+
+this.style.height = "auto";
+
+this.style.height =
+this.scrollHeight + "px";
+
+}
+);
+
 /* SEND */
 
 async function sendMessage(){
@@ -1031,7 +1079,7 @@ View Details
 class="btn secondary"
 onclick="
 saveGrant(
-'${grant.title}'
+'${grant.grantName}'
 )
 "
 >
