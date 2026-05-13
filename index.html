@@ -667,6 +667,11 @@ body{
 
 <script>
 
+/* BACKEND */
+
+const API_URL =
+"https://grant-simone-backend-production.up.railway.app";
+
 /* ELEMENTS */
 
 const input =
@@ -684,24 +689,17 @@ document.querySelectorAll(".history-item");
 const newChatBtn =
 document.querySelector(".new-chat-btn");
 
-/* SEND */
+/* ADD MESSAGE */
 
-function sendMessage(){
+function addMessage(type,text){
 
-    const text =
-    input.value.trim();
-
-    if(text === "") return;
-
-    /* USER */
-
-    const userMessage =
+    const msg =
     document.createElement("div");
 
-    userMessage.className =
-    "message user";
+    msg.className =
+    `message ${type}`;
 
-    userMessage.innerHTML = `
+    msg.innerHTML = `
 
         <div class="message-bubble">
             ${text}
@@ -709,159 +707,215 @@ function sendMessage(){
 
     `;
 
-    messages.appendChild(userMessage);
+    messages.appendChild(msg);
 
-    /* AI */
+    scrollBottom();
 
-    const aiMessage =
-    document.createElement("div");
+    return msg;
+}
 
-    aiMessage.className =
-    "message ai";
+/* SCROLL */
 
-    aiMessage.innerHTML = `
-
-        <div class="message-bubble">
-
-            Grant Simone is analyzing
-            funding opportunities...
-
-        </div>
-
-    `;
-
-    messages.appendChild(aiMessage);
-
-    /* CLEAR */
-
-    input.value = "";
-
-    /* SCROLL */
+function scrollBottom(){
 
     setTimeout(()=>{
 
         window.scrollTo({
+
             top:document.body.scrollHeight,
+
             behavior:"smooth"
+
         });
 
     },100);
 
-    /* SIMULATED RESPONSE */
+}
 
-    setTimeout(()=>{
+/* SEND */
 
-        aiMessage.innerHTML = `
+async function sendMessage(){
+
+    const text =
+    input.value.trim();
+
+    if(text === "") return;
+
+    addMessage("user",text);
+
+    input.value = "";
+
+    const loadingMessage =
+    addMessage(
+        "ai",
+        "Grant Simone is analyzing funding opportunities..."
+    );
+
+    try{
+
+        const response =
+        await fetch(
+
+            `${API_URL}/chat`,
+
+            {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    message:text
+
+                })
+
+            }
+
+        );
+
+        const data =
+        await response.json();
+
+        if(data.success){
+
+            loadingMessage.innerHTML = `
+
+                <div class="message-bubble">
+
+                    ${data.response
+                        .replace(/\n/g,"<br>")}
+
+                </div>
+
+            `;
+
+        }else{
+
+            loadingMessage.innerHTML = `
+
+                <div class="message-bubble">
+
+                    Backend error occurred.
+
+                </div>
+
+            `;
+
+        }
+
+    }catch(error){
+
+        loadingMessage.innerHTML = `
 
             <div class="message-bubble">
 
-                I found several grants
-                that may match your request.
-
-                <br><br>
-
-                Backend integration will provide
-                real-time grant results,
-                proposal generation,
-                and AI-powered recommendations.
+                Unable to connect to backend server.
 
             </div>
 
         `;
 
-    },1500);
+        console.error(error);
+
+    }
 
 }
 
 /* ENTER */
 
 input.addEventListener(
-"keypress",
-function(e){
 
-    if(e.key === "Enter"){
+    "keydown",
 
-        sendMessage();
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            sendMessage();
+
+        }
 
     }
 
-}
 );
 
 /* BUTTON */
 
 sendBtn.addEventListener(
-"click",
-sendMessage
+
+    "click",
+
+    function(){
+
+        sendMessage();
+
+    }
+
 );
 
 /* HISTORY */
 
 historyItems.forEach(item => {
 
-    item.addEventListener("click",()=>{
+    item.addEventListener(
 
-        const title =
-        item.querySelector("h4").innerText;
+        "click",
 
-        const convo =
-        document.createElement("div");
+        ()=>{
 
-        convo.className =
-        "message ai";
+            const title =
+            item.querySelector("h4").innerText;
 
-        convo.innerHTML = `
+            addMessage(
 
-            <div class="message-bubble">
+                "ai",
 
-                Opened conversation:
+                `Opened conversation:<br><br>${title}`
 
-                <br><br>
+            );
 
-                ${title}
+        }
 
-            </div>
-
-        `;
-
-        messages.appendChild(convo);
-
-        window.scrollTo({
-            top:document.body.scrollHeight,
-            behavior:"smooth"
-        });
-
-    });
+    );
 
 });
 
 /* NEW CHAT */
 
 newChatBtn.addEventListener(
-"click",
-()=>{
 
-    messages.innerHTML = `
+    "click",
 
-        <div class="message ai">
+    ()=>{
 
-            <div class="message-bubble">
+        messages.innerHTML = `
 
-                Hi! I'm Grant Simone.
+            <div class="message ai">
 
-                <br><br>
+                <div class="message-bubble">
 
-                Tell me about your business,
-                nonprofit, startup,
-                or funding goals.
+                    Hi! I'm Grant Simone.
+
+                    <br><br>
+
+                    Tell me about your business,
+                    nonprofit,
+                    startup,
+                    or funding goals.
+
+                </div>
 
             </div>
 
-        </div>
+        `;
 
-    `;
+    }
 
-}
 );
 
 </script>
