@@ -925,7 +925,7 @@ chat.scrollHeight;
 try{
 
 const response = await fetch(
-"https://grant-simone-backend-production.up.railway.app/chat",
+""https://grant-simone-backend-production.up.railway.app/grant-search",
 {
 method:"POST",
 
@@ -934,15 +934,30 @@ headers:{
 },
 
 body:JSON.stringify({
-message:text
+
+businessType:text,
+
+state:"California",
+
+keywords:text,
+
+womanOwned:"yes",
+
+minorityOwned:"no",
+
+veteranOwned:"no",
+
+startup:"yes",
+
+nonprofit:"no"
+
 })
-}
 );
 
 const data =
 await response.json();
 
-if(data.grants){
+if(data.success){
 
 showGrantCards(data.grants);
 
@@ -951,7 +966,9 @@ showGrantCards(data.grants);
 chat.innerHTML += `
 
 <div class="message bot">
-${data.response}
+
+No grants found.
+
 </div>
 
 `;
@@ -981,11 +998,11 @@ grants.map(grant => `
 <div class="grant-card">
 
 <div class="badge">
-${grant.amount || "Funding"}
+Match ${grant.matchScore}%
 </div>
 
 <div class="grant-title">
-${grant.title}
+${grant.grantName}
 </div>
 
 <div class="grant-desc">
@@ -998,10 +1015,10 @@ ${grant.description}
 class="btn primary"
 onclick="
 openGrantModal(
-'${grant.title}',
-'${grant.amount}',
+'${grant.grantName}',
+'Match ${grant.matchScore}%',
 '${grant.description}',
-'${grant.link}'
+'${grant.applicationUrl}'
 )
 "
 >
@@ -1023,7 +1040,7 @@ Save
 class="btn secondary"
 onclick="
 downloadPDF(
-'${grant.title}'
+'${grant.grantName}'
 )
 "
 >
