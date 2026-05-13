@@ -1321,29 +1321,52 @@ async function downloadPDF(name){
 
 try{
 
+const businessName =
+
+prompt("Enter Business Name:");
+
+const businessType =
+
+prompt("Enter Business Type:");
+
+const fundingPurpose =
+
+prompt("Enter Funding Purpose:");
+
+const requestedAmount =
+
+prompt("Enter Requested Amount:");
+
 const response = await fetch(
+
 "https://grant-simone-backend-production.up.railway.app/generate-proposal",
+
 {
+
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json"
+
 },
 
 body:JSON.stringify({
 
-businessName:"Client Business",
+businessName: businessName,
 
-businessType:"Small Business",
+businessType: businessType,
 
-fundingPurpose:"Business Expansion",
+fundingPurpose: fundingPurpose,
 
 grantName:name,
 
-requestedAmount:"$50,000"
+requestedAmount: requestedAmount
 
 })
+
 }
+
 );
 
 if(!response.ok){
@@ -1355,9 +1378,11 @@ throw new Error("Failed to generate PDF");
 const blob = await response.blob();
 
 const url =
+
 window.URL.createObjectURL(blob);
 
 const a =
+
 document.createElement("a");
 
 a.href = url;
