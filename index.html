@@ -36,9 +36,15 @@ body{
     color:white;
 }
 
-/* BACKGROUND */
+/* FIXED BACKGROUND */
 
-body{
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
 
     background:
     linear-gradient(
@@ -49,7 +55,10 @@ body{
 
     background-size:cover;
     background-position:center;
-    background-attachment:fixed;
+
+    z-index:-1;
+
+    pointer-events:none;
 }
 
 /* APP */
@@ -76,6 +85,9 @@ body{
     padding:24px;
 
     overflow-y:auto;
+
+    position:relative;
+    z-index:2;
 }
 
 .logo{
@@ -181,6 +193,9 @@ body{
     flex-direction:column;
 
     min-height:100dvh;
+
+    position:relative;
+    z-index:2;
 }
 
 /* TOPBAR */
@@ -292,6 +307,8 @@ body{
         rgba(0,0,0,0.95),
         transparent
     );
+
+    z-index:20;
 }
 
 .input-wrapper{
