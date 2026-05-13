@@ -363,8 +363,6 @@ opacity:1;
 }
 }
 
-/* MOBILE */
-
 @media(max-width:768px){
 
 #app{
@@ -462,8 +460,6 @@ document.getElementById("messageInput");
 const sendBtn =
 document.getElementById("sendBtn");
 
-/* AUTO RESIZE */
-
 input.addEventListener("input",()=>{
 
 input.style.height="auto";
@@ -471,8 +467,6 @@ input.style.height=
 input.scrollHeight + "px";
 
 });
-
-/* ADD MESSAGE */
 
 function addMessage(text,type){
 
@@ -498,8 +492,6 @@ chatContainer.scrollTop =
 chatContainer.scrollHeight;
 
 }
-
-/* TYPING */
 
 function showTyping(){
 
@@ -539,8 +531,6 @@ typing.remove();
 
 }
 
-/* DETECT PROPOSAL */
-
 function isProposal(text){
 
 return (
@@ -549,8 +539,6 @@ text.toLowerCase().includes("grant proposal")
 );
 
 }
-
-/* SEND MESSAGE */
 
 async function sendMessage(){
 
@@ -573,9 +561,9 @@ let endpoint =
 
 let payload = {
 
+message: message,
 businessType:"business or nonprofit organization",
-state:"United States",
-keywords:message
+state:"United States"
 
 };
 
@@ -590,7 +578,7 @@ businessName:
 "Business",
 
 businessType:
-"Small Business",
+"Business or Nonprofit",
 
 fundingPurpose:
 "Business Growth",
@@ -650,6 +638,8 @@ ${grant.applicationUrl || "Not Available"}
 Recommendation:
 ${grant.recommendation || "Strong Match"}
 
+-----------------------------------
+
 `;
 });
 
@@ -684,6 +674,8 @@ data.proposalNarrative ||
 
 }catch(error){
 
+console.error(error);
+
 removeTyping();
 
 addMessage(
@@ -695,14 +687,10 @@ addMessage(
 
 }
 
-/* BUTTON */
-
 sendBtn.addEventListener(
 "click",
 sendMessage
 );
-
-/* ENTER */
 
 input.addEventListener(
 "keydown",
@@ -722,5 +710,4 @@ sendMessage();
 </script>
 
 </body>
-
 </html>
