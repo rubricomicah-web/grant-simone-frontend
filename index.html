@@ -602,6 +602,8 @@ flex-direction:column;
 display:none;
 }
 
+.topbar{
+
 @media(min-width:901px){
 
 .input-area{
@@ -617,7 +619,7 @@ width:calc(100% - 420px);
 max-width:980px;
 }
 }
-
+  
 .topbar{
 
 padding:
@@ -949,23 +951,25 @@ message:text
 }
 );
 
-const data =
-await response.json();
+const data = await response.json();
+
+if(data.grants){
+
+showGrantCards(data.grants);
+
+}else{
 
 chat.innerHTML += `
-
 <div class="message bot">
-
 ${data.response}
-
 </div>
-
 `;
 
-showGrantCards();
+}
 
-chat.scrollTop =
-chat.scrollHeight;
+}
+
+chat.scrollTop = chat.scrollHeight;
 
 }catch(error){
 
@@ -987,160 +991,87 @@ console.error(error);
 
 /* SHOW CARDS */
 
-function showGrantCards(){
+function showGrantCards(grants){
+
+const cardsHTML = grants.map(grant => `
+
+<div class="grant-card">
+
+<div class="badge">
+${grant.amount || "Funding"}
+</div>
+
+<div class="grant-title">
+${grant.title}
+</div>
+
+<div class="grant-desc">
+${grant.description}
+</div>
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="
+openGrantModal(
+'${grant.title}',
+'${grant.amount}',
+'${grant.description}',
+'${grant.link}'
+)
+"
+>
+View Details
+</button>
+
+<button
+class="btn secondary"
+onclick="
+saveGrant(
+'${grant.title}'
+)
+"
+>
+Save
+</button>
+
+<button
+class="btn secondary"
+onclick="
+downloadPDF(
+'${grant.title}'
+)
+"
+>
+PDF
+</button>
+
+</div>
+
+</div>
+
+`).join("");
 
 chat.innerHTML += `
 
 <div class="message bot">
 
+<p>
 Here are the best grant opportunities I found for your business:
+</p>
 
 <div class="grants-grid">
 
-<div class="grant-card">
-
-<div class="badge">
-
-$50,000 Funding
-
-</div>
-
-<div class="grant-title">
-
-SBA Microloan Program
-
-</div>
-
-<div class="grant-desc">
-
-Small business funding
-for startups and salons.
-
-</div>
-
-<div class="actions">
-
-<button
-class="btn primary"
-onclick="
-openGrantModal(
-'SBA Microloan Program',
-'$50,000 Funding',
-'This grant helps startups and small businesses access working capital and expansion funding.',
-'https://www.sba.gov'
-)
-"
->
-
-View Details
-
-</button>
-
-<button
-class="btn secondary"
-onclick="
-saveGrant(
-'SBA Microloan Program'
-)
-"
->
-
-Save
-
-</button>
-
-<button
-class="btn secondary"
-onclick="
-downloadPDF(
-'SBA Microloan Program'
-)
-"
->
-
-PDF
-
-</button>
+${cardsHTML}
 
 </div>
 
 </div>
 
-<div class="grant-card">
-
-<div class="badge">
-
-Women-Owned
-
-</div>
-
-<div class="grant-title">
-
-Amber Grant
-
-</div>
-
-<div class="grant-desc">
-
-Monthly grants for women entrepreneurs.
-
-</div>
-
-<div class="actions">
-
-<button
-class="btn primary"
-onclick="
-openGrantModal(
-'Amber Grant',
-'Women-Owned',
-'Monthly funding opportunities for women-owned businesses and startups.',
-'https://ambergrantsforwomen.com'
-)
-"
->
-
-View Details
-
-</button>
-
-<button
-class="btn secondary"
-onclick="
-saveGrant(
-'Amber Grant'
-)
-"
->
-
-Save
-
-</button>
-
-<button
-class="btn secondary"
-onclick="
-downloadPDF(
-'Amber Grant'
-)
-"
->
-
-PDF
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 `;
 
-chat.scrollTop =
-chat.scrollHeight;
+chat.scrollTop = chat.scrollHeight;
 
 }
 
