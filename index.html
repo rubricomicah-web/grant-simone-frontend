@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Grant Simone AI</title>
+<title>Grant Simone </title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -23,13 +23,13 @@ body{
     overflow:hidden;
 }
 
-/* MAIN APP */
+/* APP */
 
 .app{
     display:flex;
     height:100vh;
     background:
-    radial-gradient(circle at top right, rgba(255,215,0,0.10), transparent 30%),
+    radial-gradient(circle at top right, rgba(231,200,77,0.08), transparent 30%),
     #000;
 }
 
@@ -38,7 +38,7 @@ body{
 .sidebar{
     width:320px;
     background:#050505;
-    border-right:1px solid rgba(255,255,255,0.08);
+    border-right:1px solid rgba(255,255,255,0.06);
     display:flex;
     flex-direction:column;
     padding:24px;
@@ -52,8 +52,8 @@ body{
 }
 
 .logo img{
-    width:60px;
-    height:60px;
+    width:58px;
+    height:58px;
     border-radius:50%;
     object-fit:cover;
 }
@@ -68,15 +68,13 @@ body{
     font-size:14px;
 }
 
-/* BUTTON */
-
 .new-chat-btn{
     width:100%;
-    padding:18px;
     border:none;
     border-radius:18px;
     background:#e7c84d;
     color:#000;
+    padding:18px;
     font-size:18px;
     font-weight:700;
     cursor:pointer;
@@ -88,17 +86,11 @@ body{
     transform:translateY(-2px);
 }
 
-/* SIDEBAR SECTIONS */
-
-.sidebar-section{
-    margin-bottom:30px;
-}
-
 .sidebar-title{
-    color:#7f7f7f;
+    color:#777;
     font-size:13px;
-    text-transform:uppercase;
     letter-spacing:2px;
+    text-transform:uppercase;
     margin-bottom:16px;
 }
 
@@ -114,7 +106,6 @@ body{
 
 .history-item:hover{
     border-color:#e7c84d;
-    transform:translateY(-2px);
 }
 
 .history-item h4{
@@ -123,11 +114,11 @@ body{
 }
 
 .history-item p{
-    color:#8f8f8f;
+    color:#888;
     font-size:14px;
 }
 
-/* CHAT AREA */
+/* MAIN */
 
 .chat-container{
     flex:1;
@@ -142,10 +133,10 @@ body{
     padding:24px 34px;
     border-bottom:1px solid rgba(255,255,255,0.06);
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    background:rgba(0,0,0,0.65);
-    backdrop-filter:blur(12px);
+    align-items:center;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(10px);
 }
 
 .chat-user{
@@ -158,10 +149,11 @@ body{
     width:58px;
     height:58px;
     border-radius:50%;
+    object-fit:cover;
 }
 
 .chat-user h2{
-    font-size:20px;
+    font-size:22px;
     margin-bottom:4px;
 }
 
@@ -171,10 +163,10 @@ body{
 }
 
 .online-badge{
-    padding:12px 20px;
+    padding:12px 22px;
     border-radius:999px;
-    background:rgba(231,200,77,0.08);
     border:1px solid rgba(231,200,77,0.15);
+    background:rgba(231,200,77,0.08);
     color:#e7c84d;
     font-size:16px;
 }
@@ -187,73 +179,20 @@ body{
     padding:40px;
 }
 
-/* HERO */
-
-.hero{
-    text-align:center;
-    max-width:1000px;
-    margin:auto;
-    margin-top:40px;
-}
-
-.hero h1{
-    font-size:82px;
-    font-weight:300;
-    margin-bottom:30px;
-}
-
-.hero p{
-    color:#b0b0b0;
-    font-size:28px;
-    line-height:1.6;
-    margin-bottom:50px;
-}
-
-/* PROMPTS */
-
-.quick-prompts{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:24px;
-    max-width:1000px;
-    margin:auto;
-}
-
-.prompt-btn{
-    background:#111;
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:24px;
-    padding:28px;
-    color:white;
-    font-size:26px;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition:0.3s;
-}
-
-.prompt-btn:hover{
-    border-color:#e7c84d;
-    transform:translateY(-3px);
-}
-
-.prompt-btn span{
-    color:#e7c84d;
-    font-size:34px;
-}
-
 /* MESSAGES */
 
 .messages{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
-    margin-top:40px;
 }
 
 .message{
-    margin-bottom:28px;
     display:flex;
+    margin-bottom:28px;
+}
+
+.message.ai{
+    justify-content:flex-start;
 }
 
 .message.user{
@@ -264,60 +203,64 @@ body{
     max-width:70%;
     padding:24px;
     border-radius:26px;
-    line-height:1.7;
+    line-height:1.8;
     font-size:17px;
 }
 
 .ai .message-bubble{
-    background:#111;
+    background:#101010;
     border:1px solid rgba(255,255,255,0.05);
 }
 
 .user .message-bubble{
     background:#e7c84d;
-    color:black;
+    color:#000;
     font-weight:600;
 }
 
 /* INPUT */
 
 .chat-input-area{
-    padding:26px;
+    padding:24px;
     background:#000;
 }
 
 .chat-input-wrapper{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
     position:relative;
 }
 
 .chat-input{
     width:100%;
-    height:88px;
-    border-radius:30px;
-    background:#0f0f0f;
+    height:84px;
+    border-radius:28px;
     border:1px solid rgba(255,255,255,0.06);
-    padding:0 90px 0 28px;
+    background:#0d0d0d;
     color:white;
+    padding:0 90px 0 28px;
     font-size:18px;
     outline:none;
 }
 
+.chat-input::placeholder{
+    color:#666;
+}
+
 .send-btn{
     position:absolute;
-    right:18px;
+    right:16px;
     top:50%;
     transform:translateY(-50%);
-    width:58px;
-    height:58px;
+    width:56px;
+    height:56px;
     border:none;
     border-radius:50%;
     background:#e7c84d;
     color:black;
-    font-size:26px;
-    cursor:pointer;
+    font-size:24px;
     font-weight:700;
+    cursor:pointer;
 }
 
 /* MOBILE */
@@ -336,34 +279,17 @@ body{
 .sidebar{
     width:100%;
     border-right:none;
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.06);
 }
 
-.chat-container{
-    height:auto;
-}
-
-.hero h1{
-    font-size:48px;
-}
-
-.hero p{
-    font-size:20px;
-}
-
-.quick-prompts{
-    grid-template-columns:1fr;
-}
-
-.prompt-btn{
-    font-size:20px;
+.chat-body{
+    padding:24px;
+    padding-bottom:130px;
 }
 
 .message-bubble{
-    max-width:90%;
+    max-width:92%;
 }
-
-/* TEXTBOX FIXED ONLY ON MOBILE */
 
 .chat-input-area{
     position:fixed;
@@ -371,13 +297,7 @@ body{
     left:0;
     width:100%;
     z-index:999;
-    padding:18px;
-    background:#000;
-    border-top:1px solid rgba(255,255,255,0.08);
-}
-
-.chat-body{
-    padding-bottom:140px;
+    border-top:1px solid rgba(255,255,255,0.06);
 }
 
 .chat-input{
@@ -404,59 +324,56 @@ body{
     <aside class="sidebar">
 
         <div class="logo">
-            <img src="https://i.imgur.com/1X4gA8T.png">
+
+            <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
+
             <div>
                 <h1>Grant Simone</h1>
                 <p>AI Grant Funding Consultant</p>
             </div>
+
         </div>
 
         <button class="new-chat-btn">
             + New Conversation
         </button>
 
-        <div class="sidebar-section">
-
-            <div class="sidebar-title">
-                Recent Conversations
-            </div>
-
-            <div class="history-item">
-                <h4>Help me find grants</h4>
-                <p>5/13/2026</p>
-            </div>
-
-            <div class="history-item">
-                <h4>Find startup funding</h4>
-                <p>5/12/2026</p>
-            </div>
-
-            <div class="history-item">
-                <h4>Women-owned business grants</h4>
-                <p>5/11/2026</p>
-            </div>
-
+        <div class="sidebar-title">
+            Recent Conversations
         </div>
 
-        <div class="sidebar-section">
+        <div class="history-item">
+            <h4>Help me find grants</h4>
+            <p>5/13/2026</p>
+        </div>
 
-            <div class="sidebar-title">
-                Saved Grants
-            </div>
+        <div class="history-item">
+            <h4>Find startup funding</h4>
+            <p>5/12/2026</p>
+        </div>
 
+        <div class="history-item">
+            <h4>Women-owned business grants</h4>
+            <p>5/11/2026</p>
+        </div>
+
+        <div style="margin-top:20px;" class="sidebar-title">
+            Saved Grants
         </div>
 
     </aside>
 
-    <!-- CHAT -->
+    <!-- MAIN -->
 
     <main class="chat-container">
+
+        <!-- HEADER -->
 
         <div class="chat-header">
 
             <div class="chat-user">
 
-                <img src="https://i.imgur.com/1X4gA8T.png">
+                <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
 
                 <div>
                     <h2>Grant Simone</h2>
@@ -471,51 +388,26 @@ body{
 
         </div>
 
+        <!-- CHAT -->
+
         <div class="chat-body">
-
-            <div class="hero">
-
-                <h1>How can I help you today?</h1>
-
-                <p>
-                    I'm Grant Simone, your AI grant funding consultant for all U.S. states,
-                    nonprofits, startups, NGOs, and businesses.
-                </p>
-
-                <div class="quick-prompts">
-
-                    <button class="prompt-btn">
-                        Find grants for my business
-                        <span>→</span>
-                    </button>
-
-                    <button class="prompt-btn">
-                        Government funding opportunities
-                        <span>→</span>
-                    </button>
-
-                    <button class="prompt-btn">
-                        Nonprofit grants
-                        <span>→</span>
-                    </button>
-
-                    <button class="prompt-btn">
-                        Startup funding options
-                        <span>→</span>
-                    </button>
-
-                </div>
-
-            </div>
 
             <div class="messages">
 
                 <div class="message ai">
+
                     <div class="message-bubble">
-                        Hello! I'm Grant Simone. Tell me about your business,
-                        nonprofit, startup, or funding goals and I’ll help you
-                        find the best grants available.
+
+                        Hi! I'm Grant Simone.
+
+                        <br><br>
+
+                        Tell me about your business, nonprofit,
+                        startup, or funding goals and I’ll help
+                        you find the best grants available.
+
                     </div>
+
                 </div>
 
             </div>
