@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
 rel="stylesheet"
 />
 
@@ -29,7 +29,7 @@ font-family:'Inter',sans-serif;
 
 background:
 linear-gradient(
-rgba(0,0,0,.82),
+rgba(0,0,0,.84),
 rgba(0,0,0,.92)
 ),
 url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
@@ -40,53 +40,55 @@ background-attachment:fixed;
 
 min-height:100vh;
 
-color:white;
-
 display:flex;
 justify-content:center;
 align-items:center;
 
 padding:20px;
+
 overflow:hidden;
+
+color:white;
 }
 
 #app{
 
 width:100%;
-max-width:1200px;
-height:92vh;
+max-width:1300px;
+height:94vh;
 
 background:
-rgba(10,10,10,.45);
+rgba(12,12,12,.48);
 
-backdrop-filter:blur(24px);
+backdrop-filter:blur(22px);
 
 border:
-1px solid rgba(212,175,55,.12);
+1px solid rgba(255,255,255,.06);
 
-border-radius:32px;
+border-radius:30px;
 
 box-shadow:
-0 20px 80px rgba(0,0,0,.55),
+0 25px 80px rgba(0,0,0,.55),
 0 0 40px rgba(212,175,55,.08);
 
 display:flex;
 flex-direction:column;
 
 overflow:hidden;
-position:relative;
 }
+
+/* HEADER */
 
 #header{
 
-padding:24px 28px;
-
-border-bottom:
-1px solid rgba(255,255,255,.05);
+padding:22px 28px;
 
 display:flex;
 justify-content:space-between;
 align-items:center;
+
+border-bottom:
+1px solid rgba(255,255,255,.05);
 }
 
 .logo{
@@ -107,13 +109,12 @@ object-fit:cover;
 
 border:
 2px solid rgba(212,175,55,.45);
-
 }
 
 .logo h1{
 
-font-size:20px;
-font-weight:500;
+font-size:22px;
+font-weight:600;
 }
 
 .logo p{
@@ -124,9 +125,9 @@ color:rgba(255,255,255,.55);
 
 .status{
 
-padding:12px 16px;
+padding:12px 18px;
 
-border-radius:16px;
+border-radius:18px;
 
 background:
 rgba(255,255,255,.03);
@@ -144,8 +145,11 @@ color:#d4af37;
 #chat-container{
 
 flex:1;
+
 overflow-y:auto;
+
 padding:30px;
+
 scroll-behavior:smooth;
 }
 
@@ -165,27 +169,31 @@ justify-content:flex-start;
 
 .bubble{
 
-max-width:75%;
+max-width:80%;
 
 padding:18px 20px;
 
 border-radius:22px;
 
-line-height:1.8;
+line-height:1.7;
 
 font-size:15px;
-
-white-space:pre-wrap;
 }
 
 .user .bubble{
 
-background:#d4af37;
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#f5d76e
+);
+
 color:black;
 
-border-bottom-right-radius:6px;
+border-bottom-right-radius:8px;
 
-font-weight:500;
+font-weight:600;
 }
 
 .ai .bubble{
@@ -196,7 +204,7 @@ rgba(255,255,255,.04);
 border:
 1px solid rgba(255,255,255,.06);
 
-border-bottom-left-radius:6px;
+border-bottom-left-radius:8px;
 
 color:rgba(255,255,255,.92);
 }
@@ -225,7 +233,7 @@ background:
 rgba(255,255,255,.04);
 
 border:
-1px solid rgba(212,175,55,.10);
+1px solid rgba(212,175,55,.08);
 }
 
 textarea{
@@ -254,8 +262,8 @@ color:rgba(255,255,255,.35);
 
 button{
 
-width:54px;
-height:54px;
+width:56px;
+height:56px;
 
 border:none;
 
@@ -274,6 +282,13 @@ font-size:22px;
 font-weight:700;
 
 cursor:pointer;
+
+transition:.3s;
+}
+
+button:hover{
+
+transform:scale(1.05);
 }
 
 /* TYPING */
@@ -318,6 +333,129 @@ opacity:1;
 }
 }
 
+/* GRANT CARDS */
+
+.grant-card{
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:22px;
+
+padding:22px;
+
+margin-bottom:18px;
+
+backdrop-filter:blur(12px);
+
+transition:.3s;
+}
+
+.grant-card:hover{
+
+transform:translateY(-2px);
+
+border:
+1px solid rgba(212,175,55,.30);
+
+box-shadow:
+0 10px 35px rgba(212,175,55,.08);
+}
+
+.grant-title{
+
+font-size:18px;
+font-weight:700;
+
+margin-bottom:18px;
+
+color:#f5d76e;
+}
+
+.grant-section{
+
+margin-bottom:14px;
+}
+
+.grant-label{
+
+font-size:12px;
+
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:
+rgba(255,255,255,.45);
+
+margin-bottom:5px;
+}
+
+.grant-value{
+
+font-size:15px;
+
+line-height:1.7;
+
+color:
+rgba(255,255,255,.92);
+}
+
+.grant-link{
+
+display:inline-block;
+
+margin-top:14px;
+
+padding:12px 18px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#f5d76e
+);
+
+color:black;
+
+font-weight:700;
+
+text-decoration:none;
+
+transition:.3s;
+}
+
+.grant-link:hover{
+
+transform:scale(1.03);
+}
+
+.recommendation-badge{
+
+display:inline-block;
+
+margin-top:16px;
+
+padding:8px 14px;
+
+border-radius:999px;
+
+font-size:12px;
+
+font-weight:700;
+
+color:white;
+
+text-transform:uppercase;
+
+letter-spacing:.05em;
+}
+
 @media(max-width:768px){
 
 #app{
@@ -327,7 +465,6 @@ border-radius:0;
 
 .bubble{
 max-width:92%;
-font-size:14px;
 }
 
 }
@@ -386,7 +523,7 @@ rows="1"
 
 <script>
 
-/* DIRECT ENDPOINTS */
+/* API */
 
 const GRANT_SEARCH_API =
 "https://grant-agent-backend-production.up.railway.app/grant-search";
@@ -418,7 +555,7 @@ input.scrollHeight + "px";
 
 /* ADD MESSAGE */
 
-function addMessage(text,type){
+function addMessage(content,type,isHTML=false){
 
 const wrapper =
 document.createElement("div");
@@ -432,7 +569,15 @@ document.createElement("div");
 bubble.className =
 "bubble";
 
-bubble.innerText = text;
+if(isHTML){
+
+bubble.innerHTML = content;
+
+}else{
+
+bubble.innerText = content;
+
+}
 
 wrapper.appendChild(bubble);
 
@@ -443,7 +588,7 @@ chatContainer.scrollHeight;
 
 }
 
-/* SHOW TYPING */
+/* TYPING */
 
 function showTyping(){
 
@@ -472,8 +617,6 @@ chatContainer.scrollHeight;
 
 }
 
-/* REMOVE TYPING */
-
 function removeTyping(){
 
 const typing =
@@ -485,7 +628,7 @@ typing.remove();
 
 }
 
-/* DETECT PROPOSAL */
+/* PROPOSAL DETECTION */
 
 function isProposal(text){
 
@@ -499,12 +642,12 @@ lower.includes("grant proposal")
 
 }
 
-/* FETCH TIMEOUT */
+/* FETCH WITH TIMEOUT */
 
 async function fetchWithTimeout(
 url,
-options = {},
-timeout = 120000
+options={},
+timeout=120000
 ){
 
 const controller =
@@ -541,7 +684,104 @@ throw error;
 
 }
 
-/* SEND */
+/* RENDER CARDS */
+
+function renderGrantCards(grants){
+
+let html = "";
+
+grants.forEach(grant=>{
+
+const recommendation =
+(grant.recommendation || "Strong Match")
+.toLowerCase();
+
+let badgeColor = "#22c55e";
+
+if(recommendation.includes("medium")){
+badgeColor="#f59e0b";
+}
+
+if(recommendation.includes("low")){
+badgeColor="#ef4444";
+}
+
+html += `
+
+<div class="grant-card">
+
+<div class="grant-title">
+${grant.grantName || "Verified Grant Opportunity"}
+</div>
+
+<div class="grant-section">
+
+<div class="grant-label">
+Funding Amount
+</div>
+
+<div class="grant-value">
+${grant.amount || "Varies"}
+</div>
+
+</div>
+
+<div class="grant-section">
+
+<div class="grant-label">
+Purpose
+</div>
+
+<div class="grant-value">
+${grant.purpose || "Business Support"}
+</div>
+
+</div>
+
+<div class="grant-section">
+
+<div class="grant-label">
+Eligibility
+</div>
+
+<div class="grant-value">
+${grant.eligibility || "Check requirements"}
+</div>
+
+</div>
+
+<a
+class="grant-link"
+href="${grant.applicationUrl || "#"}"
+target="_blank"
+>
+
+Apply for Grant →
+
+</a>
+
+<br>
+
+<div
+class="recommendation-badge"
+style="background:${badgeColor}"
+>
+
+${grant.recommendation || "Strong Match"}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+return html;
+
+}
+
+/* SEND MESSAGE */
 
 async function sendMessage(){
 
@@ -600,11 +840,6 @@ message
 
 }
 
-console.log(
-"Sending:",
-payload
-);
-
 const response =
 await fetchWithTimeout(
 endpoint,
@@ -620,11 +855,6 @@ body:JSON.stringify(payload)
 120000
 );
 
-console.log(
-"Status:",
-response.status
-);
-
 if(!response.ok){
 
 throw new Error(
@@ -635,11 +865,6 @@ throw new Error(
 
 const data =
 await response.json();
-
-console.log(
-"Response:",
-data
-);
 
 removeTyping();
 
@@ -653,40 +878,12 @@ Array.isArray(data.grants)
 data.grants.length > 0
 ){
 
-let formatted = "";
+const cards =
+renderGrantCards(data.grants);
 
-data.grants.forEach(grant=>{
-
-formatted +=
-`Grant Name:
-${grant.grantName || "Verified Grant"}
-
-Funding Amount:
-${grant.amount || "Varies"}
-
-Purpose:
-${grant.purpose || "Business Support"}
-
-Eligibility:
-${grant.eligibility || "Check Requirements"}
-
-Application Link:
-${grant.applicationUrl || "Unavailable"}
-
-Recommendation:
-${grant.recommendation || "Strong Match"}
-
-----------------------------
-
-`;
-
-});
-
-addMessage(formatted,"ai");
+addMessage(cards,"ai",true);
 
 }
-
-/* RESPONSE */
 
 else if(data.response){
 
@@ -696,19 +893,6 @@ data.response,
 );
 
 }
-
-/* MESSAGE */
-
-else if(data.message){
-
-addMessage(
-data.message,
-"ai"
-);
-
-}
-
-/* EMPTY */
 
 else{
 
@@ -721,7 +905,7 @@ addMessage(
 
 }
 
-/* PROPOSAL RESULT */
+/* PROPOSAL */
 
 else{
 
