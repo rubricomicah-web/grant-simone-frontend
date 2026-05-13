@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8" />
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
 
 <title>Grant Simone AI</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+/>
 
 <style>
 
@@ -21,8 +31,12 @@
 }
 
 body{
+
     background:
-    linear-gradient(rgba(0,0,0,0.88),rgba(0,0,0,0.94)),
+    linear-gradient(
+        rgba(0,0,0,0.88),
+        rgba(0,0,0,0.95)
+    ),
     url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
 
     background-size:cover;
@@ -41,89 +55,121 @@ body{
 /* SIDEBAR */
 
 .sidebar{
-    width:340px;
-    background:rgba(0,0,0,0.78);
-    border-right:1px solid rgba(255,255,255,0.06);
+
+    width:320px;
+
+    background:
+    rgba(0,0,0,0.78);
+
+    border-right:
+    1px solid rgba(255,255,255,0.05);
+
     padding:24px;
+
     overflow-y:auto;
 }
 
 .logo{
+
     display:flex;
-    gap:14px;
     align-items:center;
+    gap:14px;
+
     margin-bottom:30px;
 }
 
 .logo img{
+
     width:58px;
     height:58px;
+
     border-radius:50%;
     object-fit:cover;
 }
 
 .logo h2{
-    font-size:32px;
+
+    font-size:34px;
     line-height:1;
 }
 
 .logo p{
+
     color:#999;
     margin-top:6px;
 }
 
 .new-chat{
+
     width:100%;
+
     background:#FFD54F;
-    border:none;
+
     color:black;
+
+    border:none;
+
+    padding:18px;
+
+    border-radius:18px;
+
     font-weight:700;
     font-size:18px;
-    padding:18px;
-    border-radius:18px;
+
     cursor:pointer;
-    margin-bottom:30px;
+
+    margin-bottom:28px;
 }
 
 .section-title{
+
     color:#777;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     margin-bottom:16px;
     margin-top:26px;
 }
 
-.history-list,
-.saved-list{
+.history-list{
+
     display:flex;
     flex-direction:column;
     gap:14px;
 }
 
-.history-item,
-.saved-item{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.05);
-    border-radius:18px;
+.history-item{
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
     padding:18px;
+
+    border-radius:18px;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
-.history-item:hover,
-.saved-item:hover{
+.history-item:hover{
+
     border-color:#FFD54F;
-    transform:translateY(-2px);
 }
 
-.history-item h4,
-.saved-item h4{
+.history-item h4{
+
     font-size:16px;
     margin-bottom:6px;
 }
 
-.history-item p,
-.saved-item p{
+.history-item p{
+
     color:#888;
     font-size:13px;
 }
@@ -131,155 +177,232 @@ body{
 /* MAIN */
 
 .main{
+
     flex:1;
+
     display:flex;
     flex-direction:column;
 }
 
+/* TOPBAR */
+
 .topbar{
+
     display:flex;
     justify-content:space-between;
     align-items:center;
 
     padding:22px 34px;
 
-    border-bottom:1px solid rgba(255,255,255,0.06);
-    background:rgba(0,0,0,0.45);
+    border-bottom:
+    1px solid rgba(255,255,255,0.05);
+
+    background:
+    rgba(0,0,0,0.45);
 }
 
 .top-left{
+
     display:flex;
     align-items:center;
     gap:14px;
 }
 
 .top-left img{
-    width:52px;
-    height:52px;
+
+    width:54px;
+    height:54px;
+
     border-radius:50%;
 }
 
 .top-left h2{
+
     font-size:28px;
 }
 
 .top-left p{
+
     color:#999;
 }
 
 .online{
-    background:rgba(255,213,79,0.08);
-    border:1px solid rgba(255,213,79,0.2);
+
+    background:
+    rgba(255,213,79,0.08);
+
+    border:
+    1px solid rgba(255,213,79,0.2);
+
     color:#FFD54F;
+
     padding:12px 22px;
+
     border-radius:999px;
 }
 
 /* CHAT */
 
 .chat-area{
+
     flex:1;
+
     overflow-y:auto;
+
     padding:34px;
 }
 
 .message{
-    margin-bottom:30px;
-    max-width:1100px;
+
+    margin-bottom:28px;
 }
 
 .assistant-message{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.05);
+
+    max-width:760px;
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
     border-radius:30px;
+
     padding:30px;
 }
 
 .assistant-message p{
-    color:#ddd;
-    line-height:1.8;
+
     font-size:17px;
+    line-height:1.9;
+
+    color:#ddd;
 }
 
 .user-message{
+
     margin-left:auto;
-    background:#FFD54F;
-    color:black;
-    font-weight:600;
-    padding:20px 24px;
-    border-radius:24px;
+
     max-width:520px;
+
+    background:#FFD54F;
+
+    color:black;
+
+    padding:20px 24px;
+
+    border-radius:24px;
+
+    font-weight:600;
 }
 
-/* CARDS */
+/* GRANT CARDS */
 
 .grant-grid{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
     gap:22px;
+
     margin-top:28px;
 }
 
 .grant-card{
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,213,79,0.14);
-    border-radius:26px;
+
+    background:
+    rgba(255,255,255,0.03);
+
+    border:
+    1px solid rgba(255,213,79,0.14);
+
+    border-radius:28px;
+
     padding:24px;
+
     transition:0.3s;
 }
 
 .grant-card:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-4px);
+
     border-color:#FFD54F;
 }
 
 .badge{
+
     display:inline-block;
-    background:rgba(255,213,79,0.12);
+
+    background:
+    rgba(255,213,79,0.12);
+
     color:#FFD54F;
+
     padding:8px 16px;
+
     border-radius:999px;
+
     font-size:13px;
+
     margin-bottom:16px;
 }
 
 .grant-card h3{
-    font-size:22px;
-    margin-bottom:16px;
-    line-height:1.3;
+
+    font-size:24px;
+
+    margin-bottom:14px;
 }
 
 .grant-card p{
+
     color:#bbb;
+
     line-height:1.8;
-    margin-bottom:24px;
+
+    margin-bottom:22px;
 }
 
 .card-buttons{
+
     display:flex;
     flex-wrap:wrap;
     gap:12px;
 }
 
 .card-buttons button{
+
     border:none;
-    border-radius:14px;
+
     padding:13px 18px;
+
+    border-radius:14px;
+
     font-weight:700;
+
     cursor:pointer;
 }
 
 .view-btn{
+
     background:#FFD54F;
     color:black;
 }
 
 .save-btn{
-    background:rgba(255,255,255,0.06);
+
+    background:
+    rgba(255,255,255,0.06);
+
     color:white;
 }
 
 .proposal-btn{
+
     background:#1f1f1f;
     color:#FFD54F;
 }
@@ -287,12 +410,21 @@ body{
 /* INPUT */
 
 .input-area{
+
     padding:24px 34px;
-    background:linear-gradient(to top,rgba(0,0,0,0.95),transparent);
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.95),
+        transparent
+    );
 }
 
 .input-wrapper{
+
     max-width:1200px;
+
     margin:auto;
 
     display:flex;
@@ -300,9 +432,11 @@ body{
 
     align-items:center;
 
-    background:rgba(255,255,255,0.04);
+    background:
+    rgba(255,255,255,0.04);
 
-    border:1px solid rgba(255,255,255,0.08);
+    border:
+    1px solid rgba(255,255,255,0.08);
 
     border-radius:999px;
 
@@ -310,62 +444,38 @@ body{
 }
 
 .input-wrapper input{
+
     flex:1;
+
     background:transparent;
+
     border:none;
     outline:none;
+
     color:white;
+
     font-size:18px;
+
     padding:14px;
 }
 
 .send-btn{
+
     width:62px;
     height:62px;
+
     border-radius:50%;
+
     border:none;
+
     background:#FFD54F;
+
     color:black;
+
     font-size:24px;
-    cursor:pointer;
+
     font-weight:700;
-}
 
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.82);
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    z-index:9999;
-}
-
-.modal-content{
-    width:90%;
-    max-width:800px;
-
-    background:#111;
-
-    border-radius:30px;
-
-    padding:34px;
-
-    max-height:90vh;
-    overflow-y:auto;
-}
-
-.close-modal{
-    margin-top:20px;
-    background:#FFD54F;
-    border:none;
-    padding:14px 24px;
-    border-radius:14px;
-    font-weight:700;
     cursor:pointer;
 }
 
@@ -373,30 +483,140 @@ body{
 
 @media(max-width:900px){
 
+    body{
+        overflow:hidden;
+    }
+
     .sidebar{
         display:none;
     }
 
-    .chat-area{
-        padding:20px;
-        padding-bottom:140px;
+    .main{
+        width:100%;
     }
 
-    .input-area{
-        position:fixed;
-        bottom:0;
-        left:0;
-        right:0;
-        z-index:999;
-        backdrop-filter:blur(20px);
+    .topbar{
+
+        padding:16px 18px;
+
+        align-items:center;
+    }
+
+    .top-left{
+        gap:12px;
+    }
+
+    .top-left img{
+        width:52px;
+        height:52px;
+    }
+
+    .top-left h2{
+        font-size:20px;
+        line-height:1.1;
+    }
+
+    .top-left p{
+        font-size:12px;
+    }
+
+    .online{
+        padding:10px 16px;
+        font-size:14px;
+    }
+
+    .chat-area{
+
+        padding:18px;
+        padding-bottom:130px;
+    }
+
+    .assistant-message{
+
+        padding:24px;
+
+        border-radius:26px;
+    }
+
+    .assistant-message p{
+
+        font-size:18px;
+        line-height:1.8;
+    }
+
+    .user-message{
+
+        max-width:90%;
+
+        font-size:15px;
+
+        padding:16px 18px;
     }
 
     .grant-grid{
+
         grid-template-columns:1fr;
+    }
+
+    .grant-card{
+
+        padding:22px;
+    }
+
+    .grant-card h3{
+
+        font-size:22px;
+    }
+
+    .grant-card p{
+
+        font-size:15px;
+    }
+
+    .input-area{
+
+        position:fixed;
+
+        bottom:0;
+        left:0;
+        right:0;
+
+        padding:14px;
+
+        background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.98),
+            rgba(0,0,0,0.82)
+        );
+
+        backdrop-filter:blur(20px);
+
+        z-index:999;
+    }
+
+    .input-wrapper{
+
+        padding:10px;
+    }
+
+    .input-wrapper input{
+
+        font-size:16px;
+        padding:10px;
+    }
+
+    .send-btn{
+
+        width:56px;
+        height:56px;
+
+        font-size:22px;
     }
 }
 
 </style>
+
 </head>
 
 <body>
@@ -409,30 +629,61 @@ body{
 
         <div class="logo">
 
-            <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
+            <img
+            src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg"
+            >
 
             <div>
+
                 <h2>Grant Simone</h2>
-                <p>AI Grant Funding Consultant</p>
+
+                <p>
+                    AI Grant Funding Consultant
+                </p>
+
             </div>
 
         </div>
 
-        <button class="new-chat" onclick="newConversation()">
+        <button class="new-chat">
+
             + New Conversation
+
         </button>
 
         <div class="section-title">
+
             RECENT CONVERSATIONS
+
         </div>
 
-        <div class="history-list" id="historyList"></div>
+        <div class="history-list">
 
-        <div class="section-title">
-            SAVED GRANTS
+            <div class="history-item">
+
+                <h4>Help me find grants</h4>
+
+                <p>5/13/2026</p>
+
+            </div>
+
+            <div class="history-item">
+
+                <h4>Find startup funding</h4>
+
+                <p>5/12/2026</p>
+
+            </div>
+
+            <div class="history-item">
+
+                <h4>Women-owned business grants</h4>
+
+                <p>5/11/2026</p>
+
+            </div>
+
         </div>
-
-        <div class="saved-list" id="savedList"></div>
 
     </div>
 
@@ -444,24 +695,54 @@ body{
 
             <div class="top-left">
 
-                <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
+                <img
+                src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg"
+                >
 
                 <div>
+
                     <h2>Grant Simone</h2>
-                    <p>AI Grant Funding Consultant</p>
+
+                    <p>
+                        AI Grant Funding Consultant
+                    </p>
+
                 </div>
 
             </div>
 
             <div class="online">
+
                 ● Online
+
             </div>
 
         </div>
 
         <!-- CHAT -->
 
-        <div class="chat-area" id="chatArea"></div>
+        <div class="chat-area">
+
+            <div class="message assistant-message">
+
+                <p>
+
+                    Hi! I'm Grant Simone.
+
+                    <br><br>
+
+                    Tell me about your business,
+                    nonprofit,
+                    startup,
+                    or funding goals
+                    and I'll help you find
+                    the best grants available.
+
+                </p>
+
+            </div>
+
+        </div>
 
         <!-- INPUT -->
 
@@ -470,13 +751,14 @@ body{
             <div class="input-wrapper">
 
                 <input
-                    type="text"
-                    id="userInput"
-                    placeholder="Ask about grants, funding, nonprofits, startups..."
+                type="text"
+                placeholder="Ask about grants, funding, nonprofits..."
                 >
 
-                <button class="send-btn" id="sendBtn">
+                <button class="send-btn">
+
                     ↑
+
                 </button>
 
             </div>
@@ -486,596 +768,6 @@ body{
     </div>
 
 </div>
-
-<!-- MODAL -->
-
-<div class="modal" id="grantModal">
-
-    <div class="modal-content" id="modalContent"></div>
-
-</div>
-
-<script>
-
-/* =========================
-STORAGE
-========================= */
-
-let conversations =
-JSON.parse(
-localStorage.getItem("grantConversations")
-) || [];
-
-let savedGrants =
-JSON.parse(
-localStorage.getItem("savedGrants")
-) || [];
-
-/* =========================
-ELEMENTS
-========================= */
-
-const input =
-document.getElementById("userInput");
-
-const sendBtn =
-document.getElementById("sendBtn");
-
-const chatArea =
-document.getElementById("chatArea");
-
-const historyList =
-document.getElementById("historyList");
-
-const savedList =
-document.getElementById("savedList");
-
-/* =========================
-CURRENT CHAT
-========================= */
-
-let currentConversation = [];
-
-/* =========================
-DEMO GRANTS
-========================= */
-
-const grantDatabase = [
-
-{
-    title:"SBA Microloan Program",
-    description:"Small business funding for startups and salons.",
-    amount:"$50,000",
-    strategy:"Ideal for business expansion.",
-    timeline:"2-4 weeks"
-},
-
-{
-    title:"Amber Grant",
-    description:"Funding for women-owned businesses.",
-    amount:"$25,000",
-    strategy:"Perfect for women entrepreneurs.",
-    timeline:"Monthly applications"
-},
-
-{
-    title:"Texas Workforce Grants",
-    description:"Funding supporting employee development.",
-    amount:"$75,000",
-    strategy:"Great for business scaling.",
-    timeline:"30-60 days"
-}
-
-];
-
-/* =========================
-INIT
-========================= */
-
-renderHistory();
-renderSavedGrants();
-newConversation();
-
-/* =========================
-NEW CHAT
-========================= */
-
-function newConversation(){
-
-    currentConversation = [];
-
-    chatArea.innerHTML = `
-
-        <div class="message assistant-message">
-
-            <p>
-
-                Hi! I'm Grant Simone.
-
-                <br><br>
-
-                Tell me about your business,
-                nonprofit,
-                startup,
-                or funding goals and
-                I'll help you find
-                the best grants available.
-
-            </p>
-
-        </div>
-
-    `;
-}
-
-/* =========================
-SCROLL
-========================= */
-
-function scrollBottom(){
-
-    chatArea.scrollTop =
-    chatArea.scrollHeight;
-}
-
-/* =========================
-USER MESSAGE
-========================= */
-
-function addUserMessage(text){
-
-    const div =
-    document.createElement("div");
-
-    div.className =
-    "message user-message";
-
-    div.innerText = text;
-
-    chatArea.appendChild(div);
-
-    currentConversation.push({
-
-        type:"user",
-        content:text
-
-    });
-
-    scrollBottom();
-}
-
-/* =========================
-ASSISTANT MESSAGE
-========================= */
-
-function addGrantCards(){
-
-    const wrapper =
-    document.createElement("div");
-
-    wrapper.className =
-    "message assistant-message";
-
-    let cards = "";
-
-    grantDatabase.forEach(grant => {
-
-        cards += `
-
-            <div class="grant-card">
-
-                <div class="badge">
-                    ${grant.amount}
-                </div>
-
-                <h3>
-                    ${grant.title}
-                </h3>
-
-                <p>
-                    ${grant.description}
-                </p>
-
-                <div class="card-buttons">
-
-                    <button
-                        class="view-btn"
-                        onclick='viewGrantDetails(${JSON.stringify(grant)})'
-                    >
-                        View Details
-                    </button>
-
-                    <button
-                        class="save-btn"
-                        onclick='saveGrant(${JSON.stringify(grant)})'
-                    >
-                        Save
-                    </button>
-
-                    <button
-                        class="proposal-btn"
-                        onclick='generateProposal(${JSON.stringify(grant)})'
-                    >
-                        Generate Proposal
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-    });
-
-    wrapper.innerHTML = `
-
-        <p>
-
-            Here are the best grant opportunities
-            I found for your business.
-
-        </p>
-
-        <div class="grant-grid">
-
-            ${cards}
-
-        </div>
-
-    `;
-
-    chatArea.appendChild(wrapper);
-
-    currentConversation.push({
-
-        type:"assistant",
-        content:wrapper.innerHTML
-
-    });
-
-    saveConversation();
-
-    scrollBottom();
-}
-
-/* =========================
-SEND
-========================= */
-
-function sendMessage(){
-
-    const text =
-    input.value.trim();
-
-    if(!text) return;
-
-    addUserMessage(text);
-
-    input.value = "";
-
-    setTimeout(()=>{
-
-        addGrantCards();
-
-    },1000);
-}
-
-/* =========================
-SAVE CONVERSATION
-========================= */
-
-function saveConversation(){
-
-    if(currentConversation.length === 0)
-    return;
-
-    const title =
-    currentConversation[0]?.content
-    ?.substring(0,40) || "Conversation";
-
-    conversations.unshift({
-
-        id:Date.now(),
-
-        title,
-
-        messages:[...currentConversation],
-
-        date:new Date().toLocaleDateString()
-
-    });
-
-    localStorage.setItem(
-
-        "grantConversations",
-
-        JSON.stringify(conversations)
-
-    );
-
-    renderHistory();
-}
-
-/* =========================
-RENDER HISTORY
-========================= */
-
-function renderHistory(){
-
-    historyList.innerHTML = "";
-
-    conversations.forEach(convo => {
-
-        const div =
-        document.createElement("div");
-
-        div.className =
-        "history-item";
-
-        div.innerHTML = `
-
-            <h4>
-                ${convo.title}
-            </h4>
-
-            <p>
-                ${convo.date}
-            </p>
-
-        `;
-
-        div.onclick = () => {
-
-            loadConversation(convo);
-
-        };
-
-        historyList.appendChild(div);
-
-    });
-}
-
-/* =========================
-LOAD CONVERSATION
-========================= */
-
-function loadConversation(convo){
-
-    chatArea.innerHTML = "";
-
-    convo.messages.forEach(msg => {
-
-        const div =
-        document.createElement("div");
-
-        if(msg.type === "user"){
-
-            div.className =
-            "message user-message";
-
-            div.innerText =
-            msg.content;
-
-        }else{
-
-            div.className =
-            "message assistant-message";
-
-            div.innerHTML =
-            msg.content;
-        }
-
-        chatArea.appendChild(div);
-    });
-
-    scrollBottom();
-}
-
-/* =========================
-SAVE GRANT
-========================= */
-
-function saveGrant(grant){
-
-    savedGrants.push(grant);
-
-    localStorage.setItem(
-
-        "savedGrants",
-
-        JSON.stringify(savedGrants)
-
-    );
-
-    renderSavedGrants();
-
-    alert(
-        grant.title + " saved!"
-    );
-}
-
-/* =========================
-RENDER SAVED
-========================= */
-
-function renderSavedGrants(){
-
-    savedList.innerHTML = "";
-
-    savedGrants.forEach(grant => {
-
-        const div =
-        document.createElement("div");
-
-        div.className =
-        "saved-item";
-
-        div.innerHTML = `
-
-            <h4>
-                ${grant.title}
-            </h4>
-
-            <p>
-                ${grant.amount}
-            </p>
-
-        `;
-
-        div.onclick = () => {
-
-            viewGrantDetails(grant);
-
-        };
-
-        savedList.appendChild(div);
-    });
-}
-
-/* =========================
-MODAL
-========================= */
-
-function viewGrantDetails(grant){
-
-    const modal =
-    document.getElementById("grantModal");
-
-    const content =
-    document.getElementById("modalContent");
-
-    content.innerHTML = `
-
-        <h2>
-            ${grant.title}
-        </h2>
-
-        <br>
-
-        <p>
-
-            <strong>Funding:</strong>
-
-            ${grant.amount}
-
-        </p>
-
-        <br>
-
-        <p>
-
-            ${grant.description}
-
-        </p>
-
-        <br>
-
-        <p>
-
-            <strong>Strategy:</strong>
-
-            ${grant.strategy}
-
-        </p>
-
-        <br>
-
-        <p>
-
-            <strong>Timeline:</strong>
-
-            ${grant.timeline}
-
-        </p>
-
-        <button
-            class="close-modal"
-            onclick="closeModal()"
-        >
-            Close
-        </button>
-
-    `;
-
-    modal.style.display = "flex";
-}
-
-function closeModal(){
-
-    document.getElementById(
-        "grantModal"
-    ).style.display = "none";
-}
-
-/* =========================
-PDF
-========================= */
-
-function generateProposal(grant){
-
-    const proposal = `
-
-GRANT PROPOSAL
-
-Grant:
-${grant.title}
-
-Funding:
-${grant.amount}
-
-Description:
-${grant.description}
-
-Strategy:
-${grant.strategy}
-
-Timeline:
-${grant.timeline}
-
-Prepared by:
-Grant Simone AI
-
-`;
-
-    const { jsPDF } =
-    window.jspdf;
-
-    const doc =
-    new jsPDF();
-
-    doc.text(proposal,20,20);
-
-    doc.save(
-        `${grant.title}.pdf`
-    );
-}
-
-/* =========================
-EVENTS
-========================= */
-
-sendBtn.addEventListener(
-
-    "click",
-
-    sendMessage
-
-);
-
-input.addEventListener(
-
-    "keypress",
-
-    function(e){
-
-        if(e.key === "Enter"){
-
-            sendMessage();
-        }
-    }
-
-);
-
-</script>
 
 </body>
 </html>
