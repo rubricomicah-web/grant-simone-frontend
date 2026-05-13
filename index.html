@@ -1346,89 +1346,31 @@ requestedAmount:"$50,000"
 }
 );
 
-const data =
-await response.json();
+if(!response.ok){
 
-if(!data.success){
-
-alert("Failed to generate proposal.");
-
-return;
+throw new Error("Failed to generate PDF");
 
 }
 
-const { jsPDF } =
-window.jspdf;
+const blob = await response.blob();
 
-const doc =
-new jsPDF();
+const url =
+window.URL.createObjectURL(blob);
 
-doc.setFont("helvetica");
+const a =
+document.createElement("a");
 
-doc.setFontSize(22);
+a.href = url;
 
-doc.text(name,20,25);
+a.download = `${name}.pdf`;
 
-doc.setFontSize(12);
+document.body.appendChild(a);
 
-const text =
-data.proposalNarrative;
+a.click();
 
-const split =
-text.split("\n");
+a.remove();
 
-let y = 45;
-
-split.forEach(line => {
-
-if(line.includes("**")){
-
-const clean =
-line.replace(/\*\*/g,"");
-
-doc.setFont(
-"helvetica",
-"bold"
-);
-
-doc.text(clean,20,y);
-
-y += 8;
-
-/* AUTO NEW PAGE */
-
-if(y > 270){
-
-doc.addPage();
-
-y = 20;
-
-}
-
-}else{
-
-doc.setFont(
-"helvetica",
-"normal"
-);
-
-const wrapped =
-doc.splitTextToSize(
-line,
-170
-);
-
-doc.text(wrapped,20,y);
-
-y += wrapped.length * 7;
-
-}
-
-y += 4;
-  
-});
-
-doc.save(`${name}.pdf`);
+window.URL.revokeObjectURL(url);
 
 }catch(error){
 
