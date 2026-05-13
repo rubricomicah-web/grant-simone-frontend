@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8" />
+
 <meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
@@ -15,19 +17,18 @@ content="width=device-width, initial-scale=1.0"
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
 
 background:#000;
 color:white;
-overflow-x:hidden;
+overflow:hidden;
 
 background-image:
-radial-gradient(circle at 20% 20%, rgba(255,213,79,0.08), transparent 25%),
-radial-gradient(circle at 80% 30%, rgba(255,213,79,0.06), transparent 25%),
-radial-gradient(circle at 50% 80%, rgba(255,213,79,0.05), transparent 30%);
+radial-gradient(circle at top left, rgba(255,213,79,0.08), transparent 25%),
+radial-gradient(circle at bottom right, rgba(255,213,79,0.08), transparent 25%);
 }
 
 .app{
@@ -42,81 +43,101 @@ height:100vh;
 
 width:320px;
 background:#050505;
-border-right:1px solid rgba(255,255,255,0.06);
+border-right:1px solid rgba(255,255,255,0.05);
+
 padding:24px;
+
 overflow-y:auto;
 }
 
 .logo{
 
 display:flex;
-gap:14px;
 align-items:center;
+gap:14px;
+
 margin-bottom:28px;
 }
 
 .logo img{
 
-width:60px;
-height:60px;
+width:62px;
+height:62px;
+
 border-radius:50%;
 object-fit:cover;
 }
 
 .logo h1{
 
-font-size:28px;
+font-size:34px;
 line-height:1;
 }
 
 .logo p{
 
-color:#aaa;
-font-size:14px;
+color:#999;
 margin-top:6px;
 }
 
 .new-chat{
 
 width:100%;
+
 padding:18px;
+
 border:none;
 border-radius:18px;
+
 background:#FFD54F;
-font-size:22px;
+
+font-size:24px;
 font-weight:bold;
+
 cursor:pointer;
+
 margin-bottom:30px;
 }
 
 .sidebar-title{
 
-font-size:13px;
+font-size:12px;
 letter-spacing:2px;
-color:#777;
+
+color:#666;
+
 margin-bottom:16px;
 }
 
 .saved-card{
 
 background:#0d0d0d;
-border:1px solid rgba(255,213,79,0.12);
+
+border:
+1px solid rgba(255,213,79,0.12);
+
 border-radius:20px;
+
 padding:18px;
+
 margin-bottom:16px;
+
 cursor:pointer;
-transition:0.2s;
+
+transition:0.25s;
 }
 
 .saved-card:hover{
 
-transform:translateY(-3px);
 border-color:#FFD54F;
+
+transform:translateY(-3px);
 }
 
 .saved-card h3{
 
 font-size:18px;
+
 margin-bottom:8px;
 }
 
@@ -131,54 +152,67 @@ font-size:14px;
 .main{
 
 flex:1;
+
 display:flex;
 flex-direction:column;
+
 height:100vh;
 }
 
 .topbar{
 
-padding:24px 34px;
+padding:22px 34px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:1px solid rgba(255,255,255,0.06);
+
+border-bottom:
+1px solid rgba(255,255,255,0.05);
 }
 
 .top-left{
 
 display:flex;
 align-items:center;
-gap:16px;
+gap:14px;
 }
 
 .top-left img{
 
 width:62px;
 height:62px;
+
 border-radius:50%;
 object-fit:cover;
 }
 
 .top-left h1{
 
-font-size:54px;
+font-size:60px;
 line-height:1;
 }
 
 .top-left p{
 
-color:#aaa;
+color:#999;
 margin-top:6px;
 }
 
 .online{
 
 padding:14px 24px;
+
 border-radius:999px;
-border:1px solid rgba(255,213,79,0.2);
-background:rgba(255,213,79,0.06);
+
+border:
+1px solid rgba(255,213,79,0.2);
+
+background:
+rgba(255,213,79,0.08);
+
 color:#FFD54F;
+
 font-size:20px;
 }
 
@@ -187,31 +221,43 @@ font-size:20px;
 .chat{
 
 flex:1;
+
 overflow-y:auto;
+
 padding:34px;
 }
 
 .message{
 
-max-width:900px;
+max-width:920px;
+
 padding:28px;
+
 border-radius:30px;
+
 margin-bottom:24px;
-line-height:1.8;
+
+line-height:1.9;
+
 font-size:22px;
 }
 
 .bot{
 
-background:#0a0a0a;
-border:1px solid rgba(255,255,255,0.06);
+background:#0d0d0d;
+
+border:
+1px solid rgba(255,255,255,0.05);
 }
 
 .user{
 
 background:#FFD54F;
+
 color:black;
+
 margin-left:auto;
+
 font-weight:bold;
 }
 
@@ -220,50 +266,70 @@ font-weight:bold;
 .grants-grid{
 
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(320px,1fr));
 
 gap:24px;
+
 margin-top:24px;
 }
 
 .grant-card{
 
 background:#0d0d0d;
-border:1px solid rgba(255,213,79,0.12);
-border-radius:32px;
+
+border:
+1px solid rgba(255,213,79,0.12);
+
+border-radius:30px;
+
 padding:28px;
+
 transition:0.25s;
 }
 
 .grant-card:hover{
 
 transform:translateY(-4px);
+
 border-color:#FFD54F;
 }
 
 .badge{
 
 display:inline-block;
+
 padding:10px 18px;
+
 border-radius:999px;
-background:rgba(255,213,79,0.08);
-border:1px solid rgba(255,213,79,0.16);
+
+background:
+rgba(255,213,79,0.08);
+
+border:
+1px solid rgba(255,213,79,0.14);
+
 color:#FFD54F;
+
 margin-bottom:22px;
 }
 
 .grant-title{
 
-font-size:28px;
+font-size:30px;
+
 font-weight:bold;
+
 margin-bottom:18px;
 }
 
 .grant-desc{
 
 color:#bbb;
+
 line-height:1.8;
+
 margin-bottom:28px;
 }
 
@@ -277,11 +343,15 @@ flex-wrap:wrap;
 .btn{
 
 padding:14px 20px;
+
 border:none;
+
 border-radius:16px;
+
 cursor:pointer;
-font-weight:bold;
+
 font-size:16px;
+font-weight:bold;
 }
 
 .primary{
@@ -292,7 +362,7 @@ color:black;
 
 .secondary{
 
-background:#1c1c1c;
+background:#1b1b1b;
 color:white;
 }
 
@@ -301,39 +371,56 @@ color:white;
 .input-area{
 
 padding:24px 34px;
-border-top:1px solid rgba(255,255,255,0.06);
+
+border-top:
+1px solid rgba(255,255,255,0.05);
 }
 
 .input-wrap{
 
 display:flex;
 align-items:center;
+
 background:#0a0a0a;
-border:1px solid rgba(255,255,255,0.08);
+
+border:
+1px solid rgba(255,255,255,0.06);
+
 border-radius:999px;
+
 padding:12px;
 }
 
 .input-wrap input{
 
 flex:1;
+
 background:none;
+
 border:none;
 outline:none;
+
 color:white;
+
 font-size:20px;
+
 padding:18px;
 }
 
 .send-btn{
 
-width:74px;
-height:74px;
-border-radius:50%;
+width:72px;
+height:72px;
+
 border:none;
+
+border-radius:50%;
+
 background:#FFD54F;
-font-size:28px;
+
+font-size:30px;
 font-weight:bold;
+
 cursor:pointer;
 }
 
@@ -342,15 +429,18 @@ cursor:pointer;
 .custom-modal-overlay{
 
 position:fixed;
+
 inset:0;
-background:rgba(0,0,0,0.85);
-backdrop-filter:blur(8px);
+
+background:
+rgba(0,0,0,0.84);
 
 display:flex;
 justify-content:center;
 align-items:center;
 
 padding:20px;
+
 z-index:999999;
 }
 
@@ -360,17 +450,21 @@ width:100%;
 max-width:650px;
 
 background:#111;
+
 border-radius:30px;
 
-border:1px solid rgba(255,213,79,0.15);
+border:
+1px solid rgba(255,213,79,0.14);
 
 padding:40px;
+
 position:relative;
 }
 
 .close-modal{
 
 position:absolute;
+
 top:20px;
 right:20px;
 
@@ -378,24 +472,30 @@ width:42px;
 height:42px;
 
 border:none;
+
 border-radius:50%;
 
 background:#222;
+
 color:white;
+
 cursor:pointer;
 }
 
 .modal-title{
 
 font-size:42px;
+
 margin-bottom:18px;
 }
 
 .modal-desc{
 
 color:#bbb;
+
 line-height:1.9;
-margin-bottom:26px;
+
+margin-bottom:28px;
 }
 
 .modal-actions{
@@ -458,22 +558,31 @@ height:62px;
 <div class="logo">
 
 <img
-src="https://github.com/rubricomicah-web/grant-simone-frontend/blob/fe6e0f1fac4e7d51816dc9a3cf3c879f192c5173/Grant%20Simone.jpeg"
+src="https://randomuser.me/api/portraits/women/44.jpg"
 />
 
 <div>
+
 <h1>Grant Simone</h1>
-<p>AI Grant Funding Consultant</p>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
 </div>
 
 </div>
 
 <button class="new-chat">
+
 + New Conversation
+
 </button>
 
 <div class="sidebar-title">
+
 RECENT CONVERSATIONS
+
 </div>
 
 <div id="savedContainer"></div>
@@ -489,36 +598,54 @@ RECENT CONVERSATIONS
 <div class="top-left">
 
 <img
-src="https://github.com/rubricomicah-web/grant-simone-frontend/blob/fe6e0f1fac4e7d51816dc9a3cf3c879f192c5173/Grant%20Simone.jpeg"
+src="https://randomuser.me/api/portraits/women/44.jpg"
 />
 
 <div>
+
 <h1>Grant Simone</h1>
-<p>AI Grant Funding Consultant</p>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
 </div>
 
 </div>
 
 <div class="online">
+
 ● Online
-</div>
 
 </div>
 
-<div class="chat" id="chat">
+</div>
+
+<!-- CHAT -->
+
+<div
+class="chat"
+id="chat"
+>
 
 <div class="message bot">
 
 Hi! I'm Grant Simone.
+
 <br><br>
 
 Tell me about your business,
-nonprofit, startup, or funding goals
-and I'll help you find the best grants available.
+nonprofit,
+startup,
+or funding goals
+and I'll help you find
+the best grants available.
 
 </div>
 
 </div>
+
+<!-- INPUT -->
 
 <div class="input-area">
 
@@ -549,6 +676,10 @@ onclick="sendMessage()"
 const chat =
 document.getElementById("chat");
 
+let savedGrants = [];
+
+/* SEND */
+
 function sendMessage(){
 
 const input =
@@ -560,9 +691,13 @@ input.value.trim();
 if(!text) return;
 
 chat.innerHTML += `
+
 <div class="message user">
+
 ${text}
+
 </div>
+
 `;
 
 input.value = "";
@@ -571,9 +706,11 @@ setTimeout(()=>{
 
 showGrantCards();
 
-},800);
+},700);
 
 }
+
+/* SHOW CARDS */
 
 function showGrantCards(){
 
@@ -585,18 +722,27 @@ Here are the best grant opportunities I found for your business:
 
 <div class="grants-grid">
 
+<!-- CARD -->
+
 <div class="grant-card">
 
 <div class="badge">
+
 $50,000 Funding
+
 </div>
 
 <div class="grant-title">
+
 SBA Microloan Program
+
 </div>
 
 <div class="grant-desc">
-Small business funding for startups and salons.
+
+Small business funding
+for startups and salons.
+
 </div>
 
 <div class="actions">
@@ -612,7 +758,9 @@ openGrantModal(
 )
 "
 >
+
 View Details
+
 </button>
 
 <button
@@ -623,32 +771,48 @@ saveGrant(
 )
 "
 >
+
 Save
+
 </button>
 
 <button
 class="btn secondary"
-onclick="downloadPDF()"
+onclick="
+downloadPDF(
+'SBA Microloan Program'
+)
+"
 >
+
 PDF
+
 </button>
 
 </div>
 
 </div>
 
+<!-- CARD -->
+
 <div class="grant-card">
 
 <div class="badge">
+
 Women-Owned
+
 </div>
 
 <div class="grant-title">
+
 Amber Grant
+
 </div>
 
 <div class="grant-desc">
+
 Monthly grants for women entrepreneurs.
+
 </div>
 
 <div class="actions">
@@ -664,7 +828,9 @@ openGrantModal(
 )
 "
 >
+
 View Details
+
 </button>
 
 <button
@@ -675,14 +841,22 @@ saveGrant(
 )
 "
 >
+
 Save
+
 </button>
 
 <button
 class="btn secondary"
-onclick="downloadPDF()"
+onclick="
+downloadPDF(
+'Amber Grant'
+)
+"
 >
+
 PDF
+
 </button>
 
 </div>
@@ -699,35 +873,69 @@ chat.scrollHeight;
 
 }
 
+/* SAVE */
+
 function saveGrant(name){
+
+if(savedGrants.includes(name)){
+return;
+}
+
+savedGrants.push(name);
+
+renderSavedGrants();
+
+}
+
+/* RENDER SAVED */
+
+function renderSavedGrants(){
 
 const container =
 document.getElementById("savedContainer");
 
-const grantHTML = `
+let html = "";
+
+savedGrants.forEach((grant)=>{
+
+html += `
 
 <div
 class="saved-card"
 onclick="
-openSavedGrant('${name}')
+openSavedGrant(
+'${grant}'
+)
 "
 >
 
-<h3>⭐ ${name}</h3>
+<h3>
 
-<p>Saved Grant</p>
+⭐ ${grant}
+
+</h3>
+
+<p>
+
+Saved Grant
+
+</p>
 
 </div>
 
 `;
 
-container.innerHTML += grantHTML;
+});
+
+container.innerHTML = html;
 
 }
 
+/* OPEN SAVED */
+
 function openSavedGrant(name){
 
-if(name === 'SBA Microloan Program'){
+if(name === "SBA Microloan Program"){
 
 openGrantModal(
 'SBA Microloan Program',
@@ -738,7 +946,7 @@ openGrantModal(
 
 }
 
-if(name === 'Amber Grant'){
+else if(name === "Amber Grant"){
 
 openGrantModal(
 'Amber Grant',
@@ -749,6 +957,10 @@ openGrantModal(
 
 }
 
+}
+
+/* MODAL */
+
 function openGrantModal(
 title,
 amount,
@@ -756,17 +968,13 @@ desc,
 link
 ){
 
-const oldModal =
-document.getElementById("grantModal");
-
-if(oldModal){
-oldModal.remove();
-}
+closeGrantModal();
 
 const modal =
 document.createElement("div");
 
-modal.id = "grantModal";
+modal.id =
+"grantModal";
 
 modal.innerHTML = `
 
@@ -782,15 +990,21 @@ onclick="closeGrantModal()"
 </button>
 
 <div class="badge">
+
 ${amount}
+
 </div>
 
 <h1 class="modal-title">
+
 ${title}
+
 </h1>
 
 <p class="modal-desc">
+
 ${desc}
+
 </p>
 
 <div class="modal-actions">
@@ -801,14 +1015,22 @@ target="_blank"
 class="btn primary"
 style="text-decoration:none;"
 >
+
 Official Website
+
 </a>
 
 <button
 class="btn secondary"
-onclick="downloadPDF()"
+onclick="
+downloadPDF(
+'${title}'
+)
+"
 >
+
 Download PDF
+
 </button>
 
 </div>
@@ -816,11 +1038,14 @@ Download PDF
 </div>
 
 </div>
+
 `;
 
 document.body.appendChild(modal);
 
 }
+
+/* CLOSE MODAL */
 
 function closeGrantModal(){
 
@@ -833,26 +1058,28 @@ modal.remove();
 
 }
 
-function downloadPDF(){
+/* PDF */
+
+function downloadPDF(name){
 
 const content = `
+
 GRANT PROPOSAL
 
-Generated by Grant Simone AI
+Grant:
+${name}
 
-Business Name:
-Beauty Salon Business
+Generated by:
+Grant Simone AI
 
-Recommended Grant:
-SBA Microloan Program
-
-Funding Amount:
-$50,000
+Funding Goal:
+Business Expansion
 
 Proposal Summary:
-This funding will be used to support
-business expansion, equipment upgrades,
-marketing, staffing, and operational growth.
+This funding will support
+marketing, staffing,
+equipment, and operational growth.
+
 `;
 
 const blob =
