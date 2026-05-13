@@ -452,6 +452,43 @@ body::before{
     cursor:pointer;
 }
 
+/* MODAL */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.8);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:999999;
+
+    padding:20px;
+}
+
+.modal{
+
+    width:100%;
+    max-width:600px;
+
+    background:#111;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:28px;
+
+    padding:32px;
+}
+
 /* ANIMATION */
 
 @keyframes fadeUp{
@@ -583,7 +620,10 @@ body::before{
 
         </div>
 
-        <div class="history-list">
+        <div
+        class="history-list"
+        id="historyList"
+        >
 
             <div class="history-item">
                 Help me find grants
@@ -693,7 +733,10 @@ document.getElementById("sendBtn");
 const chatArea =
 document.getElementById("chatArea");
 
-/* SEND MESSAGE */
+const historyList =
+document.getElementById("historyList");
+
+/* SEND */
 
 async function sendMessage(){
 
@@ -702,7 +745,7 @@ async function sendMessage(){
 
     if(!message) return;
 
-    /* USER */
+    /* USER MESSAGE */
 
     const userDiv =
     document.createElement("div");
@@ -756,22 +799,24 @@ async function sendMessage(){
 
         loadingDiv.remove();
 
-        /* CARD STYLE RESPONSE */
+        /* RESPONSE CARD */
 
-        const cardResponse =
+        const assistantDiv =
         document.createElement("div");
 
-        cardResponse.className =
+        assistantDiv.className =
         "message assistant";
 
-        cardResponse.innerHTML =
+        assistantDiv.innerHTML =
 
         `
         <h2 style="margin-bottom:20px;">
-            Here are the best grant opportunities I found:
+            Here are the best grant opportunities:
         </h2>
 
         <div class="grants-wrapper">
+
+            <!-- CARD -->
 
             <div class="grant-card">
 
@@ -784,24 +829,38 @@ async function sendMessage(){
                 </div>
 
                 <div class="grant-desc">
-                    Small business funding program
-                    for startups, salons,
-                    and growing businesses.
+                    Small business funding
+                    for startups and salons.
                 </div>
 
                 <div class="card-buttons">
 
-                    <button class="view-btn">
+                    <button
+                    class="view-btn"
+                    onclick="openGrantModal(
+                        'SBA Microloan Program',
+                        '$50,000',
+                        'Funding support for startups and beauty salons.',
+                        'https://www.sba.gov/'
+                    )"
+                    >
                         View Details
                     </button>
 
-                    <button class="save-btn">
+                    <button
+                    class="save-btn"
+                    onclick="saveGrant(
+                        'SBA Microloan Program'
+                    )"
+                    >
                         Save
                     </button>
 
                 </div>
 
             </div>
+
+            <!-- CARD -->
 
             <div class="grant-card">
 
@@ -814,47 +873,30 @@ async function sendMessage(){
                 </div>
 
                 <div class="grant-desc">
-                    Monthly grants for women
-                    entrepreneurs and beauty businesses.
+                    Monthly grants for
+                    women entrepreneurs.
                 </div>
 
                 <div class="card-buttons">
 
-                    <button class="view-btn">
+                    <button
+                    class="view-btn"
+                    onclick="openGrantModal(
+                        'Amber Grant',
+                        '$10,000',
+                        'Monthly grant for women-owned businesses.',
+                        'https://ambergrantsforwomen.com/'
+                    )"
+                    >
                         View Details
                     </button>
 
-                    <button class="save-btn">
-                        Save
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="grant-card">
-
-                <div class="grant-badge">
-                    California
-                </div>
-
-                <div class="grant-title">
-                    California Dream Fund
-                </div>
-
-                <div class="grant-desc">
-                    Funding support for small
-                    businesses and startups
-                    in California.
-                </div>
-
-                <div class="card-buttons">
-
-                    <button class="view-btn">
-                        View Details
-                    </button>
-
-                    <button class="save-btn">
+                    <button
+                    class="save-btn"
+                    onclick="saveGrant(
+                        'Amber Grant'
+                    )"
+                    >
                         Save
                     </button>
 
@@ -863,41 +905,35 @@ async function sendMessage(){
             </div>
 
         </div>
+
+        <div
+        style="
+        margin-top:24px;
+        "
+        >
+
+            <button
+            onclick="downloadPDF()"
+
+            style="
+            background:#FFD54F;
+            color:black;
+            border:none;
+            padding:16px 22px;
+            border-radius:18px;
+            font-weight:700;
+            cursor:pointer;
+            "
+            >
+
+                Download Grant Proposal PDF
+
+            </button>
+
+        </div>
         `;
 
-        chatArea.appendChild(cardResponse);
-
-        /* BUTTONS */
-
-        const saveBtns =
-        document.querySelectorAll(".save-btn");
-
-        saveBtns.forEach(btn=>{
-
-            btn.addEventListener(
-                "click",
-                ()=>{
-                    btn.innerHTML = "Saved ✓";
-                }
-            );
-
-        });
-
-        const viewBtns =
-        document.querySelectorAll(".view-btn");
-
-        viewBtns.forEach(btn=>{
-
-            btn.addEventListener(
-                "click",
-                ()=>{
-                    alert(
-                        "Grant details modal coming soon."
-                    );
-                }
-            );
-
-        });
+        chatArea.appendChild(assistantDiv);
 
     }catch(error){
 
@@ -910,7 +946,169 @@ async function sendMessage(){
     chatArea.scrollHeight;
 }
 
-/* BUTTON */
+/* MODAL */
+
+function openGrantModal(
+    title,
+    amount,
+    desc,
+    link
+){
+
+    const modal =
+    document.createElement("div");
+
+    modal.className =
+    "modal-overlay";
+
+    modal.id =
+    "grantModal";
+
+    modal.innerHTML =
+
+    `
+    <div class="modal">
+
+        <h1
+        style="
+        margin-bottom:16px;
+        "
+        >
+            ${title}
+        </h1>
+
+        <div
+        style="
+        color:#FFD54F;
+        margin-bottom:18px;
+        font-size:22px;
+        "
+        >
+            ${amount}
+        </div>
+
+        <p
+        style="
+        color:#ccc;
+        line-height:1.8;
+        margin-bottom:24px;
+        "
+        >
+            ${desc}
+        </p>
+
+        <a
+        href="${link}"
+        target="_blank"
+
+        style="
+        display:inline-block;
+        background:#FFD54F;
+        color:black;
+        padding:14px 18px;
+        border-radius:14px;
+        text-decoration:none;
+        font-weight:700;
+        margin-right:12px;
+        "
+        >
+            Official Website
+        </a>
+
+        <button
+        onclick="closeGrantModal()"
+
+        style="
+        background:#222;
+        color:white;
+        border:none;
+        padding:14px 18px;
+        border-radius:14px;
+        cursor:pointer;
+        "
+        >
+            Close
+        </button>
+
+    </div>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+/* CLOSE */
+
+function closeGrantModal(){
+
+    const modal =
+    document.getElementById("grantModal");
+
+    if(modal){
+        modal.remove();
+    }
+
+}
+
+/* SAVE */
+
+function saveGrant(grantName){
+
+    const item =
+    document.createElement("div");
+
+    item.className =
+    "history-item";
+
+    item.innerHTML =
+    "⭐ " + grantName;
+
+    historyList.appendChild(item);
+
+}
+
+/* PDF */
+
+function downloadPDF(){
+
+    const content =
+
+    `
+    GRANT PROPOSAL
+
+    Business:
+    Beauty Salon Business
+
+    Funding Goal:
+    $50,000
+
+    Recommended Grants:
+    - SBA Microloan
+    - Amber Grant
+    `;
+
+    const blob =
+    new Blob(
+        [content],
+        {
+            type:"text/plain"
+        }
+    );
+
+    const url =
+    URL.createObjectURL(blob);
+
+    const a =
+    document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+    "grant-proposal.txt";
+
+    a.click();
+}
+
+/* CLICK */
 
 sendBtn.addEventListener(
     "click",
