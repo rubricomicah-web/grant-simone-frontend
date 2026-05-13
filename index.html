@@ -625,7 +625,7 @@ removeTyping();
 
 if(endpoint === "/grant-search"){
 
-if(data.grants?.length){
+if(Array.isArray(data.grants) && data.grants.length){
 
 let formatted = "";
 
@@ -633,16 +633,19 @@ data.grants.forEach(grant=>{
 
 formatted +=
 `Grant Name:
-${grant.grantName}
+${grant.grantName || "Verified Grant Opportunity"}
 
 Funding Amount:
 ${grant.amount || "Varies"}
 
 Purpose:
-${grant.purpose || "Business growth and expansion"}
+${grant.purpose || "Business growth and operational support"}
+
+Eligibility:
+${grant.eligibility || "See application requirements"}
 
 Application Link:
-${grant.applicationUrl}
+${grant.applicationUrl || "Not Available"}
 
 Recommendation:
 ${grant.recommendation || "Strong Match"}
@@ -652,7 +655,22 @@ ${grant.recommendation || "Strong Match"}
 
 addMessage(formatted,"ai");
 
+}else if(data.response){
+
+addMessage(data.response,"ai");
+
+}else if(data.message){
+
+addMessage(data.message,"ai");
+
 }else{
+
+addMessage(
+"No verified grants found at the moment.",
+"ai"
+);
+
+}
 
 addMessage(
 "No verified grants found at the moment.",
