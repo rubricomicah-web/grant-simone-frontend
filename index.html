@@ -22,7 +22,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 html,
 body{
     width:100%;
-    min-height:100dvh;
+    height:100%;
     background:#000;
     overflow:hidden;
     font-family:Inter,sans-serif;
@@ -30,8 +30,11 @@ body{
 }
 
 body::before{
+
     content:"";
+
     position:fixed;
+
     inset:0;
 
     background:
@@ -55,10 +58,17 @@ body::before{
 /* SIDEBAR */
 
 .sidebar{
+
     width:320px;
-    background:rgba(0,0,0,0.82);
-    border-right:1px solid rgba(255,255,255,0.05);
+
+    background:
+    rgba(0,0,0,0.8);
+
+    border-right:
+    1px solid rgba(255,255,255,0.05);
+
     padding:24px;
+
     overflow-y:auto;
 }
 
@@ -66,7 +76,7 @@ body::before{
     display:flex;
     align-items:center;
     gap:14px;
-    margin-bottom:28px;
+    margin-bottom:30px;
 }
 
 .logo img{
@@ -87,23 +97,36 @@ body::before{
 }
 
 .new-chat{
+
     width:100%;
+
     border:none;
+
     background:#FFD54F;
+
     color:black;
-    font-weight:700;
-    font-size:18px;
+
     padding:18px;
+
     border-radius:18px;
+
+    font-size:18px;
+    font-weight:700;
+
     cursor:pointer;
+
     margin-bottom:30px;
 }
 
 .section-title{
+
     color:#777;
+
     font-size:12px;
+
     letter-spacing:2px;
-    margin-bottom:14px;
+
+    margin-bottom:16px;
 }
 
 .history-list{
@@ -113,11 +136,19 @@ body::before{
 }
 
 .history-item{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.05);
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
     padding:18px;
+
     border-radius:18px;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
@@ -137,6 +168,7 @@ body::before{
 /* TOPBAR */
 
 .topbar{
+
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -171,6 +203,7 @@ body::before{
 }
 
 .online{
+
     background:
     rgba(255,213,79,0.08);
 
@@ -184,26 +217,38 @@ body::before{
     border-radius:999px;
 }
 
-/* CHAT */
+/* CHAT AREA */
 
 .chat-area{
+
     flex:1;
+
     overflow-y:auto;
+
     padding:34px;
+
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:24px;
 }
 
+/* MESSAGES */
+
 .message{
-    max-width:760px;
-    padding:28px;
-    border-radius:28px;
+
+    max-width:850px;
+
+    border-radius:30px;
+
+    padding:30px;
+
     line-height:1.9;
-    font-size:17px;
+
+    animation:fadeUp 0.3s ease;
 }
 
 .assistant{
+
     background:
     rgba(255,255,255,0.04);
 
@@ -214,25 +259,150 @@ body::before{
 }
 
 .user{
+
     background:#FFD54F;
+
     color:black;
-    align-self:flex-end;
+
     font-weight:600;
+
+    align-self:flex-end;
+}
+
+/* GRANT CARDS */
+
+.grants-wrapper{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+    gap:20px;
+
+    margin-top:22px;
+}
+
+.grant-card{
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border:
+    1px solid rgba(255,213,79,0.15);
+
+    border-radius:26px;
+
+    padding:24px;
+
+    transition:0.3s;
+}
+
+.grant-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#FFD54F;
+}
+
+.grant-badge{
+
+    display:inline-block;
+
+    background:
+    rgba(255,213,79,0.12);
+
+    border:
+    1px solid rgba(255,213,79,0.2);
+
+    color:#FFD54F;
+
+    padding:10px 16px;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    margin-bottom:18px;
+}
+
+.grant-title{
+
+    font-size:34px;
+
+    line-height:1.2;
+
+    margin-bottom:16px;
+
+    font-weight:700;
+}
+
+.grant-desc{
+
+    color:#ccc;
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+}
+
+.card-buttons{
+
+    display:flex;
+    gap:12px;
+}
+
+.view-btn{
+
+    flex:1;
+
+    border:none;
+
+    background:#FFD54F;
+
+    color:black;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.save-btn{
+
+    border:none;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    cursor:pointer;
 }
 
 /* INPUT */
 
 .input-area{
+
     padding:20px 30px;
+
     background:
     linear-gradient(
         to top,
-        rgba(0,0,0,0.96),
+        rgba(0,0,0,0.95),
         transparent
     );
 }
 
 .input-wrapper{
+
     display:flex;
     align-items:center;
     gap:12px;
@@ -249,24 +419,52 @@ body::before{
 }
 
 .input-wrapper input{
+
     flex:1;
+
     background:transparent;
+
     border:none;
     outline:none;
+
     color:white;
+
     font-size:18px;
+
     padding:12px;
 }
 
 .send-btn{
+
     width:62px;
     height:62px;
-    border-radius:50%;
+
     border:none;
+
+    border-radius:50%;
+
     background:#FFD54F;
+
     color:black;
+
     font-size:26px;
+
     cursor:pointer;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* MOBILE */
@@ -301,20 +499,27 @@ body::before{
 
     .chat-area{
         padding:18px;
-        padding-bottom:140px;
+        padding-bottom:150px;
     }
 
     .message{
-        font-size:18px;
         padding:24px;
+        font-size:17px;
+    }
+
+    .grant-title{
+        font-size:28px;
     }
 
     .input-area{
+
         position:fixed;
+
         left:0;
         right:0;
         bottom:0;
-        z-index:99999;
+
+        z-index:9999;
 
         padding:14px;
 
@@ -479,8 +684,6 @@ body::before{
 
 <script>
 
-/* ELEMENTS */
-
 const chatInput =
 document.getElementById("chatInput");
 
@@ -499,7 +702,7 @@ async function sendMessage(){
 
     if(!message) return;
 
-    /* USER MESSAGE */
+    /* USER */
 
     const userDiv =
     document.createElement("div");
@@ -512,24 +715,20 @@ async function sendMessage(){
 
     chatArea.appendChild(userDiv);
 
-    /* CLEAR INPUT */
-
     chatInput.value = "";
 
-    /* AI LOADING */
+    /* LOADING */
 
-    const aiDiv =
+    const loadingDiv =
     document.createElement("div");
 
-    aiDiv.className =
+    loadingDiv.className =
     "message assistant";
 
-    aiDiv.innerHTML =
+    loadingDiv.innerHTML =
     "Grant Simone is thinking...";
 
-    chatArea.appendChild(aiDiv);
-
-    /* AUTO SCROLL */
+    chatArea.appendChild(loadingDiv);
 
     chatArea.scrollTop =
     chatArea.scrollHeight;
@@ -555,12 +754,154 @@ async function sendMessage(){
         const data =
         await response.json();
 
-        aiDiv.innerHTML =
-        data.response || "No response";
+        loadingDiv.remove();
+
+        /* CARD STYLE RESPONSE */
+
+        const cardResponse =
+        document.createElement("div");
+
+        cardResponse.className =
+        "message assistant";
+
+        cardResponse.innerHTML =
+
+        `
+        <h2 style="margin-bottom:20px;">
+            Here are the best grant opportunities I found:
+        </h2>
+
+        <div class="grants-wrapper">
+
+            <div class="grant-card">
+
+                <div class="grant-badge">
+                    $50,000 Funding
+                </div>
+
+                <div class="grant-title">
+                    SBA Microloan Program
+                </div>
+
+                <div class="grant-desc">
+                    Small business funding program
+                    for startups, salons,
+                    and growing businesses.
+                </div>
+
+                <div class="card-buttons">
+
+                    <button class="view-btn">
+                        View Details
+                    </button>
+
+                    <button class="save-btn">
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="grant-card">
+
+                <div class="grant-badge">
+                    Women-Owned
+                </div>
+
+                <div class="grant-title">
+                    Amber Grant
+                </div>
+
+                <div class="grant-desc">
+                    Monthly grants for women
+                    entrepreneurs and beauty businesses.
+                </div>
+
+                <div class="card-buttons">
+
+                    <button class="view-btn">
+                        View Details
+                    </button>
+
+                    <button class="save-btn">
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="grant-card">
+
+                <div class="grant-badge">
+                    California
+                </div>
+
+                <div class="grant-title">
+                    California Dream Fund
+                </div>
+
+                <div class="grant-desc">
+                    Funding support for small
+                    businesses and startups
+                    in California.
+                </div>
+
+                <div class="card-buttons">
+
+                    <button class="view-btn">
+                        View Details
+                    </button>
+
+                    <button class="save-btn">
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+        chatArea.appendChild(cardResponse);
+
+        /* BUTTONS */
+
+        const saveBtns =
+        document.querySelectorAll(".save-btn");
+
+        saveBtns.forEach(btn=>{
+
+            btn.addEventListener(
+                "click",
+                ()=>{
+                    btn.innerHTML = "Saved ✓";
+                }
+            );
+
+        });
+
+        const viewBtns =
+        document.querySelectorAll(".view-btn");
+
+        viewBtns.forEach(btn=>{
+
+            btn.addEventListener(
+                "click",
+                ()=>{
+                    alert(
+                        "Grant details modal coming soon."
+                    );
+                }
+            );
+
+        });
 
     }catch(error){
 
-        aiDiv.innerHTML =
+        loadingDiv.innerHTML =
         "Backend connection failed.";
 
     }
@@ -569,14 +910,14 @@ async function sendMessage(){
     chatArea.scrollHeight;
 }
 
-/* BUTTON CLICK */
+/* BUTTON */
 
 sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
-/* ENTER KEY */
+/* ENTER */
 
 chatInput.addEventListener(
     "keydown",
