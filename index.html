@@ -185,9 +185,12 @@ font-size:14px;
 flex:1;
 
 display:flex;
+
 flex-direction:column;
 
 height:100dvh;
+
+overflow:hidden;
 }
 
 .topbar{
@@ -413,10 +416,21 @@ color:white;
 
 .input-area{
 
-padding:24px 34px;
+position:sticky;
 
-border-top:
-1px solid rgba(255,255,255,0.05);
+bottom:0;
+
+padding:
+10px
+16px
+calc(10px + env(safe-area-inset-bottom));
+
+background:
+rgba(0,0,0,0.75);
+
+backdrop-filter:blur(16px);
+
+z-index:999;
 }
 
 .input-wrap{
@@ -602,7 +616,11 @@ font-size:14px;
 
 .chat{
 
-padding:16px 12px;
+padding:16px 12px 120px;
+
+overflow-y:auto;
+
+flex:1;
 }
 
 .message{
