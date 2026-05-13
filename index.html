@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Grant Simone </title>
+<meta charset="UTF-8"/>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
+
+<title>Grant Simone AI</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+/>
 
 <style>
 
@@ -17,177 +25,291 @@
 }
 
 body{
+
     font-family:'Inter',sans-serif;
-    background:#000;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.88),
+        rgba(0,0,0,.92)
+    ),
+    url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
+
+    background-size:cover;
+    background-position:center;
+
     color:white;
+
     overflow:hidden;
 }
 
 /* APP */
 
 .app{
+
     display:flex;
+
     height:100vh;
-    background:
-    radial-gradient(circle at top right, rgba(231,200,77,0.08), transparent 30%),
-    #000;
+
+    backdrop-filter:blur(6px);
 }
 
 /* SIDEBAR */
 
 .sidebar{
+
     width:320px;
-    background:#050505;
-    border-right:1px solid rgba(255,255,255,0.06);
+
+    background:
+    rgba(0,0,0,.65);
+
+    border-right:
+    1px solid rgba(255,255,255,.06);
+
     display:flex;
     flex-direction:column;
+
     padding:24px;
+
+    backdrop-filter:blur(20px);
 }
 
+/* LOGO */
+
 .logo{
+
     display:flex;
     align-items:center;
     gap:14px;
+
     margin-bottom:30px;
 }
 
 .logo img{
+
     width:58px;
     height:58px;
+
     border-radius:50%;
+
     object-fit:cover;
 }
 
 .logo h1{
+
     font-size:20px;
     font-weight:700;
 }
 
 .logo p{
+
     color:#8f8f8f;
     font-size:14px;
 }
 
+/* BUTTON */
+
 .new-chat-btn{
+
     width:100%;
+
     border:none;
+
     border-radius:18px;
-    background:#e7c84d;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e7c84d,
+        #f5d76e
+    );
+
     color:#000;
+
     padding:18px;
+
     font-size:18px;
     font-weight:700;
+
     cursor:pointer;
+
     margin-bottom:30px;
-    transition:0.3s;
+
+    transition:.3s;
 }
 
 .new-chat-btn:hover{
+
     transform:translateY(-2px);
 }
 
+/* TITLES */
+
 .sidebar-title{
+
     color:#777;
+
     font-size:13px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     margin-bottom:16px;
 }
 
+/* HISTORY */
+
 .history-item{
-    background:#101010;
-    border:1px solid rgba(255,255,255,0.05);
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(255,255,255,.05);
+
     border-radius:18px;
+
     padding:18px;
+
     margin-bottom:14px;
+
     cursor:pointer;
-    transition:0.3s;
+
+    transition:.3s;
 }
 
 .history-item:hover{
+
     border-color:#e7c84d;
+
+    transform:translateY(-2px);
+
+    background:
+    rgba(255,255,255,.06);
 }
 
 .history-item h4{
+
     font-size:16px;
+
     margin-bottom:6px;
 }
 
 .history-item p{
+
     color:#888;
+
     font-size:14px;
 }
 
 /* MAIN */
 
 .chat-container{
+
     flex:1;
+
     display:flex;
     flex-direction:column;
+
     position:relative;
 }
 
 /* HEADER */
 
 .chat-header{
+
     padding:24px 34px;
-    border-bottom:1px solid rgba(255,255,255,0.06);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.75);
-    backdrop-filter:blur(10px);
+
+    background:
+    rgba(0,0,0,.55);
+
+    backdrop-filter:blur(14px);
 }
 
+/* USER */
+
 .chat-user{
+
     display:flex;
     align-items:center;
     gap:14px;
 }
 
 .chat-user img{
+
     width:58px;
     height:58px;
+
     border-radius:50%;
+
     object-fit:cover;
 }
 
 .chat-user h2{
+
     font-size:22px;
+
     margin-bottom:4px;
 }
 
 .chat-user p{
+
     color:#888;
+
     font-size:14px;
 }
 
+/* ONLINE */
+
 .online-badge{
+
     padding:12px 22px;
+
     border-radius:999px;
-    border:1px solid rgba(231,200,77,0.15);
-    background:rgba(231,200,77,0.08);
+
+    border:
+    1px solid rgba(231,200,77,0.15);
+
+    background:
+    rgba(231,200,77,0.08);
+
     color:#e7c84d;
+
     font-size:16px;
 }
 
 /* CHAT BODY */
 
 .chat-body{
+
     flex:1;
+
     overflow-y:auto;
+
     padding:40px;
 }
 
 /* MESSAGES */
 
 .messages{
+
     max-width:1000px;
+
     margin:auto;
 }
 
 .message{
+
     display:flex;
+
     margin-bottom:28px;
 }
 
@@ -199,68 +321,137 @@ body{
     justify-content:flex-end;
 }
 
+/* BUBBLES */
+
 .message-bubble{
+
     max-width:70%;
+
     padding:24px;
+
     border-radius:26px;
+
     line-height:1.8;
+
     font-size:17px;
+
+    backdrop-filter:blur(14px);
 }
 
 .ai .message-bubble{
-    background:#101010;
-    border:1px solid rgba(255,255,255,0.05);
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.05);
 }
 
 .user .message-bubble{
-    background:#e7c84d;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e7c84d,
+        #f5d76e
+    );
+
     color:#000;
+
     font-weight:600;
 }
 
 /* INPUT */
 
 .chat-input-area{
+
     padding:24px;
-    background:#000;
+
+    background:
+    rgba(0,0,0,.75);
+
+    backdrop-filter:blur(18px);
 }
 
 .chat-input-wrapper{
+
     max-width:1000px;
+
     margin:auto;
+
     position:relative;
 }
 
 .chat-input{
+
     width:100%;
+
     height:84px;
+
     border-radius:28px;
-    border:1px solid rgba(255,255,255,0.06);
-    background:#0d0d0d;
+
+    border:
+    1px solid rgba(255,255,255,.06);
+
+    background:
+    rgba(255,255,255,.04);
+
     color:white;
+
     padding:0 90px 0 28px;
+
     font-size:18px;
+
     outline:none;
+
+    backdrop-filter:blur(10px);
 }
 
 .chat-input::placeholder{
-    color:#666;
+
+    color:#777;
 }
 
+/* SEND */
+
 .send-btn{
+
     position:absolute;
+
     right:16px;
     top:50%;
+
     transform:translateY(-50%);
+
     width:56px;
     height:56px;
+
     border:none;
+
     border-radius:50%;
-    background:#e7c84d;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e7c84d,
+        #f5d76e
+    );
+
     color:black;
+
     font-size:24px;
     font-weight:700;
+
     cursor:pointer;
+
+    transition:.3s;
+}
+
+.send-btn:hover{
+
+    transform:
+    translateY(-50%)
+    scale(1.05);
 }
 
 /* MOBILE */
@@ -277,35 +468,51 @@ body{
 }
 
 .sidebar{
+
     width:100%;
+
     border-right:none;
-    border-bottom:1px solid rgba(255,255,255,0.06);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
 }
 
 .chat-body{
+
     padding:24px;
+
     padding-bottom:130px;
 }
 
 .message-bubble{
+
     max-width:92%;
 }
 
 .chat-input-area{
+
     position:fixed;
+
     bottom:0;
     left:0;
+
     width:100%;
+
     z-index:999;
-    border-top:1px solid rgba(255,255,255,0.06);
+
+    border-top:
+    1px solid rgba(255,255,255,.06);
 }
 
 .chat-input{
+
     height:72px;
+
     font-size:16px;
 }
 
 .send-btn{
+
     width:52px;
     height:52px;
 }
@@ -328,8 +535,11 @@ body{
             <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
 
             <div>
+
                 <h1>Grant Simone</h1>
+
                 <p>AI Grant Funding Consultant</p>
+
             </div>
 
         </div>
@@ -343,21 +553,33 @@ body{
         </div>
 
         <div class="history-item">
+
             <h4>Help me find grants</h4>
+
             <p>5/13/2026</p>
+
         </div>
 
         <div class="history-item">
+
             <h4>Find startup funding</h4>
+
             <p>5/12/2026</p>
+
         </div>
 
         <div class="history-item">
+
             <h4>Women-owned business grants</h4>
+
             <p>5/11/2026</p>
+
         </div>
 
-        <div style="margin-top:20px;" class="sidebar-title">
+        <div
+        style="margin-top:20px;"
+        class="sidebar-title"
+        >
             Saved Grants
         </div>
 
@@ -376,8 +598,11 @@ body{
                 <img src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg">
 
                 <div>
+
                     <h2>Grant Simone</h2>
+
                     <p>AI Grant Funding Consultant</p>
+
                 </div>
 
             </div>
@@ -402,9 +627,11 @@ body{
 
                         <br><br>
 
-                        Tell me about your business, nonprofit,
-                        startup, or funding goals and I’ll help
-                        you find the best grants available.
+                        Tell me about your business,
+                        nonprofit, startup,
+                        or funding goals
+                        and I’ll help you
+                        find the best grants available.
 
                     </div>
 
@@ -437,6 +664,207 @@ body{
     </main>
 
 </div>
+
+<script>
+
+/* ELEMENTS */
+
+const input =
+document.querySelector(".chat-input");
+
+const sendBtn =
+document.querySelector(".send-btn");
+
+const messages =
+document.querySelector(".messages");
+
+const historyItems =
+document.querySelectorAll(".history-item");
+
+const newChatBtn =
+document.querySelector(".new-chat-btn");
+
+/* SEND */
+
+function sendMessage(){
+
+    const text =
+    input.value.trim();
+
+    if(text === "") return;
+
+    /* USER */
+
+    const userMessage =
+    document.createElement("div");
+
+    userMessage.className =
+    "message user";
+
+    userMessage.innerHTML = `
+
+        <div class="message-bubble">
+            ${text}
+        </div>
+
+    `;
+
+    messages.appendChild(userMessage);
+
+    /* AI */
+
+    const aiMessage =
+    document.createElement("div");
+
+    aiMessage.className =
+    "message ai";
+
+    aiMessage.innerHTML = `
+
+        <div class="message-bubble">
+
+            Grant Simone is analyzing
+            funding opportunities...
+
+        </div>
+
+    `;
+
+    messages.appendChild(aiMessage);
+
+    /* CLEAR */
+
+    input.value = "";
+
+    /* SCROLL */
+
+    setTimeout(()=>{
+
+        window.scrollTo({
+            top:document.body.scrollHeight,
+            behavior:"smooth"
+        });
+
+    },100);
+
+    /* SIMULATED RESPONSE */
+
+    setTimeout(()=>{
+
+        aiMessage.innerHTML = `
+
+            <div class="message-bubble">
+
+                I found several grants
+                that may match your request.
+
+                <br><br>
+
+                Backend integration will provide
+                real-time grant results,
+                proposal generation,
+                and AI-powered recommendations.
+
+            </div>
+
+        `;
+
+    },1500);
+
+}
+
+/* ENTER */
+
+input.addEventListener(
+"keypress",
+function(e){
+
+    if(e.key === "Enter"){
+
+        sendMessage();
+
+    }
+
+}
+);
+
+/* BUTTON */
+
+sendBtn.addEventListener(
+"click",
+sendMessage
+);
+
+/* HISTORY */
+
+historyItems.forEach(item => {
+
+    item.addEventListener("click",()=>{
+
+        const title =
+        item.querySelector("h4").innerText;
+
+        const convo =
+        document.createElement("div");
+
+        convo.className =
+        "message ai";
+
+        convo.innerHTML = `
+
+            <div class="message-bubble">
+
+                Opened conversation:
+
+                <br><br>
+
+                ${title}
+
+            </div>
+
+        `;
+
+        messages.appendChild(convo);
+
+        window.scrollTo({
+            top:document.body.scrollHeight,
+            behavior:"smooth"
+        });
+
+    });
+
+});
+
+/* NEW CHAT */
+
+newChatBtn.addEventListener(
+"click",
+()=>{
+
+    messages.innerHTML = `
+
+        <div class="message ai">
+
+            <div class="message-bubble">
+
+                Hi! I'm Grant Simone.
+
+                <br><br>
+
+                Tell me about your business,
+                nonprofit, startup,
+                or funding goals.
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+);
+
+</script>
 
 </body>
 </html>
