@@ -573,8 +573,8 @@ let endpoint =
 
 let payload = {
 
-businessType:"small business",
-state:"California",
+businessType:"business or nonprofit organization",
+state:"United States",
 keywords:message
 
 };
@@ -664,13 +664,6 @@ addMessage(data.response,"ai");
 addMessage(data.message,"ai");
 
 }else{
-
-addMessage(
-"No verified grants found at the moment.",
-"ai"
-);
-
-}
 
 addMessage(
 "No verified grants found at the moment.",
