@@ -39,13 +39,13 @@ background-position:center;
 
 height:100vh;
 
+overflow:hidden;
+
 display:flex;
 justify-content:center;
 align-items:center;
 
 padding:18px;
-
-overflow:hidden;
 
 color:white;
 }
@@ -55,7 +55,6 @@ color:white;
 #app{
 
 width:100%;
-max-width:1550px;
 height:95vh;
 
 display:flex;
@@ -67,7 +66,7 @@ border-radius:34px;
 background:
 rgba(10,10,10,.55);
 
-backdrop-filter:blur(28px);
+backdrop-filter:blur(30px);
 
 border:
 1px solid rgba(255,255,255,.05);
@@ -76,13 +75,11 @@ box-shadow:
 0 30px 120px rgba(0,0,0,.7);
 }
 
-/* SIDEBAR */
+/* HISTORY SIDEBAR */
 
-#sidebar{
+#history-sidebar{
 
-width:330px;
-
-padding:28px;
+width:300px;
 
 background:
 rgba(255,255,255,.03);
@@ -90,33 +87,35 @@ rgba(255,255,255,.03);
 border-right:
 1px solid rgba(255,255,255,.05);
 
+padding:24px;
+
 overflow-y:auto;
 }
 
-.logo{
+.sidebar-logo{
 
 display:flex;
 align-items:center;
 gap:14px;
 
-margin-bottom:30px;
+margin-bottom:24px;
 }
 
-.logo img{
+.sidebar-logo img{
 
-width:62px;
-height:62px;
+width:58px;
+height:58px;
 
 border-radius:50%;
 }
 
-.logo h1{
+.sidebar-logo h1{
 
-font-size:23px;
+font-size:22px;
 font-weight:700;
 }
 
-.logo p{
+.sidebar-logo p{
 
 font-size:13px;
 
@@ -124,66 +123,15 @@ color:
 rgba(255,255,255,.5);
 }
 
-.side-card{
-
-padding:20px;
-
-border-radius:24px;
-
-background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-margin-bottom:18px;
-}
-
-.side-card h3{
-
-font-size:14px;
-font-weight:700;
-
-margin-bottom:14px;
-
-color:#f5d76e;
-}
-
-.side-card p{
-
-font-size:13px;
-line-height:1.9;
-
-color:
-rgba(255,255,255,.72);
-}
-
-.quick-btn{
+.new-chat-btn{
 
 width:100%;
 
-padding:14px;
-
-margin-top:10px;
+padding:16px;
 
 border:none;
 
-border-radius:16px;
-
-background:
-rgba(255,255,255,.05);
-
-color:white;
-
-font-size:14px;
-font-weight:600;
-
-cursor:pointer;
-
-transition:.25s;
-}
-
-.quick-btn:hover{
+border-radius:18px;
 
 background:
 linear-gradient(
@@ -193,6 +141,87 @@ linear-gradient(
 );
 
 color:black;
+
+font-size:15px;
+font-weight:700;
+
+cursor:pointer;
+
+margin-bottom:22px;
+}
+
+.sidebar-section{
+
+margin-bottom:26px;
+}
+
+.sidebar-title{
+
+font-size:12px;
+
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:
+rgba(255,255,255,.45);
+
+margin-bottom:14px;
+}
+
+.chat-history-item{
+
+padding:14px;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.04);
+
+margin-bottom:12px;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.chat-history-item:hover{
+
+background:
+rgba(212,175,55,.08);
+
+border:
+1px solid rgba(212,175,55,.14);
+}
+
+.chat-history-title{
+
+font-size:14px;
+font-weight:600;
+
+line-height:1.5;
+}
+
+.saved-grant{
+
+padding:14px;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,.04);
+
+margin-bottom:12px;
+
+font-size:13px;
+
+line-height:1.6;
+
+border:
+1px solid rgba(255,255,255,.04);
 }
 
 /* MAIN */
@@ -230,15 +259,15 @@ gap:14px;
 
 .header-left img{
 
-width:52px;
-height:52px;
+width:54px;
+height:54px;
 
 border-radius:50%;
 }
 
 .header-left h2{
 
-font-size:22px;
+font-size:23px;
 font-weight:700;
 }
 
@@ -265,6 +294,55 @@ border:
 color:#f5d76e;
 
 font-size:13px;
+}
+
+/* DASHBOARD */
+
+#dashboard{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:18px;
+
+padding:24px 30px;
+}
+
+.stat-card{
+
+padding:20px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.05);
+}
+
+.stat-title{
+
+font-size:11px;
+
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:
+rgba(255,255,255,.45);
+
+margin-bottom:10px;
+}
+
+.stat-value{
+
+font-size:28px;
+font-weight:800;
+
+color:#f5d76e;
 }
 
 /* CHAT */
@@ -350,48 +428,6 @@ border:
 border-bottom-left-radius:10px;
 }
 
-/* AI THINKING */
-
-.ai-thinking{
-
-display:flex;
-gap:8px;
-align-items:center;
-margin-top:14px;
-}
-
-.ai-dot{
-
-width:8px;
-height:8px;
-
-border-radius:50%;
-
-background:#f5d76e;
-
-animation:bounce 1s infinite;
-}
-
-.ai-dot:nth-child(2){
-animation-delay:.2s;
-}
-
-.ai-dot:nth-child(3){
-animation-delay:.4s;
-}
-
-@keyframes bounce{
-
-0%,80%,100%{
-transform:scale(0);
-}
-
-40%{
-transform:scale(1);
-}
-
-}
-
 /* GRANTS */
 
 .grant-grid{
@@ -418,6 +454,8 @@ rgba(255,255,255,.04);
 border:
 1px solid rgba(255,255,255,.05);
 
+position:relative;
+
 transition:.3s;
 }
 
@@ -426,7 +464,26 @@ transition:.3s;
 transform:translateY(-5px);
 
 border:
-1px solid rgba(212,175,55,.2);
+1px solid rgba(212,175,55,.18);
+}
+
+.save-btn{
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+font-size:22px;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.save-btn:hover{
+
+transform:scale(1.2);
 }
 
 .match{
@@ -457,7 +514,12 @@ margin-bottom:16px;
 color:#f5d76e;
 }
 
-.label{
+.grant-section{
+
+margin-bottom:14px;
+}
+
+.grant-label{
 
 font-size:11px;
 
@@ -471,11 +533,9 @@ rgba(255,255,255,.4);
 margin-bottom:5px;
 }
 
-.value{
+.grant-value{
 
 font-size:14px;
-
-margin-bottom:16px;
 
 line-height:1.7;
 }
@@ -504,63 +564,7 @@ font-weight:700;
 
 text-decoration:none;
 
-margin-top:10px;
-}
-
-.ai-analysis{
-
-margin-top:16px;
-
-padding:14px;
-
-border-radius:16px;
-
-background:
-rgba(212,175,55,.08);
-
-border:
-1px solid rgba(212,175,55,.14);
-
-font-size:13px;
-line-height:1.7;
-
-color:#f8e6a0;
-}
-
-/* SUGGESTIONS */
-
-.suggestions{
-
-margin-top:18px;
-
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.suggestion-btn{
-
-padding:12px 16px;
-
-border-radius:14px;
-
-background:
-rgba(255,255,255,.05);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-font-size:13px;
-
-cursor:pointer;
-
-transition:.25s;
-}
-
-.suggestion-btn:hover{
-
-background:
-rgba(212,175,55,.12);
+margin-top:14px;
 }
 
 /* INPUT */
@@ -631,6 +635,26 @@ font-weight:700;
 cursor:pointer;
 }
 
+@media(max-width:1200px){
+
+#dashboard{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:900px){
+
+#history-sidebar{
+display:none;
+}
+
+#dashboard{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 
 </head>
@@ -639,9 +663,11 @@ cursor:pointer;
 
 <div id="app">
 
-<div id="sidebar">
+<!-- HISTORY -->
 
-<div class="logo">
+<div id="history-sidebar">
+
+<div class="sidebar-logo">
 
 <img
 src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
@@ -654,49 +680,40 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
-<div class="side-card">
+<button
+class="new-chat-btn"
+onclick="newConversation()"
+>
++ New Conversation
+</button>
 
-<h3>AI Capabilities</h3>
+<div class="sidebar-section">
 
-<p>
+<div class="sidebar-title">
+Recent Conversations
+</div>
 
-• Smart grant matching<br><br>
-• AI proposal generation<br><br>
-• State-specific filtering<br><br>
-• Nonprofit & startup funding<br><br>
-• AI funding analysis
-
-</p>
+<div id="chatHistory"></div>
 
 </div>
 
-<div class="side-card">
+<div class="sidebar-section">
 
-<h3>Quick Actions</h3>
+<div class="sidebar-title">
+Saved Grants
+</div>
 
-<button
-class="quick-btn"
-onclick="quickPrompt('Find grants for my nonprofit in California')">
-California Nonprofit Grants
-</button>
-
-<button
-class="quick-btn"
-onclick="quickPrompt('Find grants above $50,000')">
-$50k+ Grants
-</button>
-
-<button
-class="quick-btn"
-onclick="quickPrompt('Generate a grant proposal')">
-Generate Proposal
-</button>
+<div id="savedGrants"></div>
 
 </div>
 
 </div>
+
+<!-- MAIN -->
 
 <div id="main">
+
+<!-- HEADER -->
 
 <div id="header">
 
@@ -719,7 +736,71 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<div class="stat-card">
+
+<div class="stat-title">
+Funding Opportunities
+</div>
+
+<div class="stat-value">
+1,284
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-title">
+Saved Grants
+</div>
+
+<div
+class="stat-value"
+id="savedCount"
+>
+0
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-title">
+Conversations
+</div>
+
+<div
+class="stat-value"
+id="conversationCount"
+>
+0
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-title">
+AI Match Score
+</div>
+
+<div class="stat-value">
+94%
+</div>
+
+</div>
+
+</div>
+
+<!-- CHAT -->
+
 <div id="chat-container"></div>
+
+<!-- INPUT -->
 
 <div id="input-area">
 
@@ -757,17 +838,19 @@ document.getElementById("messageInput");
 const sendBtn =
 document.getElementById("sendBtn");
 
-/* MEMORY */
+/* STORAGE */
 
-let memory = {
+let conversations =
+JSON.parse(
+localStorage.getItem("grantSimoneChats")
+) || [];
 
-state:"",
-businessType:"",
-organizationType:""
+let savedGrants =
+JSON.parse(
+localStorage.getItem("grantSimoneSaved")
+) || [];
 
-};
-
-/* WELCOME */
+/* LOAD UI */
 
 window.onload = ()=>{
 
@@ -777,20 +860,25 @@ addMessage(
 
 I'm Grant Simone.
 
-Tell me:
-• your business type
-• state
-• funding goals
+I can help you:
+• find grants
+• match funding opportunities
+• generate proposals
+• analyze grant eligibility
 
-and I'll help find the best grants for you.`,
+Tell me about your business or nonprofit to begin.`,
 
 "ai"
 
 );
 
+renderHistory();
+
+renderSavedGrants();
+
 };
 
-/* ADD MESSAGE */
+/* MESSAGE */
 
 function addMessage(content,type,isHTML=false){
 
@@ -821,61 +909,123 @@ chat.scrollHeight;
 
 }
 
-/* AI LOADING */
+/* SAVE CHAT */
 
-function addLoading(){
+function saveConversation(message){
 
-const wrapper =
-document.createElement("div");
+conversations.unshift({
 
-wrapper.className =
-"message ai";
+title:
+message.substring(0,40),
 
-wrapper.id = "loading";
+date:
+new Date().toLocaleDateString()
 
-wrapper.innerHTML = `
+});
 
-<div class="bubble">
+localStorage.setItem(
+"grantSimoneChats",
+JSON.stringify(conversations)
+);
 
-Grant Simone is analyzing your request...
+renderHistory();
 
-<div class="ai-thinking">
+}
 
-<div class="ai-dot"></div>
-<div class="ai-dot"></div>
-<div class="ai-dot"></div>
+/* RENDER HISTORY */
 
+function renderHistory(){
+
+const container =
+document.getElementById("chatHistory");
+
+container.innerHTML = "";
+
+conversations.slice(0,8).forEach(chatItem=>{
+
+container.innerHTML += `
+
+<div class="chat-history-item">
+
+<div class="chat-history-title">
+${chatItem.title}
+</div>
+
+<div class="chat-history-date">
+${chatItem.date}
 </div>
 
 </div>
 
 `;
 
-chat.appendChild(wrapper);
+});
 
-chat.scrollTop =
-chat.scrollHeight;
-
-}
-
-function removeLoading(){
-
-const loading =
-document.getElementById("loading");
-
-if(loading){
-loading.remove();
-}
+document.getElementById(
+"conversationCount"
+).innerText =
+conversations.length;
 
 }
 
-/* QUICK */
+/* SAVE GRANT */
 
-function quickPrompt(text){
+function saveGrant(title){
 
-input.value = text;
+savedGrants.unshift(title);
 
-sendMessage();
+localStorage.setItem(
+"grantSimoneSaved",
+JSON.stringify(savedGrants)
+);
+
+renderSavedGrants();
+
+}
+
+/* RENDER SAVED */
+
+function renderSavedGrants(){
+
+const container =
+document.getElementById("savedGrants");
+
+container.innerHTML = "";
+
+savedGrants.slice(0,8).forEach(grant=>{
+
+container.innerHTML += `
+
+<div class="saved-grant">
+❤️ ${grant}
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"savedCount"
+).innerText =
+savedGrants.length;
+
+}
+
+/* NEW CHAT */
+
+function newConversation(){
+
+chat.innerHTML = "";
+
+addMessage(
+
+`New conversation started.
+
+How can I help you today?`,
+
+"ai"
+
+);
 
 }
 
@@ -890,9 +1040,9 @@ if(!message) return;
 
 addMessage(message,"user");
 
-input.value = "";
+saveConversation(message);
 
-addLoading();
+input.value="";
 
 try{
 
@@ -907,14 +1057,9 @@ headers:{
 
 body:JSON.stringify({
 
-businessType:
-memory.businessType || "Business",
-
-state:
-memory.state || "United States",
-
-keywords:
-message
+businessType:"Business",
+state:"United States",
+keywords:message
 
 })
 
@@ -923,26 +1068,11 @@ message
 const data =
 await response.json();
 
-removeLoading();
-
 const grants =
 (data.grants || []).slice(0,6);
 
-let html = `
-
-<div style="margin-bottom:20px">
-
-I found
-<strong>${grants.length}</strong>
-strong funding opportunities related to your request.
-
-These grants appear to align with your funding goals and business profile.
-
-</div>
-
-<div class="grant-grid">
-
-`;
+let html =
+`<div class="grant-grid">`;
 
 grants.forEach(grant=>{
 
@@ -953,6 +1083,13 @@ html += `
 
 <div class="grant-card">
 
+<div
+class="save-btn"
+onclick="saveGrant('${grant.grantName || "Grant"}')"
+>
+♡
+</div>
+
 <div class="match">
 ${score}% MATCH
 </div>
@@ -961,20 +1098,28 @@ ${score}% MATCH
 ${grant.grantName || "Grant Opportunity"}
 </div>
 
-<div class="label">
+<div class="grant-section">
+
+<div class="grant-label">
 Purpose
 </div>
 
-<div class="value">
+<div class="grant-value">
 ${grant.purpose || "Business Support"}
 </div>
 
-<div class="label">
+</div>
+
+<div class="grant-section">
+
+<div class="grant-label">
 Eligibility
 </div>
 
-<div class="value">
+<div class="grant-value">
 ${grant.eligibility || "Check Requirements"}
+</div>
+
 </div>
 
 <a
@@ -987,68 +1132,21 @@ Apply for Grant →
 
 </a>
 
-<div class="ai-analysis">
-
-💡 Why this matches:
-<br><br>
-
-• Strong alignment with your funding request
-<br>
-• Relevant business category
-<br>
-• Potential eligibility match
-
-</div>
-
 </div>
 
 `;
 
 });
 
-html += `
-
-</div>
-
-<div class="suggestions">
-
-<div
-class="suggestion-btn"
-onclick="quickPrompt('Generate a proposal for these grants')"
->
-Generate Proposal
-</div>
-
-<div
-class="suggestion-btn"
-onclick="quickPrompt('Find local grants only')"
->
-Local Grants
-</div>
-
-<div
-class="suggestion-btn"
-onclick="quickPrompt('Find higher funding opportunities')"
->
-Higher Funding
-</div>
-
-</div>
-
-`;
+html += `</div>`;
 
 addMessage(html,"ai",true);
 
 }catch(err){
 
-removeLoading();
-
 addMessage(
-
-"Something went wrong while searching funding opportunities. Please try again.",
-
+"Something went wrong while searching grants.",
 "ai"
-
 );
 
 }
