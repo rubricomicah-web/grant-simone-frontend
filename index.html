@@ -456,6 +456,48 @@ text-transform:uppercase;
 letter-spacing:.05em;
 }
 
+/* PROPOSAL CARD */
+
+.proposal-card{
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(212,175,55,.18);
+
+border-radius:24px;
+
+padding:24px;
+
+line-height:1.9;
+
+backdrop-filter:blur(14px);
+
+box-shadow:
+0 10px 40px rgba(212,175,55,.06);
+}
+
+.proposal-header{
+
+font-size:20px;
+font-weight:700;
+
+margin-bottom:18px;
+
+color:#f5d76e;
+}
+
+.proposal-content{
+
+font-size:15px;
+
+color:
+rgba(255,255,255,.92);
+
+white-space:normal;
+}
+
 @media(max-width:768px){
 
 #app{
@@ -542,6 +584,28 @@ document.getElementById("messageInput");
 const sendBtn =
 document.getElementById("sendBtn");
 
+/* WELCOME */
+
+window.onload = ()=>{
+
+addMessage(
+`Hello! I'm Grant Simone.
+
+I can help you:
+
+• Find grants
+• Match funding opportunities
+• Generate grant proposals
+• Support nonprofits, NGOs, startups, and businesses
+
+Try asking:
+"Find grants for my nonprofit in Texas"
+`,
+"ai"
+);
+
+};
+
 /* AUTO RESIZE */
 
 input.addEventListener("input",()=>{
@@ -602,11 +666,21 @@ wrapper.id = "typing";
 
 wrapper.innerHTML = `
 <div class="bubble">
-<div class="typing">
+
+<div style="margin-bottom:10px;font-weight:600;color:#f5d76e;">
+Grant Simone
+</div>
+
+<div id="loadingText">
+Searching verified funding databases...
+</div>
+
+<div class="typing" style="margin-top:12px;">
 <span></span>
 <span></span>
 <span></span>
 </div>
+
 </div>
 `;
 
@@ -614,6 +688,37 @@ chatContainer.appendChild(wrapper);
 
 chatContainer.scrollTop =
 chatContainer.scrollHeight;
+
+const phases = [
+
+"Searching verified funding databases...",
+"Checking federal grant programs...",
+"Scanning nonprofit funding opportunities...",
+"Matching grants to your business...",
+"Preparing recommendations..."
+
+];
+
+let i = 0;
+
+const interval =
+setInterval(()=>{
+
+const el =
+document.getElementById("loadingText");
+
+if(!el){
+
+clearInterval(interval);
+return;
+}
+
+i = (i + 1) % phases.length;
+
+el.innerText =
+phases[i];
+
+},2500);
 
 }
 
@@ -628,7 +733,7 @@ typing.remove();
 
 }
 
-/* PROPOSAL DETECTION */
+/* DETECT PROPOSAL */
 
 function isProposal(text){
 
@@ -684,7 +789,7 @@ throw error;
 
 }
 
-/* RENDER CARDS */
+/* RENDER GRANTS */
 
 function renderGrantCards(grants){
 
@@ -815,8 +920,6 @@ message
 
 };
 
-/* PROPOSAL */
-
 if(isProposal(message)){
 
 endpoint =
@@ -872,29 +975,62 @@ removeTyping();
 
 if(endpoint === GRANT_SEARCH_API){
 
-if(
-Array.isArray(data.grants)
-&&
-data.grants.length > 0
-){
+const userMessage =
+message.toLowerCase();
+
+const states = [
+"california",
+"texas",
+"florida",
+"new york",
+"michigan",
+"missouri",
+"wisconsin"
+];
+
+let detectedState = "";
+
+states.forEach(state=>{
+
+if(userMessage.includes(state)){
+detectedState = state;
+}
+
+});
+
+let filteredGrants =
+data.grants || [];
+
+if(detectedState){
+
+filteredGrants =
+filteredGrants.filter(grant=>{
+
+const text =
+JSON.stringify(grant)
+.toLowerCase();
+
+return text.includes(detectedState);
+
+});
+
+}
+
+if(filteredGrants.length === 0){
+
+filteredGrants =
+data.grants || [];
+
+}
+
+if(filteredGrants.length > 0){
 
 const cards =
-renderGrantCards(data.grants);
+renderGrantCards(filteredGrants);
 
 addMessage(cards,"ai",true);
 
-}
-
-else if(data.response){
-
-addMessage(
-data.response,
-"ai"
-);
-
-}
-
-else{
+}else{
 
 addMessage(
 "No verified grants found currently.",
@@ -909,11 +1045,49 @@ addMessage(
 
 else{
 
-addMessage(
+console.log("Proposal Response:", data);
+
+let proposalText = "";
+
+proposalText =
 data.proposalNarrative ||
+data.proposal ||
+data.content ||
 data.response ||
-"Proposal generated successfully.",
-"ai"
+data.message ||
+"";
+
+if(typeof data === "string"){
+proposalText = data;
+}
+
+if(!proposalText){
+
+proposalText =
+JSON.stringify(data,null,2);
+
+}
+
+const formattedProposal = `
+
+<div class="proposal-card">
+
+<div class="proposal-header">
+Grant Proposal
+</div>
+
+<div class="proposal-content">
+${proposalText.replace(/\n/g,"<br>")}
+</div>
+
+</div>
+
+`;
+
+addMessage(
+formattedProposal,
+"ai",
+true
 );
 
 }
