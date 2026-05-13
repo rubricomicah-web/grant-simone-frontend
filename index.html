@@ -1390,9 +1390,19 @@ doc.setFont(
 "bold"
 );
 
-doc.text(clean,20,y);
+doc.text(wrapped,20,y);
 
-y += 4;
+y += wrapped.length * 7;
+
+/* AUTO NEW PAGE */
+
+if(y > 270){
+
+doc.addPage();
+
+y = 20;
+
+} 
 }else{
 
 doc.setFont(
@@ -1408,7 +1418,7 @@ line,
 
 doc.text(wrapped,20,y);
 
-y += wrapped.length * 6;
+y += wrapped.length * 7;
 
 }
 
