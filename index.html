@@ -1283,11 +1283,50 @@ doc.text(name,20,25);
 
 doc.setFontSize(12);
 
-const lines =
+const text =
+data.proposalNarrative;
+
+const split =
+text.split("\n");
+
+let y = 45;
+
+split.forEach(line => {
+
+if(line.includes("**")){
+
+const clean =
+line.replace(/\*\*/g,"");
+
+doc.setFont(
+"helvetica",
+"bold"
+);
+
+doc.text(clean,20,y);
+
+}else{
+
+doc.setFont(
+"helvetica",
+"normal"
+);
+
+const wrapped =
 doc.splitTextToSize(
-data.proposalNarrative,
+line,
 170
 );
+
+doc.text(wrapped,20,y);
+
+y += wrapped.length * 7;
+
+}
+
+y += 10;
+
+});
 
 doc.text(lines,20,45);
 
