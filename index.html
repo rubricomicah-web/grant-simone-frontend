@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-
 <meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
@@ -12,43 +11,437 @@ content="width=device-width, initial-scale=1.0"
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+
+background:#000;
+color:white;
+overflow-x:hidden;
+
+background-image:
+radial-gradient(circle at 20% 20%, rgba(255,213,79,0.08), transparent 25%),
+radial-gradient(circle at 80% 30%, rgba(255,213,79,0.06), transparent 25%),
+radial-gradient(circle at 50% 80%, rgba(255,213,79,0.05), transparent 30%);
+}
+
+.app{
+
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:320px;
+background:#050505;
+border-right:1px solid rgba(255,255,255,0.06);
+padding:24px;
+overflow-y:auto;
+}
+
+.logo{
+
+display:flex;
+gap:14px;
+align-items:center;
+margin-bottom:28px;
+}
+
+.logo img{
+
+width:60px;
+height:60px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.logo h1{
+
+font-size:28px;
+line-height:1;
+}
+
+.logo p{
+
+color:#aaa;
+font-size:14px;
+margin-top:6px;
+}
+
+.new-chat{
+
+width:100%;
+padding:18px;
+border:none;
+border-radius:18px;
+background:#FFD54F;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:30px;
+}
+
+.sidebar-title{
+
+font-size:13px;
+letter-spacing:2px;
+color:#777;
+margin-bottom:16px;
+}
+
 .saved-card{
+
 background:#0d0d0d;
-border:1px solid rgba(255,213,79,0.18);
+border:1px solid rgba(255,213,79,0.12);
 border-radius:20px;
 padding:18px;
 margin-bottom:16px;
 cursor:pointer;
-transition:0.25s;
+transition:0.2s;
 }
 
 .saved-card:hover{
-transform:translateY(-4px);
+
+transform:translateY(-3px);
 border-color:#FFD54F;
 }
 
 .saved-card h3{
-font-size:20px;
+
+font-size:18px;
 margin-bottom:8px;
-color:white;
 }
 
 .saved-card p{
-color:#999;
+
+color:#777;
 font-size:14px;
 }
 
-/* CLICKABLE */
+/* MAIN */
 
-.saved-card button{
-margin-top:12px;
-padding:10px 16px;
-border:none;
-border-radius:12px;
+.main{
+
+flex:1;
+display:flex;
+flex-direction:column;
+height:100vh;
+}
+
+.topbar{
+
+padding:24px 34px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.top-left{
+
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.top-left img{
+
+width:62px;
+height:62px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.top-left h1{
+
+font-size:54px;
+line-height:1;
+}
+
+.top-left p{
+
+color:#aaa;
+margin-top:6px;
+}
+
+.online{
+
+padding:14px 24px;
+border-radius:999px;
+border:1px solid rgba(255,213,79,0.2);
+background:rgba(255,213,79,0.06);
+color:#FFD54F;
+font-size:20px;
+}
+
+/* CHAT */
+
+.chat{
+
+flex:1;
+overflow-y:auto;
+padding:34px;
+}
+
+.message{
+
+max-width:900px;
+padding:28px;
+border-radius:30px;
+margin-bottom:24px;
+line-height:1.8;
+font-size:22px;
+}
+
+.bot{
+
+background:#0a0a0a;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.user{
+
 background:#FFD54F;
 color:black;
+margin-left:auto;
+font-weight:bold;
+}
+
+/* GRANTS */
+
+.grants-grid{
+
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:24px;
+margin-top:24px;
+}
+
+.grant-card{
+
+background:#0d0d0d;
+border:1px solid rgba(255,213,79,0.12);
+border-radius:32px;
+padding:28px;
+transition:0.25s;
+}
+
+.grant-card:hover{
+
+transform:translateY(-4px);
+border-color:#FFD54F;
+}
+
+.badge{
+
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+background:rgba(255,213,79,0.08);
+border:1px solid rgba(255,213,79,0.16);
+color:#FFD54F;
+margin-bottom:22px;
+}
+
+.grant-title{
+
+font-size:28px;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+.grant-desc{
+
+color:#bbb;
+line-height:1.8;
+margin-bottom:28px;
+}
+
+.actions{
+
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+
+padding:14px 20px;
+border:none;
+border-radius:16px;
+cursor:pointer;
+font-weight:bold;
+font-size:16px;
+}
+
+.primary{
+
+background:#FFD54F;
+color:black;
+}
+
+.secondary{
+
+background:#1c1c1c;
+color:white;
+}
+
+/* INPUT */
+
+.input-area{
+
+padding:24px 34px;
+border-top:1px solid rgba(255,255,255,0.06);
+}
+
+.input-wrap{
+
+display:flex;
+align-items:center;
+background:#0a0a0a;
+border:1px solid rgba(255,255,255,0.08);
+border-radius:999px;
+padding:12px;
+}
+
+.input-wrap input{
+
+flex:1;
+background:none;
+border:none;
+outline:none;
+color:white;
+font-size:20px;
+padding:18px;
+}
+
+.send-btn{
+
+width:74px;
+height:74px;
+border-radius:50%;
+border:none;
+background:#FFD54F;
+font-size:28px;
 font-weight:bold;
 cursor:pointer;
+}
+
+/* MODAL */
+
+.custom-modal-overlay{
+
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(8px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+z-index:999999;
+}
+
+.custom-modal{
+
+width:100%;
+max-width:650px;
+
+background:#111;
+border-radius:30px;
+
+border:1px solid rgba(255,213,79,0.15);
+
+padding:40px;
+position:relative;
+}
+
+.close-modal{
+
+position:absolute;
+top:20px;
+right:20px;
+
+width:42px;
+height:42px;
+
+border:none;
+border-radius:50%;
+
+background:#222;
+color:white;
+cursor:pointer;
+}
+
+.modal-title{
+
+font-size:42px;
+margin-bottom:18px;
+}
+
+.modal-desc{
+
+color:#bbb;
+line-height:1.9;
+margin-bottom:26px;
+}
+
+.modal-actions{
+
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.app{
+flex-direction:column;
+}
+
+.sidebar{
+display:none;
+}
+
+.top-left h1{
+font-size:34px;
+}
+
+.message{
+font-size:18px;
+padding:22px;
+}
+
+.chat{
+padding:20px;
+}
+
+.input-area{
+padding:18px;
+}
+
+.input-wrap input{
+font-size:16px;
+}
+
+.send-btn{
+width:62px;
+height:62px;
+}
 }
 
 </style>
@@ -56,69 +449,305 @@ cursor:pointer;
 
 <body>
 
-<script>
+<div class="app">
 
-/* =========================
-SAVE GRANT
-========================= */
+<!-- SIDEBAR -->
 
-function saveGrant(
-title,
-amount,
-desc,
-link
-){
+<div class="sidebar">
 
-const container =
-document.getElementById("savedContainer");
+<div class="logo">
 
-/* PREVENT DUPLICATE */
+<img
+src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"
+/>
 
-const existing =
-document.getElementById(
-"saved-" + title
-);
+<div>
+<h1>Grant Simone</h1>
+<p>AI Grant Funding Consultant</p>
+</div>
 
-if(existing){
-return;
-}
+</div>
 
-container.innerHTML += `
+<button class="new-chat">
++ New Conversation
+</button>
 
-<div
-class="saved-card"
-id="saved-${title}"
->
+<div class="sidebar-title">
+RECENT CONVERSATIONS
+</div>
 
-<h3>
-⭐ ${title}
-</h3>
+<div id="savedContainer"></div>
 
-<p>
-Saved Grant
-</p>
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="topbar">
+
+<div class="top-left">
+
+<img
+src="https://i.imgur.com/8Km9tLL.jpg"
+/>
+
+<div>
+<h1>Grant Simone</h1>
+<p>AI Grant Funding Consultant</p>
+</div>
+
+</div>
+
+<div class="online">
+● Online
+</div>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="message bot">
+
+Hi! I'm Grant Simone.
+<br><br>
+
+Tell me about your business,
+nonprofit, startup, or funding goals
+and I'll help you find the best grants available.
+
+</div>
+
+</div>
+
+<div class="input-area">
+
+<div class="input-wrap">
+
+<input
+id="userInput"
+placeholder="Ask about grants, funding, nonprofits..."
+/>
 
 <button
+class="send-btn"
+onclick="sendMessage()"
+>
+↑
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const chat =
+document.getElementById("chat");
+
+function sendMessage(){
+
+const input =
+document.getElementById("userInput");
+
+const text =
+input.value.trim();
+
+if(!text) return;
+
+chat.innerHTML += `
+<div class="message user">
+${text}
+</div>
+`;
+
+input.value = "";
+
+setTimeout(()=>{
+
+showGrantCards();
+
+},800);
+
+}
+
+function showGrantCards(){
+
+chat.innerHTML += `
+
+<div class="message bot">
+
+Here are the best grant opportunities I found for your business:
+
+<div class="grants-grid">
+
+<div class="grant-card">
+
+<div class="badge">
+$50,000 Funding
+</div>
+
+<div class="grant-title">
+SBA Microloan Program
+</div>
+
+<div class="grant-desc">
+Small business funding for startups and salons.
+</div>
+
+<div class="actions">
+
+<button
+class="btn primary"
 onclick="
 openGrantModal(
-'${title}',
-'${amount}',
-'${desc}',
-'${link}'
+'SBA Microloan Program',
+'$50,000 Funding',
+'This grant helps startups and small businesses access working capital and expansion funding.',
+'https://www.sba.gov'
 )
 "
 >
-Open Grant
+View Details
 </button>
+
+<button
+class="btn secondary"
+onclick="
+saveGrant(
+'SBA Microloan Program'
+)
+"
+>
+Save
+</button>
+
+<button
+class="btn secondary"
+onclick="downloadPDF()"
+>
+PDF
+</button>
+
+</div>
+
+</div>
+
+<div class="grant-card">
+
+<div class="badge">
+Women-Owned
+</div>
+
+<div class="grant-title">
+Amber Grant
+</div>
+
+<div class="grant-desc">
+Monthly grants for women entrepreneurs.
+</div>
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="
+openGrantModal(
+'Amber Grant',
+'Women-Owned',
+'Monthly funding opportunities for women-owned businesses and startups.',
+'https://ambergrantsforwomen.com'
+)
+"
+>
+View Details
+</button>
+
+<button
+class="btn secondary"
+onclick="
+saveGrant(
+'Amber Grant'
+)
+"
+>
+Save
+</button>
+
+<button
+class="btn secondary"
+onclick="downloadPDF()"
+>
+PDF
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 `;
 
+chat.scrollTop =
+chat.scrollHeight;
+
 }
 
-/* =========================
-OPEN MODAL
-========================= */
+function saveGrant(name){
+
+const container =
+document.getElementById("savedContainer");
+
+const grantHTML = `
+
+<div
+class="saved-card"
+onclick="
+openSavedGrant('${name}')
+"
+>
+
+<h3>⭐ ${name}</h3>
+
+<p>Saved Grant</p>
+
+</div>
+
+`;
+
+container.innerHTML += grantHTML;
+
+}
+
+function openSavedGrant(name){
+
+if(name === 'SBA Microloan Program'){
+
+openGrantModal(
+'SBA Microloan Program',
+'$50,000 Funding',
+'This grant helps startups and small businesses access working capital and expansion funding.',
+'https://www.sba.gov'
+);
+
+}
+
+if(name === 'Amber Grant'){
+
+openGrantModal(
+'Amber Grant',
+'Women-Owned',
+'Monthly funding opportunities for women-owned businesses and startups.',
+'https://ambergrantsforwomen.com'
+);
+
+}
 
 function openGrantModal(
 title,
@@ -128,9 +757,7 @@ link
 ){
 
 const oldModal =
-document.getElementById(
-"grantModal"
-);
+document.getElementById("grantModal");
 
 if(oldModal){
 oldModal.remove();
@@ -195,16 +822,10 @@ document.body.appendChild(modal);
 
 }
 
-/* =========================
-CLOSE MODAL
-========================= */
-
 function closeGrantModal(){
 
 const modal =
-document.getElementById(
-"grantModal"
-);
+document.getElementById("grantModal");
 
 if(modal){
 modal.remove();
@@ -212,21 +833,50 @@ modal.remove();
 
 }
 
+function downloadPDF(){
+
+const content = `
+GRANT PROPOSAL
+
+Generated by Grant Simone AI
+
+Business Name:
+Beauty Salon Business
+
+Recommended Grant:
+SBA Microloan Program
+
+Funding Amount:
+$50,000
+
+Proposal Summary:
+This funding will be used to support
+business expansion, equipment upgrades,
+marketing, staffing, and operational growth.
+`;
+
+const blob =
+new Blob(
+[content],
+{
+type:'application/pdf'
+}
+);
+
+const link =
+document.createElement('a');
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+'grant-proposal.pdf';
+
+link.click();
+
+}
+
 </script>
-
-<!-- =========================
-REPLACE ALL IMAGE URLS
-WITH THIS
-========================= -->
-
-<!-- OLD -->
-<!-- https://i.imgur.com/8Km9tLL.jpg -->
-
-<!-- NEW -->
-
-<img
-src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg"
-/>
 
 </body>
 </html>
