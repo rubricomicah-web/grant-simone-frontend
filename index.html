@@ -816,8 +816,6 @@ async function sendMessage(){
 
         <div class="grants-wrapper">
 
-            <!-- CARD -->
-
             <div class="grant-card">
 
                 <div class="grant-badge">
@@ -859,8 +857,6 @@ async function sendMessage(){
                 </div>
 
             </div>
-
-            <!-- CARD -->
 
             <div class="grant-card">
 
@@ -1036,7 +1032,7 @@ function openGrantModal(
     document.body.appendChild(modal);
 }
 
-/* CLOSE */
+/* CLOSE MODAL */
 
 function closeGrantModal(){
 
@@ -1053,6 +1049,20 @@ function closeGrantModal(){
 
 function saveGrant(grantName){
 
+    const existing =
+    Array.from(
+        document.querySelectorAll(".history-item")
+    ).find(item =>
+        item.innerHTML.includes(grantName)
+    );
+
+    if(existing){
+
+        alert("Grant already saved.");
+
+        return;
+    }
+
     const item =
     document.createElement("div");
 
@@ -1060,9 +1070,30 @@ function saveGrant(grantName){
     "history-item";
 
     item.innerHTML =
-    "⭐ " + grantName;
 
-    historyList.appendChild(item);
+    `
+    ⭐ ${grantName}
+
+    <div
+    style="
+    color:#888;
+    font-size:12px;
+    margin-top:6px;
+    "
+    >
+        Saved Grant
+    </div>
+    `;
+
+    item.onclick = function(){
+
+        alert(
+            grantName + " opened."
+        );
+
+    };
+
+    historyList.prepend(item);
 
 }
 
@@ -1072,25 +1103,29 @@ function downloadPDF(){
 
     const content =
 
-    `
-    GRANT PROPOSAL
+`
+GRANT PROPOSAL
 
-    Business:
-    Beauty Salon Business
+Business:
+Beauty Salon Business
 
-    Funding Goal:
-    $50,000
+Funding Goal:
+$50,000
 
-    Recommended Grants:
-    - SBA Microloan
-    - Amber Grant
-    `;
+Recommended Grants:
+- SBA Microloan Program
+- Amber Grant
+
+Purpose:
+Expansion, marketing,
+equipment, and staffing.
+`;
 
     const blob =
     new Blob(
         [content],
         {
-            type:"text/plain"
+            type:"application/pdf"
         }
     );
 
@@ -1103,7 +1138,7 @@ function downloadPDF(){
     a.href = url;
 
     a.download =
-    "grant-proposal.txt";
+    "grant-proposal.pdf";
 
     a.click();
 }
