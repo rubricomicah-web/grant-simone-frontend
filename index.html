@@ -1,1032 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8"/>
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Grant Simone AI</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,
 body{
-    width:100%;
-    height:100%;
+    margin:0;
     background:#000;
-    overflow:hidden;
-    font-family:Inter,sans-serif;
     color:white;
+    font-family:Arial;
 }
 
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-        rgba(0,0,0,0.88),
-        rgba(0,0,0,0.96)
-    ),
-    url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
-
-    background-size:cover;
-    background-position:center;
-
-    z-index:-1;
-}
-
-.app{
-    display:flex;
-    height:100dvh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-
-    width:320px;
-
-    background:
-    rgba(0,0,0,0.8);
-
-    border-right:
-    1px solid rgba(255,255,255,0.05);
-
-    padding:24px;
-
-    overflow-y:auto;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:30px;
-}
-
-.logo img{
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.logo h2{
-    font-size:34px;
-    line-height:1;
-}
-
-.logo p{
-    color:#888;
-    margin-top:6px;
-}
-
-.new-chat{
-
+/* PDF FIX */
+iframe{
     width:100%;
-
+    height:100vh;
     border:none;
-
-    background:#FFD54F;
-
-    color:black;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    font-size:18px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    margin-bottom:30px;
-}
-
-.section-title{
-
-    color:#777;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    margin-bottom:16px;
-}
-
-.history-list{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.history-item{
-
-    background:
-    rgba(255,255,255,0.04);
-
-    border:
-    1px solid rgba(255,255,255,0.05);
-
-    padding:18px;
-
-    border-radius:18px;
-
-    cursor:pointer;
-
-    transition:0.3s;
-}
-
-.history-item:hover{
-    border-color:#FFD54F;
-}
-
-/* MAIN */
-
-.main{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    height:100dvh;
-}
-
-/* TOPBAR */
-
-.topbar{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:22px 34px;
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.05);
-
-    background:
-    rgba(0,0,0,0.4);
-}
-
-.top-left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.top-left img{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-}
-
-.top-left h2{
-    font-size:28px;
-}
-
-.top-left p{
-    color:#888;
-}
-
-.online{
-
-    background:
-    rgba(255,213,79,0.08);
-
-    border:
-    1px solid rgba(255,213,79,0.2);
-
-    color:#FFD54F;
-
-    padding:12px 22px;
-
-    border-radius:999px;
-}
-
-/* CHAT AREA */
-
-.chat-area{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:34px;
-
-    display:flex;
-    flex-direction:column;
-    gap:24px;
-}
-
-/* MESSAGES */
-
-.message{
-
-    max-width:850px;
-
-    border-radius:30px;
-
-    padding:30px;
-
-    line-height:1.9;
-
-    animation:fadeUp 0.3s ease;
-}
-
-.assistant{
-
-    background:
-    rgba(255,255,255,0.04);
-
-    border:
-    1px solid rgba(255,255,255,0.05);
-
-    align-self:flex-start;
-}
-
-.user{
-
-    background:#FFD54F;
-
-    color:black;
-
-    font-weight:600;
-
-    align-self:flex-end;
-}
-
-/* GRANT CARDS */
-
-.grants-wrapper{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(240px,1fr));
-
-    gap:20px;
-
-    margin-top:22px;
 }
 
 .grant-card{
-
-    background:
-    rgba(255,255,255,0.04);
-
-    border:
-    1px solid rgba(255,213,79,0.15);
-
-    border-radius:26px;
-
-    padding:24px;
-
-    transition:0.3s;
+    background:#0b0b0b;
+    border:1px solid rgba(255,215,0,0.15);
+    border-radius:25px;
+    padding:25px;
+    margin-bottom:25px;
+    width:300px;
 }
 
-.grant-card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:#FFD54F;
-}
-
-.grant-badge{
-
-    display:inline-block;
-
-    background:
-    rgba(255,213,79,0.12);
-
-    border:
-    1px solid rgba(255,213,79,0.2);
-
-    color:#FFD54F;
-
-    padding:10px 16px;
-
-    border-radius:999px;
-
-    font-size:14px;
-
-    margin-bottom:18px;
-}
-
-.grant-title{
-
-    font-size:34px;
-
-    line-height:1.2;
-
-    margin-bottom:16px;
-
-    font-weight:700;
-}
-
-.grant-desc{
-
-    color:#ccc;
-
-    line-height:1.7;
-
-    margin-bottom:24px;
-}
-
-.card-buttons{
-
-    display:flex;
-    gap:12px;
-}
-
-.view-btn{
-
-    flex:1;
-
-    border:none;
-
-    background:#FFD54F;
-
-    color:black;
-
-    padding:14px;
-
-    border-radius:16px;
-
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-.save-btn{
-
-    border:none;
-
-    background:
-    rgba(255,255,255,0.08);
-
-    color:white;
-
-    padding:14px 18px;
-
-    border-radius:16px;
-
-    cursor:pointer;
-}
-
-/* INPUT */
-
-.input-area{
-
-    padding:20px 30px;
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.95),
-        transparent
-    );
-}
-
-.input-wrapper{
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    background:
-    rgba(255,255,255,0.04);
-
-    border:
-    1px solid rgba(255,255,255,0.06);
-
-    border-radius:999px;
-
-    padding:12px;
-}
-
-.input-wrapper input{
-
-    flex:1;
-
-    background:transparent;
-
-    border:none;
-    outline:none;
-
-    color:white;
-
-    font-size:18px;
-
-    padding:12px;
-}
-
-.send-btn{
-
-    width:62px;
-    height:62px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#FFD54F;
-
-    color:black;
-
-    font-size:26px;
-
+button{
     cursor:pointer;
 }
 
 /* MODAL */
-
 .modal-overlay{
-
     position:fixed;
-
     inset:0;
-
-    background:
-    rgba(0,0,0,0.8);
-
+    background:rgba(0,0,0,0.7);
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    z-index:999999;
-
-    padding:20px;
+    z-index:9999;
 }
 
 .modal{
-
-    width:100%;
+    width:90%;
     max-width:600px;
-
     background:#111;
-
-    border:
-    1px solid rgba(255,255,255,0.08);
-
-    border-radius:28px;
-
-    padding:32px;
+    border-radius:25px;
+    padding:30px;
+    border:1px solid rgba(255,215,0,0.15);
 }
 
-/* ANIMATION */
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.modal h2{
+    color:#ffd54f;
 }
 
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .sidebar{
-        display:none;
-    }
-
-    .topbar{
-        padding:18px;
-    }
-
-    .top-left img{
-        width:50px;
-        height:50px;
-    }
-
-    .top-left h2{
-        font-size:20px;
-    }
-
-    .top-left p{
-        font-size:12px;
-    }
-
-    .online{
-        padding:10px 16px;
-        font-size:14px;
-    }
-
-    .chat-area{
-        padding:18px;
-        padding-bottom:150px;
-    }
-
-    .message{
-        padding:24px;
-        font-size:17px;
-    }
-
-    .grant-title{
-        font-size:28px;
-    }
-
-    .input-area{
-
-        position:fixed;
-
-        left:0;
-        right:0;
-        bottom:0;
-
-        z-index:9999;
-
-        padding:14px;
-
-        padding-bottom:
-        calc(
-            14px + env(safe-area-inset-bottom)
-        );
-
-        background:
-        rgba(0,0,0,0.95);
-
-        backdrop-filter:blur(20px);
-    }
-
-    .send-btn{
-        width:58px;
-        height:58px;
-    }
-
+.modal-close{
+    margin-top:20px;
+    background:#ffd54f;
+    color:black;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:bold;
 }
 
 </style>
-
 </head>
-
 <body>
 
-<div class="app">
+<div id="cards-container"></div>
 
-    <!-- SIDEBAR -->
+<div id="saved-grants"></div>
 
-    <div class="sidebar">
+<script>
 
-        <div class="logo">
+const grants = [
+{
+    title:"SBA Microloan Program",
+    amount:"$50,000 Funding",
+    description:"Small business funding for startups and salons.",
+    details:`
+SBA Microloan Program
 
-            <img
-            src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg"
-            >
+• Funding up to $50,000
+• Designed for startups and small businesses
+• Good for salons and beauty businesses
+• Flexible repayment terms
+• National U.S. funding program
+`
+},
+{
+    title:"Amber Grant",
+    amount:"Women-Owned",
+    description:"Monthly grants for women entrepreneurs.",
+    details:`
+Amber Grant
 
-            <div>
+• $10,000 monthly grant
+• Women-owned businesses
+• Easy online application
+• Extra year-end funding opportunities
+`
+}
+];
 
-                <h2>Grant Simone</h2>
+const cardsContainer = document.getElementById("cards-container");
 
-                <p>
-                    AI Grant Funding Consultant
-                </p>
+function renderCards(){
 
+    cardsContainer.innerHTML = "";
+
+    grants.forEach((grant,index)=>{
+
+        cardsContainer.innerHTML += `
+        
+        <div class="grant-card">
+
+            <div style="
+                display:inline-block;
+                background:rgba(255,215,0,0.1);
+                color:#ffd54f;
+                padding:10px 18px;
+                border-radius:999px;
+                margin-bottom:20px;
+                font-weight:bold;
+            ">
+                ${grant.amount}
             </div>
 
-        </div>
+            <h1 style="margin-top:0;">
+                ${grant.title}
+            </h1>
 
-        <button class="new-chat">
+            <p style="
+                color:#bdbdbd;
+                line-height:1.7;
+            ">
+                ${grant.description}
+            </p>
 
-            + New Conversation
+            <div style="
+                display:flex;
+                gap:10px;
+                margin-top:25px;
+            ">
 
-        </button>
+                <button onclick="openDetails(${index})"
+                    style="
+                        background:#ffd54f;
+                        border:none;
+                        padding:14px 20px;
+                        border-radius:14px;
+                        font-weight:bold;
+                    ">
+                    View Details
+                </button>
 
-        <div class="section-title">
+                <button onclick="saveGrant(${index})"
+                    style="
+                        background:#1a1a1a;
+                        color:white;
+                        border:none;
+                        padding:14px 20px;
+                        border-radius:14px;
+                    ">
+                    Save
+                </button>
 
-            RECENT CONVERSATIONS
-
-        </div>
-
-        <div
-        class="history-list"
-        id="historyList"
-        >
-
-            <div class="history-item">
-                Help me find grants
-            </div>
-
-            <div class="history-item">
-                Startup funding
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- MAIN -->
-
-    <div class="main">
-
-        <div class="topbar">
-
-            <div class="top-left">
-
-                <img
-                src="https://raw.githubusercontent.com/rubricomicah-web/grant-simone-frontend/main/Grant%20Simone.jpeg"
-                >
-
-                <div>
-
-                    <h2>Grant Simone</h2>
-
-                    <p>
-                        AI Grant Funding Consultant
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="online">
-
-                ● Online
-
-            </div>
-
-        </div>
-
-        <!-- CHAT -->
-
-        <div
-        class="chat-area"
-        id="chatArea"
-        >
-
-            <div class="message assistant">
-
-                Hi! I'm Grant Simone.
-
-                <br><br>
-
-                Tell me about your business,
-                nonprofit,
-                startup,
-                or funding goals
-                and I'll help you find
-                the best grants available.
-
-            </div>
-
-        </div>
-
-        <!-- INPUT -->
-
-        <div class="input-area">
-
-            <div class="input-wrapper">
-
-                <input
-                type="text"
-                id="chatInput"
-                placeholder="Ask about grants, funding, nonprofits..."
-                >
-
-                <button
-                class="send-btn"
-                id="sendBtn"
-                >
-
-                    ↑
-
+                <button onclick="downloadPDF(${index})"
+                    style="
+                        background:#222;
+                        color:white;
+                        border:none;
+                        padding:14px 20px;
+                        border-radius:14px;
+                    ">
+                    PDF
                 </button>
 
             </div>
 
         </div>
 
-    </div>
+        `;
+    });
 
-</div>
+}
 
-<script>
+renderCards();
 
-const chatInput =
-document.getElementById("chatInput");
+/* VIEW DETAILS */
 
-const sendBtn =
-document.getElementById("sendBtn");
+function openDetails(index){
 
-const chatArea =
-document.getElementById("chatArea");
+    const grant = grants[index];
 
-const historyList =
-document.getElementById("historyList");
+    const modal = document.createElement("div");
 
-/* SEND */
+    modal.className = "modal-overlay";
 
-async function sendMessage(){
+    modal.innerHTML = `
 
-    const message =
-    chatInput.value.trim();
+        <div class="modal">
 
-    if(!message) return;
+            <h2>${grant.title}</h2>
 
-    /* USER MESSAGE */
+            <p style="
+                color:#ccc;
+                line-height:1.9;
+                white-space:pre-line;
+            ">
+                ${grant.details}
+            </p>
 
-    const userDiv =
-    document.createElement("div");
-
-    userDiv.className =
-    "message user";
-
-    userDiv.innerHTML =
-    message;
-
-    chatArea.appendChild(userDiv);
-
-    chatInput.value = "";
-
-    /* LOADING */
-
-    const loadingDiv =
-    document.createElement("div");
-
-    loadingDiv.className =
-    "message assistant";
-
-    loadingDiv.innerHTML =
-    "Grant Simone is thinking...";
-
-    chatArea.appendChild(loadingDiv);
-
-    chatArea.scrollTop =
-    chatArea.scrollHeight;
-
-    try{
-
-        const response =
-        await fetch(
-            "https://grant-simone-backend-production.up.railway.app/chat",
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify({
-                    message:message
-                })
-            }
-        );
-
-        const data =
-        await response.json();
-
-        loadingDiv.remove();
-
-        /* RESPONSE CARD */
-
-        const assistantDiv =
-        document.createElement("div");
-
-        assistantDiv.className =
-        "message assistant";
-
-        assistantDiv.innerHTML =
-
-        `
-        <h2 style="margin-bottom:20px;">
-            Here are the best grant opportunities:
-        </h2>
-
-        <div class="grants-wrapper">
-
-            <div class="grant-card">
-
-                <div class="grant-badge">
-                    $50,000 Funding
-                </div>
-
-                <div class="grant-title">
-                    SBA Microloan Program
-                </div>
-
-                <div class="grant-desc">
-                    Small business funding
-                    for startups and salons.
-                </div>
-
-                <div class="card-buttons">
-
-                    <button
-                    class="view-btn"
-                    onclick="openGrantModal(
-                        'SBA Microloan Program',
-                        '$50,000',
-                        'Funding support for startups and beauty salons.',
-                        'https://www.sba.gov/'
-                    )"
-                    >
-                        View Details
-                    </button>
-
-                    <button
-                    class="save-btn"
-                    onclick="saveGrant(
-                        'SBA Microloan Program'
-                    )"
-                    >
-                        Save
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="grant-card">
-
-                <div class="grant-badge">
-                    Women-Owned
-                </div>
-
-                <div class="grant-title">
-                    Amber Grant
-                </div>
-
-                <div class="grant-desc">
-                    Monthly grants for
-                    women entrepreneurs.
-                </div>
-
-                <div class="card-buttons">
-
-                    <button
-                    class="view-btn"
-                    onclick="openGrantModal(
-                        'Amber Grant',
-                        '$10,000',
-                        'Monthly grant for women-owned businesses.',
-                        'https://ambergrantsforwomen.com/'
-                    )"
-                    >
-                        View Details
-                    </button>
-
-                    <button
-                    class="save-btn"
-                    onclick="saveGrant(
-                        'Amber Grant'
-                    )"
-                    >
-                        Save
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div
-        style="
-        margin-top:24px;
-        "
-        >
-
-            <button
-            onclick="downloadPDF()"
-
-            style="
-            background:#FFD54F;
-            color:black;
-            border:none;
-            padding:16px 22px;
-            border-radius:18px;
-            font-weight:700;
-            cursor:pointer;
-            "
-            >
-
-                Download Grant Proposal PDF
-
+            <button class="modal-close" onclick="closeModal()">
+                Close
             </button>
 
         </div>
-        `;
 
-        chatArea.appendChild(assistantDiv);
-
-    }catch(error){
-
-        loadingDiv.innerHTML =
-        "Backend connection failed.";
-
-    }
-
-    chatArea.scrollTop =
-    chatArea.scrollHeight;
-}
-
-/* MODAL */
-
-function openGrantModal(
-    title,
-    amount,
-    desc,
-    link
-){
-
-    const modal =
-    document.createElement("div");
-
-    modal.className =
-    "modal-overlay";
-
-    modal.id =
-    "grantModal";
-
-    modal.innerHTML =
-
-    `
-    <div class="modal">
-
-        <h1
-        style="
-        margin-bottom:16px;
-        "
-        >
-            ${title}
-        </h1>
-
-        <div
-        style="
-        color:#FFD54F;
-        margin-bottom:18px;
-        font-size:22px;
-        "
-        >
-            ${amount}
-        </div>
-
-        <p
-        style="
-        color:#ccc;
-        line-height:1.8;
-        margin-bottom:24px;
-        "
-        >
-            ${desc}
-        </p>
-
-        <a
-        href="${link}"
-        target="_blank"
-
-        style="
-        display:inline-block;
-        background:#FFD54F;
-        color:black;
-        padding:14px 18px;
-        border-radius:14px;
-        text-decoration:none;
-        font-weight:700;
-        margin-right:12px;
-        "
-        >
-            Official Website
-        </a>
-
-        <button
-        onclick="closeGrantModal()"
-
-        style="
-        background:#222;
-        color:white;
-        border:none;
-        padding:14px 18px;
-        border-radius:14px;
-        cursor:pointer;
-        "
-        >
-            Close
-        </button>
-
-    </div>
     `;
 
     document.body.appendChild(modal);
@@ -1034,10 +233,9 @@ function openGrantModal(
 
 /* CLOSE MODAL */
 
-function closeGrantModal(){
+function closeModal(){
 
-    const modal =
-    document.getElementById("grantModal");
+    const modal = document.querySelector(".modal-overlay");
 
     if(modal){
         modal.remove();
@@ -1045,126 +243,58 @@ function closeGrantModal(){
 
 }
 
-/* SAVE */
+/* SAVE GRANT */
 
-function saveGrant(grantName){
+function saveGrant(index){
 
-    const existing =
-    Array.from(
-        document.querySelectorAll(".history-item")
-    ).find(item =>
-        item.innerHTML.includes(grantName)
-    );
+    const grant = grants[index];
 
-    if(existing){
+    const savedContainer = document.getElementById("saved-grants");
 
-        alert("Grant already saved.");
+    const exists = document.getElementById("saved-" + index);
 
+    if(exists){
         return;
     }
 
-    const item =
-    document.createElement("div");
+    savedContainer.innerHTML += `
 
-    item.className =
-    "history-item";
+        <div id="saved-${index}" style="
+            background:#111;
+            border:1px solid rgba(255,215,0,0.2);
+            padding:15px;
+            border-radius:15px;
+            margin:15px;
+        ">
+            ⭐ ${grant.title}
+        </div>
 
-    item.innerHTML =
-
-    `
-    ⭐ ${grantName}
-
-    <div
-    style="
-    color:#888;
-    font-size:12px;
-    margin-top:6px;
-    "
-    >
-        Saved Grant
-    </div>
     `;
 
-    item.onclick = function(){
-
-        alert(
-            grantName + " opened."
-        );
-
-    };
-
-    historyList.prepend(item);
-
 }
 
-/* PDF */
+/* REAL PDF DOWNLOAD FIX */
 
-function downloadPDF(){
+async function downloadPDF(index){
 
-    const content =
+    const grant = grants[index];
 
-`
-GRANT PROPOSAL
+    const { jsPDF } = window.jspdf;
 
-Business:
-Beauty Salon Business
+    const doc = new jsPDF();
 
-Funding Goal:
-$50,000
+    doc.setFontSize(22);
+    doc.text(grant.title,20,25);
 
-Recommended Grants:
-- SBA Microloan Program
-- Amber Grant
+    doc.setFontSize(14);
 
-Purpose:
-Expansion, marketing,
-equipment, and staffing.
-`;
+    const lines = doc.splitTextToSize(grant.details,170);
 
-    const blob =
-    new Blob(
-        [content],
-        {
-            type:"application/pdf"
-        }
-    );
+    doc.text(lines,20,45);
 
-    const url =
-    URL.createObjectURL(blob);
+    doc.save(`${grant.title}.pdf`);
 
-    const a =
-    document.createElement("a");
-
-    a.href = url;
-
-    a.download =
-    "grant-proposal.pdf";
-
-    a.click();
 }
-
-/* CLICK */
-
-sendBtn.addEventListener(
-    "click",
-    sendMessage
-);
-
-/* ENTER */
-
-chatInput.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Enter"){
-
-            e.preventDefault();
-
-            sendMessage();
-        }
-
-    }
-);
 
 </script>
 
