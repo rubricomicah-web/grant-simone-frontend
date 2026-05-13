@@ -892,8 +892,11 @@ onclick="sendMessage()"
 const chat =
 document.getElementById("chat");
 
-let savedGrants = [];
-
+let savedGrants =
+JSON.parse(
+localStorage.getItem("savedGrants")
+) || [];
+  
 /* SEND */
 
 async function sendMessage(){
@@ -1065,6 +1068,11 @@ return;
 }
 
 savedGrants.push(name);
+
+localStorage.setItem(
+"savedGrants",
+JSON.stringify(savedGrants)
+);
 
 renderSavedGrants();
 
@@ -1305,7 +1313,7 @@ doc.setFont(
 
 doc.text(clean,20,y);
 
-y += 6;
+y += 4;
 }else{
 
 doc.setFont(
@@ -1341,6 +1349,8 @@ alert("Error generating PDF.");
 
 }
 
+renderSavedGrants();
+  
 </script>
 
 </body>
