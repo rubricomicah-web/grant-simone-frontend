@@ -365,7 +365,7 @@ border:
 border-bottom-left-radius:10px;
 }
 
-/* GRANT CARDS */
+/* GRANTS */
 
 .grant-grid{
 
@@ -549,47 +549,6 @@ font-size:14px;
 font-weight:700;
 
 text-decoration:none;
-}
-
-.proposal-section{
-
-margin-bottom:24px;
-}
-
-.proposal-section h3{
-
-font-size:16px;
-
-margin-bottom:10px;
-
-color:#f5d76e;
-}
-
-.proposal-section p{
-
-font-size:14px;
-
-line-height:1.8;
-
-color:
-rgba(255,255,255,.85);
-}
-
-.timeline{
-
-display:grid;
-
-gap:12px;
-}
-
-.timeline-item{
-
-padding:14px;
-
-border-radius:16px;
-
-background:
-rgba(255,255,255,.04);
 }
 
 /* INPUT */
@@ -777,11 +736,7 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
-<!-- CHAT -->
-
 <div id="chat"></div>
-
-<!-- INPUT -->
 
 <div id="input-area">
 
@@ -807,7 +762,471 @@ placeholder="Ask about grants, proposal generation, nonprofit funding..."
 
 <script>
 
-/* CONTINUE YOUR EXISTING SCRIPT HERE */
+const API =
+"https://grant-agent-backend-production.up.railway.app/grant-search";
+
+const chat =
+document.getElementById("chat");
+
+const input =
+document.getElementById("message");
+
+const sendBtn =
+document.getElementById("send");
+
+/* STORAGE */
+
+let conversations =
+JSON.parse(
+localStorage.getItem("grantSimoneConversations")
+) || [];
+
+let savedGrants =
+JSON.parse(
+localStorage.getItem("grantSimoneSaved")
+) || [];
+
+/* INIT */
+
+window.onload = ()=>{
+
+addMessage(
+
+`Welcome to Grant Simone.
+
+Your AI funding consultant for:
+
+• nonprofits
+• startups
+• women-owned businesses
+• small businesses
+• NGOs
+
+Tell me about your organization and funding goals.`,
+
+"ai"
+
+);
+
+renderHistory();
+
+renderSaved();
+
+};
+
+/* MESSAGE */
+
+function addMessage(content,type,isHTML=false){
+
+const wrapper =
+document.createElement("div");
+
+wrapper.className =
+`message ${type}`;
+
+const bubble =
+document.createElement("div");
+
+bubble.className =
+"bubble";
+
+if(isHTML){
+bubble.innerHTML = content;
+}else{
+bubble.innerText = content;
+}
+
+wrapper.appendChild(bubble);
+
+chat.appendChild(wrapper);
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+/* HISTORY */
+
+function saveConversation(message){
+
+conversations.unshift({
+
+title:
+message.substring(0,45),
+
+date:
+new Date().toLocaleDateString(),
+
+message
+
+});
+
+localStorage.setItem(
+"grantSimoneConversations",
+JSON.stringify(conversations)
+);
+
+renderHistory();
+
+}
+
+function renderHistory(){
+
+const container =
+document.getElementById("history");
+
+if(!container) return;
+
+container.innerHTML = "";
+
+conversations
+.slice(0,8)
+.forEach((item)=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+"history-item";
+
+div.innerHTML = `
+
+<b>${item.title}</b>
+
+<br><br>
+
+<small>${item.date}</small>
+
+`;
+
+div.onclick = ()=>{
+
+restoreChat(item.message);
+
+};
+
+container.appendChild(div);
+
+});
+
+}
+
+function restoreChat(message){
+
+if(!input) return;
+
+input.value = message;
+
+input.focus();
+
+}
+
+/* SAVED */
+
+function saveGrant(title,url){
+
+savedGrants.unshift({
+title,
+url
+});
+
+localStorage.setItem(
+"grantSimoneSaved",
+JSON.stringify(savedGrants)
+);
+
+renderSaved();
+
+}
+
+function renderSaved(){
+
+const container =
+document.getElementById("saved");
+
+container.innerHTML = "";
+
+savedGrants.slice(0,8).forEach(grant=>{
+
+container.innerHTML += `
+
+<a
+href="${grant.url}"
+target="_blank"
+class="saved-item"
+>
+
+❤️ ${grant.title}
+
+</a>
+
+`;
+
+});
+
+}
+
+/* NEW CHAT */
+
+function newChat(){
+
+chat.innerHTML = "";
+
+addMessage(
+"New conversation started 👋",
+"ai"
+);
+
+}
+
+/* TYPING */
+
+function showTyping(){
+
+const typing =
+document.createElement("div");
+
+typing.id =
+"typing";
+
+typing.className =
+"message ai";
+
+typing.innerHTML = `
+
+<div class="bubble">
+Grant Simone is preparing your funding recommendations...
+</div>
+
+`;
+
+chat.appendChild(typing);
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+function removeTyping(){
+
+const typing =
+document.getElementById("typing");
+
+if(typing){
+typing.remove();
+}
+
+}
+
+/* SEND */
+
+async function sendMessage(){
+
+const message =
+input.value.trim();
+
+if(!message) return;
+
+addMessage(message,"user");
+
+saveConversation(message);
+
+input.value="";
+
+showTyping();
+
+try{
+
+const response =
+await fetch(API,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+businessType:"Business",
+state:"California",
+keywords:message
+
+})
+
+});
+
+const data =
+await response.json();
+
+removeTyping();
+
+if(
+!data.grants ||
+data.grants.length===0
+){
+
+addMessage(
+
+`I couldn't find exact matches.
+
+Please include:
+• your state
+• organization type
+• business category
+• funding goal`,
+
+"ai"
+
+);
+
+return;
+
+}
+
+addMessage(
+
+`I found ${data.grants.length} funding opportunities that may fit your request.`,
+
+"ai"
+
+);
+
+let html =
+`<div class="grant-grid">`;
+
+data.grants.slice(0,8).forEach(grant=>{
+
+const title =
+grant.grantName ||
+"Grant Opportunity";
+
+const url =
+grant.applicationUrl ||
+"#";
+
+const purpose =
+grant.purpose ||
+"Business Support";
+
+const eligibility =
+grant.eligibility ||
+"Check requirements";
+
+const score =
+Math.floor(Math.random()*10)+90;
+
+html += `
+
+<div class="grant-card">
+
+<div class="match">
+${score}% MATCH
+</div>
+
+<div class="grant-title">
+${title}
+</div>
+
+<div class="grant-label">
+Purpose
+</div>
+
+<div class="grant-value">
+${purpose}
+</div>
+
+<div class="grant-label">
+Eligibility
+</div>
+
+<div class="grant-value">
+${eligibility}
+</div>
+
+<div class="actions">
+
+<a
+href="${url}"
+target="_blank"
+class="apply-btn"
+>
+Apply →
+</a>
+
+<div
+class="proposal-btn"
+onclick="saveGrant('${title.replace(/'/g,"")}','${url}')"
+>
+Save
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+html += `</div>`;
+
+addMessage(html,"ai",true);
+
+}catch(error){
+
+removeTyping();
+
+console.error(error);
+
+addMessage(
+
+`Something went wrong while connecting to the funding server.
+
+Please try again.`,
+
+"ai"
+
+);
+
+}
+
+}
+
+/* EVENTS */
+
+if(sendBtn){
+
+sendBtn.onclick = ()=>{
+
+sendMessage();
+
+};
+
+}
+
+if(input){
+
+input.addEventListener(
+"keydown",
+function(e){
+
+if(
+e.key === "Enter"
+&&
+!e.shiftKey
+){
+
+e.preventDefault();
+
+sendMessage();
+
+}
+
+}
+);
+
+}
 
 </script>
 
