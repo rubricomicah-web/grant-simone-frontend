@@ -75,7 +75,7 @@ box-shadow:
 0 30px 120px rgba(0,0,0,.7);
 }
 
-/* HISTORY SIDEBAR */
+/* SIDEBAR */
 
 #history-sidebar{
 
@@ -195,14 +195,6 @@ rgba(212,175,55,.08);
 
 border:
 1px solid rgba(212,175,55,.14);
-}
-
-.chat-history-title{
-
-font-size:14px;
-font-weight:600;
-
-line-height:1.5;
 }
 
 .saved-grant{
@@ -635,22 +627,121 @@ font-weight:700;
 cursor:pointer;
 }
 
-@media(max-width:1200px){
+/* MOBILE */
 
-#dashboard{
-grid-template-columns:repeat(2,1fr);
+@media(max-width:768px){
+
+body{
+padding:0;
+overflow:hidden;
 }
 
-}
+#app{
 
-@media(max-width:900px){
+width:100%;
+height:100vh;
+
+border-radius:0;
+
+display:block;
+}
 
 #history-sidebar{
 display:none;
 }
 
+#main{
+width:100%;
+height:100vh;
+}
+
+#header{
+padding:18px;
+}
+
+.header-left img{
+width:48px;
+height:48px;
+}
+
+.header-left h2{
+font-size:18px;
+}
+
+.header-left p{
+font-size:12px;
+}
+
+.status{
+padding:8px 12px;
+font-size:11px;
+}
+
 #dashboard{
+
 grid-template-columns:1fr;
+
+padding:16px;
+
+gap:12px;
+}
+
+#chat-container{
+padding:16px;
+}
+
+.message{
+margin-bottom:18px;
+}
+
+.bubble{
+
+max-width:100%;
+
+padding:16px;
+
+font-size:14px;
+}
+
+.grant-grid{
+
+grid-template-columns:1fr;
+
+gap:14px;
+}
+
+.grant-card{
+
+padding:18px;
+
+border-radius:20px;
+}
+
+.grant-title{
+font-size:15px;
+}
+
+#input-area{
+padding:14px;
+}
+
+#input-wrapper{
+
+padding:12px;
+
+border-radius:18px;
+}
+
+textarea{
+font-size:14px;
+}
+
+button{
+
+width:50px;
+height:50px;
+
+font-size:18px;
 }
 
 }
@@ -663,7 +754,7 @@ grid-template-columns:1fr;
 
 <div id="app">
 
-<!-- HISTORY -->
+<!-- SIDEBAR -->
 
 <div id="history-sidebar">
 
@@ -713,8 +804,6 @@ Saved Grants
 
 <div id="main">
 
-<!-- HEADER -->
-
 <div id="header">
 
 <div class="header-left">
@@ -736,71 +825,53 @@ src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
 
 </div>
 
-<!-- DASHBOARD -->
-
 <div id="dashboard">
 
 <div class="stat-card">
-
 <div class="stat-title">
 Funding Opportunities
 </div>
-
 <div class="stat-value">
 1,284
 </div>
-
 </div>
 
 <div class="stat-card">
-
 <div class="stat-title">
 Saved Grants
 </div>
-
 <div
 class="stat-value"
 id="savedCount"
 >
 0
 </div>
-
 </div>
 
 <div class="stat-card">
-
 <div class="stat-title">
 Conversations
 </div>
-
 <div
 class="stat-value"
 id="conversationCount"
 >
 0
 </div>
-
 </div>
 
 <div class="stat-card">
-
 <div class="stat-title">
 AI Match Score
 </div>
-
 <div class="stat-value">
 94%
 </div>
-
 </div>
 
 </div>
-
-<!-- CHAT -->
 
 <div id="chat-container"></div>
-
-<!-- INPUT -->
 
 <div id="input-area">
 
@@ -850,7 +921,7 @@ JSON.parse(
 localStorage.getItem("grantSimoneSaved")
 ) || [];
 
-/* LOAD UI */
+/* LOAD */
 
 window.onload = ()=>{
 
@@ -860,13 +931,13 @@ addMessage(
 
 I'm Grant Simone.
 
-I can help you:
-• find grants
-• match funding opportunities
-• generate proposals
-• analyze grant eligibility
+Tell me:
+• your business
+• your nonprofit
+• your state
+• your funding goals
 
-Tell me about your business or nonprofit to begin.`,
+and I'll help find the best grants for you.`,
 
 "ai"
 
@@ -909,7 +980,7 @@ chat.scrollHeight;
 
 }
 
-/* SAVE CHAT */
+/* HISTORY */
 
 function saveConversation(message){
 
@@ -917,6 +988,8 @@ conversations.unshift({
 
 title:
 message.substring(0,40),
+
+message,
 
 date:
 new Date().toLocaleDateString()
@@ -932,8 +1005,6 @@ renderHistory();
 
 }
 
-/* RENDER HISTORY */
-
 function renderHistory(){
 
 const container =
@@ -945,13 +1016,16 @@ conversations.slice(0,8).forEach(chatItem=>{
 
 container.innerHTML += `
 
-<div class="chat-history-item">
+<div
+class="chat-history-item"
+onclick="loadConversation('${chatItem.message.replace(/'/g,"")}')"
+>
 
 <div class="chat-history-title">
 ${chatItem.title}
 </div>
 
-<div class="chat-history-date">
+<div>
 ${chatItem.date}
 </div>
 
@@ -968,11 +1042,20 @@ conversations.length;
 
 }
 
-/* SAVE GRANT */
+function loadConversation(message){
 
-function saveGrant(title){
+input.value = message;
 
-savedGrants.unshift(title);
+}
+
+/* SAVED GRANTS */
+
+function saveGrant(title,url){
+
+savedGrants.unshift({
+title,
+url
+});
 
 localStorage.setItem(
 "grantSimoneSaved",
@@ -983,8 +1066,6 @@ renderSavedGrants();
 
 }
 
-/* RENDER SAVED */
-
 function renderSavedGrants(){
 
 const container =
@@ -992,13 +1073,24 @@ document.getElementById("savedGrants");
 
 container.innerHTML = "";
 
-savedGrants.slice(0,8).forEach(grant=>{
+savedGrants.slice(0,10).forEach(grant=>{
 
 container.innerHTML += `
 
-<div class="saved-grant">
-❤️ ${grant}
-</div>
+<a
+href="${grant.url}"
+target="_blank"
+class="saved-grant"
+style="
+display:block;
+text-decoration:none;
+color:white;
+"
+>
+
+❤️ ${grant.title}
+
+</a>
 
 `;
 
@@ -1029,6 +1121,45 @@ How can I help you today?`,
 
 }
 
+/* LOADING */
+
+function showTyping(){
+
+const typing =
+document.createElement("div");
+
+typing.className =
+"message ai";
+
+typing.id =
+"typing";
+
+typing.innerHTML = `
+
+<div class="bubble">
+Grant Simone is searching grants...
+</div>
+
+`;
+
+chat.appendChild(typing);
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+function removeTyping(){
+
+const typing =
+document.getElementById("typing");
+
+if(typing){
+typing.remove();
+}
+
+}
+
 /* SEND */
 
 async function sendMessage(){
@@ -1044,6 +1175,8 @@ saveConversation(message);
 
 input.value="";
 
+showTyping();
+
 try{
 
 const response =
@@ -1058,23 +1191,75 @@ headers:{
 body:JSON.stringify({
 
 businessType:"Business",
-state:"United States",
+state:"California",
 keywords:message
 
 })
 
 });
 
+removeTyping();
+
 const data =
 await response.json();
 
-const grants =
-(data.grants || []).slice(0,6);
+console.log(data);
+
+if(
+!data ||
+!data.grants ||
+data.grants.length===0
+){
+
+addMessage(
+
+`I couldn't find exact matches for that request.
+
+Try including:
+• your state
+• business type
+• nonprofit or for-profit
+• industry
+
+Example:
+"Find grants for my nonprofit in Texas"`,
+
+"ai"
+
+);
+
+return;
+
+}
+
+addMessage(
+
+`I found ${data.grants.length} funding opportunities that may match your request.`,
+
+"ai"
+
+);
 
 let html =
 `<div class="grant-grid">`;
 
-grants.forEach(grant=>{
+data.grants.slice(0,8).forEach(grant=>{
+
+const title =
+grant.grantName ||
+"Grant Opportunity";
+
+const url =
+grant.applicationUrl ||
+"#";
+
+const purpose =
+grant.purpose ||
+"Business Support";
+
+const eligibility =
+grant.eligibility ||
+"Check requirements";
 
 const score =
 Math.floor(Math.random()*10)+90;
@@ -1085,9 +1270,12 @@ html += `
 
 <div
 class="save-btn"
-onclick="saveGrant('${grant.grantName || "Grant"}')"
+onclick="saveGrant(
+'${title.replace(/'/g,"")}',
+'${url}'
+)"
 >
-♡
+❤️
 </div>
 
 <div class="match">
@@ -1095,7 +1283,7 @@ ${score}% MATCH
 </div>
 
 <div class="grant-title">
-${grant.grantName || "Grant Opportunity"}
+${title}
 </div>
 
 <div class="grant-section">
@@ -1105,7 +1293,7 @@ Purpose
 </div>
 
 <div class="grant-value">
-${grant.purpose || "Business Support"}
+${purpose}
 </div>
 
 </div>
@@ -1117,19 +1305,17 @@ Eligibility
 </div>
 
 <div class="grant-value">
-${grant.eligibility || "Check Requirements"}
+${eligibility}
 </div>
 
 </div>
 
 <a
 class="apply-btn"
-href="${grant.applicationUrl || "#"}"
+href="${url}"
 target="_blank"
 >
-
 Apply for Grant →
-
 </a>
 
 </div>
@@ -1142,11 +1328,20 @@ html += `</div>`;
 
 addMessage(html,"ai",true);
 
-}catch(err){
+}catch(error){
+
+removeTyping();
+
+console.error(error);
 
 addMessage(
-"Something went wrong while searching grants.",
+
+`Something went wrong while contacting the funding server.
+
+Please try again in a moment.`,
+
 "ai"
+
 );
 
 }
@@ -1182,5 +1377,4 @@ sendMessage();
 </script>
 
 </body>
-
 </html>
