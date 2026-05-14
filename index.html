@@ -1784,30 +1784,24 @@ async function downloadPDF(name){
 try{
 
 const ownerName =
-
 prompt("Enter Owner Name:");
 
 const yearsInBusiness =
-
 prompt("Years In Business:");
+  
 const businessName =
-
 prompt("Enter Business Name:");
 
 const businessType =
-
 prompt("Enter Business Type:");
 
 const fundingPurpose =
-
 prompt("Enter Funding Purpose:");
 
 const requestedAmount =
-
 prompt("Enter Requested Amount:");
 
 const response = await fetch(
-
 "https://grant-simone-backend-production.up.railway.app/generate-proposal",
 
 {
@@ -1826,7 +1820,7 @@ businessName: businessName,
 
 ownerName: ownerName,
 
-yearsInBusiness: yearsInBusiness,
+businessYears: businessYears,
 
 businessType: businessType,
 
@@ -1835,6 +1829,8 @@ fundingPurpose: fundingPurpose,
 grantName:name,
 
 requestedAmount: requestedAmount
+
+})
   
 })
 
