@@ -1454,7 +1454,7 @@ behavior:"smooth"
 try{
 
 const response = await fetch(
-"https://grant-simone-backend-production.up.railway.app/grant-search",
+"https://grant-simone-backend-production.up.railway.app/generate-proposal",
 {
 method:"POST",
 
@@ -1464,14 +1464,17 @@ headers:{
 
 body:JSON.stringify({
 
-businessType:text,
-state:selectedState,
-keywords:text,
-womanOwned:"yes",
-minorityOwned:"no",
-veteranOwned:"no",
-startup:"yes",
-nonprofit:"no"
+businessName,
+ownerName,
+businessYears,
+businessType,
+fundingPurpose,
+grantName:name,
+requestedAmount,
+
+projectSummary:"Business expansion project",
+timeline:"12 months",
+targetPopulation:"Local community"
 
 })
 
@@ -1525,7 +1528,12 @@ chat.innerHTML += `
 function showGrantCards(grants){
 
 const cardsHTML =
-grants.map(grant => `
+grants.map(grant => {
+
+const encodedGrant =
+encodeURIComponent(JSON.stringify(grant));
+
+return `
 
 <div class="grant-card">
 
@@ -1559,7 +1567,7 @@ View Details
 
 <button
 class="btn secondary"
-onclick='saveGrant(${JSON.stringify(grant)})'
+onclick='saveGrantFromEncoded("${encodedGrant}")'
 >
 Save
 </button>
@@ -1579,7 +1587,9 @@ Generate Proposal
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 chat.innerHTML += `
 
@@ -1630,6 +1640,17 @@ renderSavedGrants();
 
 }
 
+function saveGrantFromEncoded(encoded){
+
+const grant =
+JSON.parse(
+decodeURIComponent(encoded)
+);
+
+saveGrant(grant);
+
+}
+  
 /* RENDER SIDEBAR */
 
 function renderSavedGrants(){
@@ -1674,7 +1695,7 @@ html += `
 
 <div
 class="saved-card"
-onclick='openSavedGrant(${JSON.stringify(grant)})'
+onclick='openSavedGrantFromEncoded("${encodeURIComponent(JSON.stringify(grant))}")'
 >
 
 <h3>
@@ -1705,7 +1726,17 @@ grant.grantName,
 grant.description,
 grant.applicationUrl
 );
+  
+}
+function openSavedGrantFromEncoded(encoded){
 
+const grant =
+JSON.parse(
+decodeURIComponent(encoded)
+);
+
+openSavedGrant(grant);
+  
 }
 
 /* MODAL */
