@@ -1416,7 +1416,7 @@ body:JSON.stringify({
 
 businessType:text,
 
-state:selectedState,
+state:"USA",
 
 keywords:text,
 
@@ -1856,9 +1856,34 @@ window.URL.revokeObjectURL(url);
 console.error(error);
 
 alert("Error generating PDF.");
+}
+}
+function saveConversation(){
+
+const messages =
+chat.innerHTML;
+
+const title =
+"Conversation " + (conversations.length + 1);
+
+conversations.push({
+title,
+messages
+});
+
+localStorage.setItem(
+"conversations",
+JSON.stringify(conversations)
+);
+
+renderSavedGrants();
 
 }
 
+function openConversation(index){
+
+chat.innerHTML =
+conversations[index].messages;
 }
 
 renderSavedGrants();
