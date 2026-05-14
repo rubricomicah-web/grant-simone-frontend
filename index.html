@@ -1255,39 +1255,62 @@ onclick="sendMessage()"
 
 <script>
 
-function startNewConversation(){
-
-chat.innerHTML = `
-<div class="message bot">
-Hi! I'm Grant Simone.
-<br><br>
-Tell me about your business,
-nonprofit,
-startup,
-or funding goals
-and I'll help you find
-the best grants available.
-</div>
-`;
-userInput.value = "";
-userInput.style.height = "52px";
-
-}
 const chat =
 document.getElementById("chat");
+
+const userInput =
+document.getElementById("userInput");
+
+/* SAVED GRANTS */
 
 let savedGrants =
 JSON.parse(
 localStorage.getItem("savedGrants")
 ) || [];
 
+/* SAVED CONVERSATIONS */
+
 let conversations =
 JSON.parse(
 localStorage.getItem("conversations")
 ) || [];
 
-const userInput =
-document.getElementById("userInput");
+/* START NEW CONVERSATION */
+
+function startNewConversation(){
+
+if(
+chat.innerHTML.trim() !== ""
+){
+
+saveConversation();
+
+}
+
+chat.innerHTML = `
+
+<div class="message bot">
+
+Hi! I'm Grant Simone.
+
+<br><br>
+
+Tell me about your business,
+nonprofit,
+startup,
+or funding goals
+and I'll help you find
+the best grants available.
+
+</div>
+
+`;
+
+userInput.value = "";
+
+userInput.style.height = "52px";
+
+}
 
 /* ENTER TO SEND */
 
@@ -1469,7 +1492,7 @@ grants.map(grant => `
 <div class="grant-card">
 
 <div class="badge">
-AI Match ${Math.min(grant.matchScore + 25, 98)}%
+AI Match ${Math.min(grant.matchScore + 35, 98)}%
 </div>
 
 <div class="grant-title">
@@ -1760,6 +1783,13 @@ async function downloadPDF(name){
 
 try{
 
+const ownerName =
+
+prompt("Enter Owner Name:");
+
+const yearsInBusiness =
+
+prompt("Years In Business:");
 const businessName =
 
 prompt("Enter Business Name:");
@@ -1794,6 +1824,10 @@ body:JSON.stringify({
 
 businessName: businessName,
 
+ownerName: ownerName,
+
+yearsInBusiness: yearsInBusiness,
+
 businessType: businessType,
 
 fundingPurpose: fundingPurpose,
@@ -1801,7 +1835,7 @@ fundingPurpose: fundingPurpose,
 grantName:name,
 
 requestedAmount: requestedAmount
-
+  
 })
 
 }
