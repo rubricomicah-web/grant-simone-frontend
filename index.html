@@ -1279,12 +1279,8 @@ localStorage.getItem("conversations")
 
 function startNewConversation(){
 
-if(
-chat.innerHTML.trim() !== ""
-){
-
+if(chat.innerHTML.trim() !== ""){
 saveConversation();
-
 }
 
 chat.innerHTML = `
@@ -1307,7 +1303,6 @@ the best grants available.
 `;
 
 userInput.value = "";
-
 userInput.style.height = "52px";
 
 }
@@ -1322,17 +1317,14 @@ if(
 e.key === "Enter" &&
 !e.shiftKey
 ){
-
 e.preventDefault();
-
 sendMessage();
-
 }
 
 }
 );
 
-/* AUTO EXPAND TEXTAREA */
+/* AUTO EXPAND */
 
 userInput.addEventListener(
 "input",
@@ -1341,24 +1333,19 @@ function(){
 this.style.height = "52px";
 
 if(this.scrollHeight > 52){
-
 this.style.height =
 this.scrollHeight + "px";
-
 }
 
 }
 );
 
-/* SEND */
+/* SEND MESSAGE */
 
 async function sendMessage(){
 
-const input =
-document.getElementById("userInput");
-
 const text =
-input.value.trim();
+userInput.value.trim();
 
 if(!text) return;
 
@@ -1371,36 +1358,32 @@ ${text}
 `;
 
 const loadingId = Date.now();
+
 chat.innerHTML += `
+
 <div class="message bot loading-ai" id="loading-${loadingId}">
+
 <div style="font-size:20px;font-weight:bold;margin-bottom:12px;">
 🤖 Grant Simone AI
 </div>
+
 <div style="color:#FFD54F;">
 Searching live grant databases
 <span class="dots"></span>
 </div>
-<br>
-Reviewing:
-<br>
-• Federal grants
-<br>
-• Startup funding
-<br>
-• Small business opportunities
-<br>
-• Private foundation grants
+
 </div>
+
 `;
-  
-input.value = "";
-input.style.height = "52px";
+
+userInput.value = "";
+userInput.style.height = "52px";
 
 chat.scrollTo({
-top: chat.scrollHeight,
+top:chat.scrollHeight,
 behavior:"smooth"
 });
-  
+
 try{
 
 const response = await fetch(
@@ -1415,31 +1398,25 @@ headers:{
 body:JSON.stringify({
 
 businessType:text,
-
 state:"USA",
-
 keywords:text,
-
 womanOwned:"yes",
-
 minorityOwned:"no",
-
 veteranOwned:"no",
-
 startup:"yes",
-
 nonprofit:"no"
 
 })
-  
+
 }
 );
 
 const data =
 await response.json();
-  
+
 const loadingMessage =
 document.getElementById(`loading-${loadingId}`);
+
 if(loadingMessage){
 loadingMessage.remove();
 }
@@ -1453,36 +1430,30 @@ showGrantCards(data.grants);
 chat.innerHTML += `
 
 <div class="message bot">
-
 No grants found.
-
 </div>
 
 `;
 
 }
-
-chat.scrollTo({
-top: chat.scrollHeight,
-behavior:"smooth"
-});
 
 }catch(error){
+
 console.error(error);
-const loadingMessage =
-document.getElementById(`loading-${loadingId}`);
-if(loadingMessage){
-loadingMessage.remove();
-}
+
 chat.innerHTML += `
+
 <div class="message bot">
-❌ Unable to fetch grants right now.
-Please try again in a few moments.
+❌ Unable to fetch grants.
 </div>
+
 `;
+
 }
+
 }
-/* SHOW CARDS */
+
+/* SHOW GRANTS */
 
 function showGrantCards(grants){
 
@@ -1521,11 +1492,7 @@ View Details
 
 <button
 class="btn secondary"
-onclick="
-saveGrant(
-'${grant.grantName}'
-)
-"
+onclick='saveGrant(${JSON.stringify(grant)})'
 >
 Save
 </button>
@@ -1552,7 +1519,7 @@ chat.innerHTML += `
 <div class="message bot">
 
 <p>
-Here are the best grant opportunities I found for your business:
+Here are the best grant opportunities:
 </p>
 
 <div class="grants-grid">
@@ -1566,21 +1533,26 @@ ${cardsHTML}
 `;
 
 chat.scrollTo({
-top: chat.scrollHeight,
+top:chat.scrollHeight,
 behavior:"smooth"
 });
 
 }
 
-/* SAVE */
+/* SAVE GRANT */
 
-function saveGrant(name){
+function saveGrant(grant){
 
-if(savedGrants.includes(name)){
+const exists =
+savedGrants.find(
+g => g.grantName === grant.grantName
+);
+
+if(exists){
 return;
 }
 
-savedGrants.push(name);
+savedGrants.push(grant);
 
 localStorage.setItem(
 "savedGrants",
@@ -1591,7 +1563,7 @@ renderSavedGrants();
 
 }
 
-/* RENDER SAVED */
+/* RENDER SIDEBAR */
 
 function renderSavedGrants(){
 
@@ -1600,7 +1572,7 @@ document.getElementById("savedContainer");
 
 let html = "";
 
-/* SAVED CONVERSATIONS */
+/* CONVERSATIONS */
 
 conversations.forEach((conv,index)=>{
 
@@ -1635,15 +1607,11 @@ html += `
 
 <div
 class="saved-card"
-onclick="
-openSavedGrant(
-'${grant}'
-)
-"
+onclick='openSavedGrant(${JSON.stringify(grant)})'
 >
 
 <h3>
-⭐ ${grant}
+⭐ ${grant.grantName}
 </h3>
 
 <p>
@@ -1662,29 +1630,14 @@ container.innerHTML = html;
 
 /* OPEN SAVED */
 
-function openSavedGrant(name){
-
-if(name === "SBA Microloan Program"){
+function openSavedGrant(grant){
 
 openGrantModal(
-'SBA Microloan Program',
-'$50,000 Funding',
-'This grant helps startups and small businesses access working capital and expansion funding.',
-'https://www.sba.gov'
+grant.grantName,
+"AI Match " + grant.matchScore + "%",
+grant.description,
+grant.applicationUrl
 );
-
-}
-
-else if(name === "Amber Grant"){
-
-openGrantModal(
-'Amber Grant',
-'Women-Owned',
-'Monthly funding opportunities for women-owned businesses and startups.',
-'https://ambergrantsforwomen.com'
-);
-
-}
 
 }
 
@@ -1702,8 +1655,7 @@ closeGrantModal();
 const modal =
 document.createElement("div");
 
-modal.id =
-"grantModal";
+modal.id = "grantModal";
 
 modal.innerHTML = `
 
@@ -1777,7 +1729,7 @@ modal.remove();
 
 }
 
-/* REAL PDF */
+/* PDF */
 
 async function downloadPDF(name){
 
@@ -1812,13 +1764,13 @@ headers:{
 
 body:JSON.stringify({
 
-businessName: businessName,
-ownerName: ownerName,
-businessYears: businessYears,
-businessType: businessType,
-fundingPurpose: fundingPurpose,
+businessName,
+ownerName,
+businessYears,
+businessType,
+fundingPurpose,
 grantName:name,
-requestedAmount: requestedAmount
+requestedAmount
 
 })
 
@@ -1826,12 +1778,11 @@ requestedAmount: requestedAmount
 );
 
 if(!response.ok){
-
-throw new Error("Failed to generate PDF");
-
+throw new Error("PDF failed");
 }
 
-const blob = await response.blob();
+const blob =
+await response.blob();
 
 const url =
 window.URL.createObjectURL(blob);
@@ -1840,7 +1791,6 @@ const a =
 document.createElement("a");
 
 a.href = url;
-
 a.download = `${name}.pdf`;
 
 document.body.appendChild(a);
@@ -1856,8 +1806,13 @@ window.URL.revokeObjectURL(url);
 console.error(error);
 
 alert("Error generating PDF.");
+
 }
+
 }
+
+/* SAVE CONVERSATION */
+
 function saveConversation(){
 
 const messages =
@@ -1880,14 +1835,19 @@ renderSavedGrants();
 
 }
 
+/* OPEN CONVERSATION */
+
 function openConversation(index){
 
 chat.innerHTML =
 conversations[index].messages;
+
 }
 
+/* INITIALIZE */
+
 renderSavedGrants();
-  
+
 </script>
 
 </body>
