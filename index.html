@@ -1410,7 +1410,7 @@ async function sendMessage(){
 
 const selectedState =
 document.getElementById("stateSelect").value;
-  
+
 const text =
 userInput.value.trim();
 
@@ -1463,8 +1463,12 @@ headers:{
 },
 
 body: JSON.stringify({
-  query: text,
-  state: selectedState
+
+businessType: text,
+keywords: text,
+state: selectedState,
+startup: "yes"
+
 })
 
 }
@@ -1483,6 +1487,8 @@ if(data.grants && data.grants.length > 0){
 
 showGrantCards(data.grants);
 
+saveConversation();
+
 }else{
 
 chat.innerHTML += `
@@ -1493,21 +1499,25 @@ No grants found.
 
 `;
 
-}
-
-chat.innerHTML += `
-
-<div class="message bot">
-No grants found.
-</div>
-
-`;
+saveConversation();
 
 }
+
+chat.scrollTo({
+top:chat.scrollHeight,
+behavior:"smooth"
+});
 
 }catch(error){
 
 console.error(error);
+
+const loadingMessage =
+document.getElementById(`loading-${loadingId}`);
+
+if(loadingMessage){
+loadingMessage.remove();
+}
 
 chat.innerHTML += `
 
