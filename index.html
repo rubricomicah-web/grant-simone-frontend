@@ -11,8 +11,6 @@ content="width=device-width, initial-scale=1.0"
 
 <title>Grant Simone</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <style>
 
 *{
@@ -27,195 +25,588 @@ scroll-behavior:smooth;
 }
 
 body{
+
 background:#000;
 color:white;
 overflow:hidden;
-height:100dvh;
--webkit-overflow-scrolling:touch;
+height:100vh;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,0.82),
+rgba(0,0,0,0.88)
+),
+
+url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+
 }
 
 .app{
 display:flex;
-min-height:100dvh;
+height:100vh;
 }
+
+/* SIDEBAR */
 
 .sidebar{
-width:320px;
-background:rgba(5,5,5,0.82);
-padding:24px;
+
+width:280px;
+
+background:
+rgba(5,5,5,0.82);
+
+backdrop-filter:blur(14px);
+
+border-right:
+1px solid rgba(255,255,255,0.05);
+
+padding:20px;
+
 overflow-y:auto;
-border-right:1px solid rgba(255,255,255,0.05);
+
 }
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+margin-bottom:30px;
+
+position:relative;
+z-index:999;
+
+}
+
+.logo img{
+
+width:52px;
+height:52px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+.logo h2{
+font-size:20px;
+}
+
+.logo p{
+
+font-size:13px;
+
+color:#aaa;
+
+line-height:1.4;
+
+}
+
+.new-chat-btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:18px;
+
+background:#FFD54F;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-bottom:28px;
+
+}
+
+.sidebar-title{
+
+font-size:12px;
+
+color:#777;
+
+margin-bottom:18px;
+
+letter-spacing:1px;
+
+}
+
+.saved-card{
+
+background:#0d0d0d;
+
+border:
+1px solid rgba(255,213,79,0.08);
+
+padding:18px;
+
+border-radius:22px;
+
+margin-bottom:16px;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+.saved-card:hover{
+border-color:#FFD54F;
+}
+
+.saved-card h3{
+
+font-size:16px;
+
+margin-bottom:8px;
+
+line-height:1.4;
+
+}
+
+.saved-card p{
+
+font-size:13px;
+
+color:#aaa;
+
+}
+
+/* MAIN */
 
 .main{
-height:100dvh;
+
+flex:1;
+
 display:flex;
+
 flex-direction:column;
-width:100%;
+
+height:100vh;
+
 overflow:hidden;
+
 }
 
+/* TOPBAR */
+
+.topbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 28px;
+
+border-bottom:
+1px solid rgba(255,255,255,0.05);
+
+position:relative;
+
+z-index:999;
+
+background:
+rgba(5,5,5,0.45);
+
+backdrop-filter:blur(12px);
+
+}
+
+.top-left{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.top-left img{
+
+width:52px;
+height:52px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+.top-left h2{
+font-size:22px;
+}
+
+.top-left p{
+
+font-size:13px;
+
+color:#aaa;
+
+}
+
+.online{
+
+background:
+rgba(255,213,79,0.08);
+
+padding:10px 18px;
+
+border-radius:999px;
+
+color:#FFD54F;
+
+font-size:14px;
+
+position:relative;
+
+z-index:999;
+
+}
+
+/* CHAT */
+
 .chat{
+
 flex:1;
+
 overflow-y:auto;
-padding:16px 20px 180px 16px;
+
+scrollbar-gutter:stable;
+
+scroll-behavior:smooth;
+
+padding:40px 20px 180px 20px;
+
+min-height:0;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+position:relative;
+
+z-index:1;
+
+}
+
+.hero-message{
+
+width:100%;
+
+max-width:1000px;
+
+margin:0 auto;
+
 }
 
 .message{
-max-width:920px;
-padding:24px;
-border-radius:24px;
-margin-bottom:20px;
-line-height:1.8;
-font-size:16px;
+
+max-width:1000px;
+
+width:100%;
+
+padding:26px;
+
+border-radius:28px;
+
+margin-bottom:24px;
+
+line-height:1.9;
+
+font-size:18px;
+
 word-wrap:break-word;
+
 }
 
 .bot{
-background:rgba(10,10,10,0.55);
-border:1px solid rgba(255,255,255,0.05);
+
+background:
+rgba(8,8,8,0.65);
+
+border:
+1px solid rgba(255,255,255,0.05);
+
+backdrop-filter:blur(12px);
+
 }
 
 .user{
+
 background:#FFD54F;
+
 color:black;
+
 margin-left:auto;
+
 font-weight:bold;
+
 }
+
+/* INPUT */
 
 .input-area{
 
 position:fixed;
 
-left:0;
+left:280px;
 right:0;
 
 bottom:max(12px, env(safe-area-inset-bottom));
 
-padding:0 16px;
+padding:0 20px;
 
 padding-bottom:env(safe-area-inset-bottom);
-
-width:100%;
-
-background:transparent;
 
 z-index:9999;
 
 }
 
 .input-wrap{
-display:flex;
-align-items:center;
-gap:10px;
+
 max-width:1000px;
+
 margin:0 auto;
-padding:14px 16px;
-border-radius:32px;
-background:rgba(10,10,10,0.82);
-border:1px solid rgba(255,255,255,0.06);
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border-radius:999px;
+
+background:
+rgba(8,8,8,0.82);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(12px);
+
 }
 
 .input-wrap textarea{
+
 flex:1;
+
 background:none;
+
 border:none;
+
 outline:none;
+
 color:white;
+
 font-size:16px;
-padding:14px 10px;
+
 resize:none;
-overflow-y:auto;
+
+padding:12px;
+
 min-height:52px;
-height:52px;
+
 max-height:140px;
+
+overflow-y:auto;
+
+}
+
+.state-select{
+
+background:#111;
+
+color:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:14px;
+
+outline:none;
+
 }
 
 .send-btn{
-width:56px;
-height:56px;
+
+width:60px;
+height:60px;
+
 border:none;
+
 border-radius:50%;
+
 background:#FFD54F;
+
 font-size:24px;
-font-weight:bold;
+
 cursor:pointer;
+
+font-weight:bold;
+
 }
 
-.saved-card{
-background:#0d0d0d;
-border:1px solid rgba(255,213,79,0.12);
-border-radius:20px;
-padding:18px;
-margin-bottom:16px;
-cursor:pointer;
-}
+/* GRANTS */
 
 .grants-grid{
+
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(320px,1fr));
+
 gap:24px;
-margin-top:24px;
+
+margin-top:20px;
+
+width:100%;
+
+max-width:1000px;
+
 }
 
 .grant-card{
-background:rgba(10,10,10,0.55);
-border:1px solid rgba(255,213,79,0.12);
-border-radius:30px;
+
+background:
+rgba(8,8,8,0.72);
+
+border:
+1px solid rgba(255,213,79,0.12);
+
 padding:28px;
+
+border-radius:28px;
+
+backdrop-filter:blur(12px);
+
 }
 
 .badge{
+
 display:inline-block;
+
 padding:10px 18px;
+
 border-radius:999px;
-background:rgba(255,213,79,0.08);
+
+background:
+rgba(255,213,79,0.08);
+
 color:#FFD54F;
-margin-bottom:22px;
+
+margin-bottom:20px;
+
+font-size:14px;
+
 }
 
 .grant-title{
-font-size:22px;
+
+font-size:24px;
+
 font-weight:bold;
-margin-bottom:18px;
+
+margin-bottom:16px;
+
+line-height:1.4;
+
 }
 
 .grant-desc{
-color:#bbb;
+
+font-size:15px;
+
 line-height:1.8;
-margin-bottom:28px;
+
+color:#ccc;
+
+margin-bottom:24px;
+
 }
 
 .actions{
+
 display:flex;
+
 gap:12px;
+
 flex-wrap:wrap;
+
 }
 
 .btn{
-padding:14px 20px;
+
+padding:14px 22px;
+
 border:none;
+
 border-radius:16px;
-cursor:pointer;
-font-size:16px;
+
+font-size:15px;
+
 font-weight:bold;
+
+cursor:pointer;
+
 }
 
 .primary{
+
 background:#FFD54F;
+
 color:black;
+
 }
 
 .secondary{
+
 background:#1b1b1b;
+
 color:white;
+
 }
+
+/* MOBILE */
 
 @media(max-width:900px){
 
 .sidebar{
 display:none;
+}
+
+.input-area{
+left:0;
+}
+
+.message{
+
+font-size:16px;
+
+padding:22px;
+
 }
 
 .input-wrap textarea{
@@ -225,23 +616,43 @@ font-size:16px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
 
+<!-- SIDEBAR -->
+
 <div class="sidebar">
 
+<div class="logo">
+
+<img
+src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
+/>
+
+<div>
+
+<h2>Grant Simone</h2>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
+</div>
+
+</div>
+
 <button
-class="btn primary"
+class="new-chat-btn"
 onclick="startNewConversation()"
-style="width:100%;margin-bottom:20px;"
 >
 + New Conversation
 </button>
 
-<div style="margin-bottom:16px;color:#666;font-size:12px;">
+<div class="sidebar-title">
 RECENT CONVERSATIONS
 </div>
 
@@ -249,14 +660,46 @@ RECENT CONVERSATIONS
 
 </div>
 
+<!-- MAIN -->
+
 <div class="main">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="top-left">
+
+<img
+src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
+/>
+
+<div>
+
+<h2>Grant Simone</h2>
+
+<p>
+AI Grant Funding Consultant
+</p>
+
+</div>
+
+</div>
+
+<div class="online">
+● Online
+</div>
+
+</div>
+
+<!-- CHAT -->
 
 <div
 class="chat"
 id="chat"
 >
 
-<div class="message bot">
+<div class="message bot hero-message">
 
 Hi! I'm Grant Simone.
 
@@ -273,23 +716,36 @@ the best grants available.
 
 </div>
 
+<!-- INPUT -->
+
 <div class="input-area">
 
 <div class="input-wrap">
 
-<select id="stateSelect" style="
-background:#111;
-color:white;
-border:none;
-padding:12px;
-border-radius:12px;
-">
+<select
+id="stateSelect"
+class="state-select"
+>
 
-<option value="USA">All USA</option>
-<option value="California">California</option>
-<option value="Texas">Texas</option>
-<option value="Florida">Florida</option>
-<option value="New York">New York</option>
+<option value="USA">
+All USA
+</option>
+
+<option value="California">
+California
+</option>
+
+<option value="Texas">
+Texas
+</option>
+
+<option value="Florida">
+Florida
+</option>
+
+<option value="New York">
+New York
+</option>
 
 </select>
 
@@ -322,28 +778,31 @@ document.getElementById("chat");
 const userInput =
 document.getElementById("userInput");
 
-let conversations =
-JSON.parse(
-localStorage.getItem("conversations")
-) || [];
-
 let savedGrants =
 JSON.parse(
 localStorage.getItem("savedGrants")
+) || [];
+
+let conversations =
+JSON.parse(
+localStorage.getItem("conversations")
 ) || [];
 
 /* SAVE CONVERSATION */
 
 function saveConversation(){
 
-const messages = chat.innerHTML;
+const messages =
+chat.innerHTML;
 
 const cleanText =
 chat.innerText.trim();
 
 if(
 cleanText === "" ||
-cleanText.includes("Tell me about your business")
+cleanText.includes(
+"Tell me about your business"
+)
 ){
 return;
 }
@@ -359,29 +818,31 @@ return;
 
 const conversationData = {
 
-id: Date.now(),
+id:Date.now(),
 
 title:
 `Conversation ${conversations.length + 1}`,
 
 messages,
 
-timestamp: Date.now()
+timestamp:Date.now()
 
 };
 
-conversations.unshift(conversationData);
+conversations.unshift(
+conversationData
+);
 
 localStorage.setItem(
 "conversations",
 JSON.stringify(conversations)
 );
 
-renderSavedGrants();
+renderSidebar();
 
 }
 
-/* NEW CONVERSATION */
+/* NEW CHAT */
 
 function startNewConversation(){
 
@@ -390,14 +851,16 @@ chat.innerText.trim();
 
 if(
 currentText &&
-!currentText.includes("Tell me about your business")
+!currentText.includes(
+"Tell me about your business"
+)
 ){
 saveConversation();
 }
 
 chat.innerHTML = `
 
-<div class="message bot">
+<div class="message bot hero-message">
 
 Hi! I'm Grant Simone.
 
@@ -417,6 +880,8 @@ the best grants available.
 userInput.value = "";
 userInput.style.height = "52px";
 
+chat.scrollTop = 0;
+
 }
 
 /* SEND MESSAGE */
@@ -426,10 +891,12 @@ async function sendMessage(){
 const text =
 userInput.value.trim();
 
-const selectedState =
-document.getElementById("stateSelect").value;
-
 if(!text) return;
+
+const state =
+document.getElementById(
+"stateSelect"
+).value;
 
 chat.innerHTML += `
 
@@ -441,29 +908,24 @@ ${text}
 
 userInput.value = "";
 
-const loadingId = Date.now();
-
 chat.innerHTML += `
 
 <div
 class="message bot"
-id="loading-${loadingId}"
+id="loadingMessage"
 >
-
-Searching grants...
-
+Searching live grant databases...
 </div>
 
 `;
 
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
+chat.scrollTop =
+chat.scrollHeight;
 
 try{
 
-const response = await fetch(
+const response =
+await fetch(
 "https://grant-simone-backend-production.up.railway.app/grant-search",
 {
 method:"POST",
@@ -476,8 +938,7 @@ body:JSON.stringify({
 
 businessType:text,
 keywords:text,
-state:selectedState,
-startup:"yes"
+state
 
 })
 
@@ -487,14 +948,9 @@ startup:"yes"
 const data =
 await response.json();
 
-const loading =
-document.getElementById(
-`loading-${loadingId}`
-);
-
-if(loading){
-loading.remove();
-}
+document
+.getElementById("loadingMessage")
+?.remove();
 
 if(
 data.grants &&
@@ -519,6 +975,10 @@ No grants found.
 
 console.error(error);
 
+document
+.getElementById("loadingMessage")
+?.remove();
+
 chat.innerHTML += `
 
 <div class="message bot">
@@ -529,6 +989,9 @@ chat.innerHTML += `
 
 }
 
+chat.scrollTop =
+chat.scrollHeight;
+
 }
 
 /* SHOW GRANTS */
@@ -538,7 +1001,7 @@ function showGrantCards(grants){
 grants = grants.slice(0,10);
 
 const cardsHTML =
-grants.map(grant => {
+grants.map(grant=>{
 
 const encodedGrant =
 encodeURIComponent(
@@ -550,7 +1013,7 @@ return `
 <div class="grant-card">
 
 <div class="badge">
-AI Match ${Math.min(grant.matchScore,100)}%
+AI Match ${Math.min(grant.matchScore || 85,100)}%
 </div>
 
 <div class="grant-title">
@@ -604,10 +1067,8 @@ ${cardsHTML}
 
 `;
 
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
+chat.scrollTop =
+chat.scrollHeight;
 
 saveConversation();
 
@@ -622,8 +1083,11 @@ JSON.parse(
 localStorage.getItem("savedGrants")
 ) || [];
 
-const exists = saved.find(
-g => g.applicationUrl === grant.applicationUrl
+const exists =
+saved.find(
+g =>
+g.applicationUrl ===
+grant.applicationUrl
 );
 
 if(exists){
@@ -639,11 +1103,9 @@ JSON.stringify(saved)
 
 savedGrants = saved;
 
-renderSavedGrants();
+renderSidebar();
 
 }
-
-/* SAVE GRANT FROM ENCODED */
 
 function saveGrantFromEncoded(encoded){
 
@@ -656,18 +1118,21 @@ saveGrant(grant);
 
 }
 
-/* RENDER SIDEBAR */
+/* SIDEBAR */
 
-function renderSavedGrants(){
+function renderSidebar(){
 
 const container =
-document.getElementById("savedContainer");
+document.getElementById(
+"savedContainer"
+);
 
 let html = "";
 
 /* CONVERSATIONS */
 
-conversations.forEach((conv,index)=>{
+conversations.forEach(
+(conv,index)=>{
 
 html += `
 
@@ -690,11 +1155,13 @@ Saved Conversation
 
 `;
 
-});
+}
+);
 
 /* SAVED GRANTS */
 
-savedGrants.forEach((grant)=>{
+savedGrants.forEach(
+(grant)=>{
 
 html += `
 
@@ -720,7 +1187,8 @@ Saved Grant
 
 `;
 
-});
+}
+);
 
 container.innerHTML = html;
 
@@ -733,15 +1201,22 @@ function openConversation(index){
 const conversation =
 conversations[index];
 
-if(!conversation) return;
+if(
+!conversation ||
+!conversation.messages
+){
+return;
+}
 
 chat.innerHTML =
 conversation.messages;
 
-chat.scrollTo({
-top:0,
-behavior:"smooth"
-});
+setTimeout(()=>{
+
+chat.scrollTop =
+chat.scrollHeight;
+
+},100);
 
 }
 
@@ -755,8 +1230,11 @@ if(
 e.key === "Enter" &&
 !e.shiftKey
 ){
+
 e.preventDefault();
+
 sendMessage();
+
 }
 
 }
@@ -780,23 +1258,11 @@ this.scrollHeight + "px";
 }
 );
 
-/* MOBILE FIX */
-
-window.addEventListener(
-"resize",
-()=>{
-
-document.body.style.height =
-window.innerHeight + "px";
-
-}
-);
-
 /* INITIALIZE */
 
-renderSavedGrants();
+renderSidebar();
 
-/* SAVE BEFORE EXIT */
+/* BEFORE EXIT */
 
 window.addEventListener(
 "beforeunload",
@@ -807,7 +1273,9 @@ chat.innerText.trim();
 
 if(
 currentText &&
-!currentText.includes("Tell me about your business")
+!currentText.includes(
+"Tell me about your business"
+)
 ){
 saveConversation();
 }
