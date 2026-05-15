@@ -1337,40 +1337,38 @@ JSON.parse(
 localStorage.getItem("savedGrants")
 ) || [];
 
-/* SAVED CONVERSATIONS */
-
-let conversations =
-JSON.parse(
-localStorage.getItem("conversations")
-) || [];
-
-/* START NEW CONVERSATION */
+/* SAVE CONVERSATION */
 
 function saveConversation(){
 
 const messages = chat.innerHTML;
 
-if(messages.trim() === ""){
+const cleanText =
+chat.innerText.trim();
+
+if(
+cleanText === "" ||
+cleanText.includes("Tell me about your business")
+){
 return;
 }
 
-const alreadyExists = conversations.find(
-conv => conv.messages === messages
-);
+const title =
+`Conversation ${conversations.length + 1}`;
 
-if(alreadyExists){
-return;
-}
+const conversationData = {
 
-const title = `Conversation ${conversations.length + 1}`;
-
-conversations.unshift({
+id: Date.now(),
 
 title,
+
 messages,
+
 timestamp: Date.now()
 
-});
+};
+
+conversations.unshift(conversationData);
 
 localStorage.setItem(
 "conversations",
@@ -1381,9 +1379,17 @@ renderSavedGrants();
 
 }
 
+/* START NEW CONVERSATION */
+
 function startNewConversation(){
 
-if(chat.innerHTML.trim() !== ""){
+const currentText =
+chat.innerText.trim();
+
+if(
+currentText &&
+!currentText.includes("Tell me about your business")
+){
 saveConversation();
 }
 
@@ -1407,7 +1413,10 @@ the best grants available.
 `;
 
 userInput.value = "";
+
 userInput.style.height = "52px";
+
+chat.scrollTop = 0;
 
 }
 
@@ -1954,10 +1963,14 @@ if(!conversation) return;
 chat.innerHTML =
 conversation.messages;
 
+setTimeout(()=>{
+
 chat.scrollTo({
 top:0,
 behavior:"smooth"
 });
+
+},100);
 
 }
 
@@ -1973,6 +1986,13 @@ window.innerHeight + "px";
 );
 
 renderSavedGrants();
+
+window.addEventListener(
+"beforeunload",
+()=>{
+saveConversation();
+}
+);
 
 </script>
 
