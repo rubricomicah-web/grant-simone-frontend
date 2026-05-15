@@ -810,6 +810,12 @@ JSON.parse(
 localStorage.getItem("conversations")
 ) || [];
 
+window.savedGrants =
+savedGrants;
+
+window.conversations =
+conversations;
+
 /* START NEW */
 
 function startNewConversation(){
@@ -1094,25 +1100,38 @@ saveConversation();
 
 function saveGrant(grant){
 
+let saved =
+JSON.parse(
+localStorage.getItem("savedGrants")
+) || [];
+
 const exists =
-savedGrants.find(
+saved.find(
 g =>
 g.applicationUrl ===
 grant.applicationUrl
 );
 
 if(exists){
+
+alert("Grant already saved.");
+
 return;
+
 }
 
-savedGrants.unshift(grant);
+saved.unshift(grant);
 
 localStorage.setItem(
 "savedGrants",
-JSON.stringify(savedGrants)
+JSON.stringify(saved)
 );
 
+savedGrants = saved;
+
 renderSavedGrants();
+
+alert("Grant saved successfully.");
 
 }
 
@@ -1141,6 +1160,17 @@ generatePDF(grant);
 }
 
 async function generatePDF(grant){
+
+if(
+!window.jspdf ||
+!window.jspdf.jsPDF
+){
+
+alert("PDF library failed to load.");
+
+return;
+
+}
 
 const { jsPDF } = window.jspdf;
 
@@ -1219,12 +1249,15 @@ cleanText.includes(
 return;
 }
 
-const exists =
-conversations.find(
-c => c.messages === messages
-);
+/* LIMIT DUPLICATES ONLY IF EXACT */
 
-if(exists){
+const latest =
+conversations[0];
+
+if(
+latest &&
+latest.messages === messages
+){
 return;
 }
 
@@ -1239,6 +1272,11 @@ messages,
 timestamp:Date.now()
 
 });
+
+/* LIMIT TO 20 */
+
+conversations =
+conversations.slice(0,20);
 
 localStorage.setItem(
 "conversations",
@@ -1353,7 +1391,11 @@ container.innerHTML = html;
 
 /* INIT */
 
+setTimeout(()=>{
+
 renderSavedGrants();
+
+},100);
 
 /* AUTO SAVE */
 
