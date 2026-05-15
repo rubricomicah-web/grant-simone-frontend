@@ -24,9 +24,8 @@ font-family:Arial,sans-serif;
 
 html{
 scroll-behavior:smooth;
-
 }
-  
+
 body{
 
 background:#000;
@@ -65,7 +64,6 @@ height:100vh;
 width:320px;
 
 background:
-
 rgba(5,5,5,0.82);
 
 backdrop-filter:blur(14px);
@@ -73,7 +71,6 @@ backdrop-filter:blur(14px);
 -webkit-backdrop-filter:blur(14px);
 
 border-right:
-
 1px solid rgba(255,255,255,0.05);
 
 padding:24px;
@@ -89,11 +86,7 @@ align-items:center;
 gap:14px;
 
 margin-bottom:28px;
-transition:
 
-transform 0.3s ease,
-
-box-shadow 0.3s ease;
 }
 
 .logo img{
@@ -103,27 +96,15 @@ height:62px;
 
 border-radius:50%;
 object-fit:cover;
-}
-
-.logo img:hover{
-
-transform:scale(1.05);
-
-box-shadow:
-
-0 0 25px rgba(255,213,79,0.18);
 
 }
 
 .logo h1{
-
 font-size:18px;
-line-height:1.1;
 font-weight:800;
 }
 
 .logo p{
-
 color:#999;
 margin-top:6px;
 }
@@ -147,20 +128,6 @@ cursor:pointer;
 
 margin-bottom:24px;
 
-transition:
-
-transform 0.25s ease,
-
-border-color 0.25s ease,
-
-box-shadow 0.25s ease;
-}
-
-.new-chat:hover{
-
-transform:translateY(-2px);
-
-opacity:0.95;
 }
 
 .sidebar-title{
@@ -189,13 +156,8 @@ margin-bottom:16px;
 
 cursor:pointer;
 
-transition:
+transition:0.25s;
 
-transform 0.25s ease,
-
-border-color 0.25s ease,
-
-box-shadow 0.25s ease;
 }
 
 .saved-card:hover{
@@ -204,8 +166,6 @@ border-color:#FFD54F;
 
 transform:translateY(-3px);
 
-box-shadow:
-0 10px 25px rgba(255,213,79,0.06);
 }
 
 .saved-card h3{
@@ -248,11 +208,9 @@ justify-content:space-between;
 align-items:center;
 
 border-bottom:
-
 1px solid rgba(255,255,255,0.05);
 
 background:
-
 rgba(5,5,5,0.45);
 
 backdrop-filter:blur(12px);
@@ -280,8 +238,6 @@ object-fit:cover;
 .top-left h1{
 
 font-size:18px;
-
-line-height:1.1;
 
 font-weight:700;
 }
@@ -313,7 +269,6 @@ font-size:14px;
 
 font-weight:600;
 
-animation:onlinePulse 2s infinite;
 }
 
 /* CHAT */
@@ -362,59 +317,8 @@ backdrop-filter:blur(12px);
 border:
 1px solid rgba(255,255,255,0.05);
 
-box-shadow:
-0 4px 20px rgba(0,0,0,0.18);
-
-position:relative;
-
-z-index:1;
-
-overflow:hidden;
-
-animation:fadeIn 0.35s ease;
-
-will-change:transform,opacity;
-
-}
-.bot::before{
-
-content:'';
-
-position:absolute;
-
-top:0;
-
-left:0;
-
-right:0;
-
-height:1px;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,0.18),
-
-transparent
-
-);
-
-pointer-events:none;
-
 }
 
-.loading-ai{
-
-animation:pulseGlow 2s infinite;
-cursor:progress;
-
-}
-  
 .user{
 
 background:#FFD54F;
@@ -441,7 +345,7 @@ margin-top:24px;
 
 align-items:stretch;
 }
-  
+
 .grant-card{
 
 background:
@@ -456,45 +360,7 @@ border-radius:30px;
 
 padding:28px;
 
-transition:
-
-transform 0.25s ease,
-border-color 0.25s ease,
-box-shadow 0.25s ease;
-
-position:relative;
-
-z-index:2;
-}
-.grant-card::before{
-
-content:'';
-
-position:absolute;
-
-top:0;
-
-left:0;
-
-right:0;
-
-height:1px;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,0.14),
-
-transparent
-
-);
-
-pointer-events:none;
+transition:0.25s;
 
 }
 
@@ -504,8 +370,6 @@ transform:translateY(-4px);
 
 border-color:#FFD54F;
 
-box-shadow:
-0 10px 35px rgba(255,213,79,0.08);
 }
 
 .badge{
@@ -552,10 +416,6 @@ display:flex;
 gap:12px;
 
 flex-wrap:wrap;
-
-position:relative;
-
-z-index:5;
 }
 
 .btn{
@@ -570,46 +430,22 @@ cursor:pointer;
 
 font-size:16px;
 font-weight:bold;
-letter-spacing:0.3px;
-  
-transition:
-transform 0.2s ease,
-opacity 0.2s ease,
-box-shadow 0.25s ease;
 
-will-change:
-transform,
-box-shadow;
-  
+transition:0.2s;
+
 }
 
 .btn:hover{
 transform:translateY(-2px);
 }
 
-.btn:active{
-transform:scale(0.97);
-}
-  
 .primary{
 
 background:#FFD54F;
 
 color:black;
-
-box-shadow:
-
-0 0 18px rgba(255,213,79,0.18);
-
 }
 
-.primary:hover{
-
-box-shadow:
-
-0 0 30px rgba(255,213,79,0.35);
-
-}
 .secondary{
 
 background:#1b1b1b;
@@ -654,45 +490,20 @@ padding:14px 16px;
 border-radius:32px;
 
 background:
-
 rgba(10,10,10,0.82);
 
 backdrop-filter:blur(16px);
 
 border:
-
 1px solid rgba(255,255,255,0.06);
 
 box-shadow:
-
 0 0 25px rgba(0,0,0,0.4);
 
 min-height:72px;
 
-transition:
-
-border-color 0.25s ease,
-
-box-shadow 0.25s ease,
-
-transform 0.25s ease;
-
 }
 
-.input-wrap:focus-within{
-
-border-color:
-
-rgba(255,213,79,0.25);
-
-box-shadow:
-
-0 0 40px rgba(255,213,79,0.12);
-
-transform:translateY(-1px);
-
-}
-  
 .input-wrap textarea{
 
 flex:1;
@@ -721,17 +532,8 @@ max-height:140px;
 
 line-height:1.6;
 
-font-family:inherit;
-
-scrollbar-width:none;
-
 }
 
-.input-wrap textarea::-webkit-scrollbar{
-
-display:none;
-
-}
 .send-btn{
 
 min-width:56px;
@@ -739,16 +541,6 @@ min-width:56px;
 width:56px;
 
 height:56px;
-
-aspect-ratio:1/1;
-
-flex-shrink:0;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
 
 border:none;
 
@@ -761,50 +553,6 @@ font-size:24px;
 font-weight:bold;
 
 cursor:pointer;
-
-transition:0.25s;
-
-box-shadow:0 0 20px rgba(255,213,79,0.25);
-}
-
-.send-btn:hover{
-
-transform:scale(1.06);
-
-box-shadow:
-0 0 35px rgba(255,213,79,0.45);
-
-}
-
-.chat::-webkit-scrollbar{
-
-width:8px;
-
-}
-
-.chat::-webkit-scrollbar-track{
-
-background:transparent;
-
-}
-
-.chat::-webkit-scrollbar-thumb{
-
-background:rgba(255,213,79,0.18);
-
-border-radius:999px;
-
-}
-
-.chat::-webkit-scrollbar-thumb:hover{
-
-background:rgba(255,213,79,0.35);
-
-}
-
-.send-btn:active{
-
-transform:scale(0.96);
 
 }
 
@@ -828,7 +576,7 @@ align-items:center;
 padding:20px;
 
 z-index:999999;
-  
+
 backdrop-filter:blur(4px);
 }
 
@@ -899,43 +647,16 @@ gap:14px;
 flex-wrap:wrap;
 }
 
-
-
 /* MOBILE */
 
 @media(max-width:900px){
+
 .app{
 flex-direction:column;
 }
 
 .sidebar{
 display:none;
-}
-
-.topbar{
-
-padding:
-max(22px, env(safe-area-inset-top))
-18px
-14px;
-}
-
-.top-left{
-gap:10px;
-}
-
-.top-left img{
-width:52px;
-height:52px;
-}
-
-.top-left h1{
-font-size:22px;
-line-height:1;
-}
-
-.top-left p{
-font-size:12px;
 }
 
 .message{
@@ -947,87 +668,25 @@ padding:16px;
 border-radius:22px;
 
 line-height:1.7;
-
-word-wrap:break-word;
-
-overflow-wrap:break-word;
 }
 
 .bot{
-
 max-width:92%;
-
-margin-right:auto;
 }
 
 .user{
-
 max-width:88%;
-
-margin-left:auto;
 }
 
 .grants-grid{
-
 grid-template-columns:1fr;
-
-gap:18px;
-}
-
-.grant-card{
-
-padding:20px;
-
-border-radius:24px;
-}
-
-.grant-title{
-font-size:22px;
-}
-
-.grant-desc{
-font-size:14px;
-}
-
-.actions{
-gap:10px;
-}
-
-.btn{
-
-padding:12px 16px;
-
-font-size:14px;
-
-}
-
-.input-area{
-
-padding:10px 16px 12px;
-}
-
-.input-wrap{
-
-padding:8px;
 }
 
 .input-wrap textarea{
 
-font-size:14px;
+font-size:16px !important;
 
 padding:10px 12px;
-}
-
-.custom-modal{
-padding:26px;
-}
-
-.modal-title{
-font-size:28px;
-}
-
-.modal-desc{
-font-size:15px;
 }
 
 }
@@ -1048,94 +707,6 @@ max-width:980px;
 }
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(12px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-@keyframes pulseGlow{
-0%{
-box-shadow:0 0 0 rgba(255,213,79,0);
-}
-50%{
-box-shadow:0 0 30px rgba(255,213,79,0.12);
-}
-100%{
-box-shadow:0 0 0 rgba(255,213,79,0);
-}
-}
-  
-.dots::after{
-  
-content:'';
-animation:dots 1.5s infinite;
-  
-}
-  
-@keyframes dots{
-  
-0%{content:'';}
-25%{content:'.';}
-50%{content:'..';}
-75%{content:'...';}
-100%{content:'';}
-  
-}
-
-@keyframes onlinePulse{
-
-0%{
-
-box-shadow:0 0 0 rgba(255,213,79,0);
-
-}
-
-50%{
-
-box-shadow:0 0 18px rgba(255,213,79,0.18);
-
-}
-
-100%{
-
-box-shadow:0 0 0 rgba(255,213,79,0);
-
-}
-
-}
-
-body{
-
-animation:appFade 0.6s ease;
-
-}
-
-@keyframes appFade{
-
-from{
-
-opacity:0;
-
-transform:scale(1.01);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-
-}
-  
 </style>
 </head>
 
@@ -1242,57 +813,10 @@ margin-right:10px;
 ">
 
 <option value="USA">All USA</option>
-
-<option value="Alabama">Alabama</option>
-<option value="Alaska">Alaska</option>
-<option value="Arizona">Arizona</option>
-<option value="Arkansas">Arkansas</option>
 <option value="California">California</option>
-<option value="Colorado">Colorado</option>
-<option value="Connecticut">Connecticut</option>
-<option value="Delaware">Delaware</option>
-<option value="Florida">Florida</option>
-<option value="Georgia">Georgia</option>
-<option value="Hawaii">Hawaii</option>
-<option value="Idaho">Idaho</option>
-<option value="Illinois">Illinois</option>
-<option value="Indiana">Indiana</option>
-<option value="Iowa">Iowa</option>
-<option value="Kansas">Kansas</option>
-<option value="Kentucky">Kentucky</option>
-<option value="Louisiana">Louisiana</option>
-<option value="Maine">Maine</option>
-<option value="Maryland">Maryland</option>
-<option value="Massachusetts">Massachusetts</option>
-<option value="Michigan">Michigan</option>
-<option value="Minnesota">Minnesota</option>
-<option value="Mississippi">Mississippi</option>
-<option value="Missouri">Missouri</option>
-<option value="Montana">Montana</option>
-<option value="Nebraska">Nebraska</option>
-<option value="Nevada">Nevada</option>
-<option value="New Hampshire">New Hampshire</option>
-<option value="New Jersey">New Jersey</option>
-<option value="New Mexico">New Mexico</option>
-<option value="New York">New York</option>
-<option value="North Carolina">North Carolina</option>
-<option value="North Dakota">North Dakota</option>
-<option value="Ohio">Ohio</option>
-<option value="Oklahoma">Oklahoma</option>
-<option value="Oregon">Oregon</option>
-<option value="Pennsylvania">Pennsylvania</option>
-<option value="Rhode Island">Rhode Island</option>
-<option value="South Carolina">South Carolina</option>
-<option value="South Dakota">South Dakota</option>
-<option value="Tennessee">Tennessee</option>
 <option value="Texas">Texas</option>
-<option value="Utah">Utah</option>
-<option value="Vermont">Vermont</option>
-<option value="Virginia">Virginia</option>
-<option value="Washington">Washington</option>
-<option value="West Virginia">West Virginia</option>
-<option value="Wisconsin">Wisconsin</option>
-<option value="Wyoming">Wyoming</option>
+<option value="Florida">Florida</option>
+<option value="New York">New York</option>
 
 </select>
 
@@ -1428,15 +952,14 @@ const loadingId = Date.now();
 
 chat.innerHTML += `
 
-<div class="message bot loading-ai" id="loading-${loadingId}">
+<div class="message bot" id="loading-${loadingId}">
 
 <div style="font-size:20px;font-weight:bold;margin-bottom:12px;">
 🤖 Grant Simone AI
 </div>
 
 <div style="color:#FFD54F;">
-Searching live grant databases
-<span class="dots"></span>
+Searching live grant databases...
 </div>
 
 </div>
@@ -1658,7 +1181,7 @@ decodeURIComponent(encoded)
 saveGrant(grant);
 
 }
-  
+
 /* RENDER SIDEBAR */
 
 function renderSavedGrants(){
@@ -1734,8 +1257,9 @@ grant.grantName,
 grant.description,
 grant.applicationUrl
 );
-  
+
 }
+
 function openSavedGrantFromEncoded(encoded){
 
 const grant =
@@ -1744,7 +1268,7 @@ decodeURIComponent(encoded)
 );
 
 openSavedGrant(grant);
-  
+
 }
 
 /* MODAL */
@@ -1922,14 +1446,39 @@ alert("Error generating PDF.");
 function saveConversation(){
 
 const messages =
-chat.innerHTML;
+chat.innerHTML.trim();
+
+const cleanText =
+chat.innerText.trim();
+
+if(
+cleanText === "" ||
+cleanText.includes(
+"Tell me about your business"
+)
+){
+return;
+}
+
+const latest =
+conversations[conversations.length - 1];
+
+if(
+latest &&
+latest.messages === messages
+){
+return;
+}
 
 const title =
 "Conversation " + (conversations.length + 1);
 
 conversations.push({
+
 title,
-messages
+messages,
+timestamp:Date.now()
+
 });
 
 localStorage.setItem(
@@ -1945,8 +1494,23 @@ renderSavedGrants();
 
 function openConversation(index){
 
+const conversation =
+conversations[index];
+
+if(
+!conversation ||
+!conversation.messages
+){
+return;
+}
+
 chat.innerHTML =
-conversations[index].messages;
+conversation.messages;
+
+chat.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
