@@ -863,14 +863,27 @@ JSON.parse(
 localStorage.getItem("conversations")
 ) || [];
 
+let currentConversationId =
+Date.now();
+
 /* START NEW CONVERSATION */
 
 function startNewConversation(){
 
-if(chat.innerHTML.trim() !== ""){
+const cleanText =
+chat.innerText.trim();
+
+if(
+cleanText &&
+!cleanText.includes(
+"Tell me about your business"
+)
+){
 saveConversation();
 }
 
+currentConversationId =
+Date.now();
 chat.innerHTML = `
 
 <div class="message bot">
@@ -892,6 +905,11 @@ the best grants available.
 
 userInput.value = "";
 userInput.style.height = "52px";
+
+chat.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
@@ -1009,8 +1027,6 @@ loadingMessage.remove();
 if(data.grants && data.grants.length > 0){
 
 showGrantCards(data.grants);
-
-saveConversation();
 
 }else{
 
@@ -1463,9 +1479,11 @@ return;
 const latest =
 conversations[conversations.length - 1];
 
+/* ONLY BLOCK IF TRULY IDENTICAL */
+
 if(
 latest &&
-latest.messages === messages
+latest.messages.trim() === messages.trim()
 ){
 return;
 }
@@ -1474,6 +1492,8 @@ const title =
 "Conversation " + (conversations.length + 1);
 
 conversations.push({
+
+id:currentConversationId,
 
 title,
 messages,
