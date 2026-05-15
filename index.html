@@ -31,7 +31,9 @@ body{
 
 background:#000;
 color:white;
-overflow-x:hidden;
+overflow:hidden;
+height:100dvh;
+-webkit-overflow-scrolling:touch;
 
 text-rendering:optimizeLegibility;
 -webkit-font-smoothing:antialiased;
@@ -55,7 +57,7 @@ background-attachment:fixed;
 
 .app{
 display:flex;
-height:100vh;
+min-height:100dvh;
 }
 
 /* SIDEBAR */
@@ -623,18 +625,21 @@ color:white;
 
 position:fixed;
 
-bottom:12px;
-
 left:0;
 right:0;
 
-width:100%;
+bottom:max(12px, env(safe-area-inset-bottom));
 
 padding:0 16px;
+
+padding-bottom:env(safe-area-inset-bottom);
+
+width:100%;
 
 background:transparent;
 
 z-index:9999;
+
 }
 
 .input-wrap{
@@ -1013,7 +1018,7 @@ padding:8px;
 
 .input-wrap textarea{
 
-font-size:14px;
+font-size:16px;
 
 padding:10px 12px;
 }
@@ -1341,6 +1346,41 @@ localStorage.getItem("conversations")
 
 /* START NEW CONVERSATION */
 
+function saveConversation(){
+
+const messages = chat.innerHTML;
+
+if(messages.trim() === ""){
+return;
+}
+
+const alreadyExists = conversations.find(
+conv => conv.messages === messages
+);
+
+if(alreadyExists){
+return;
+}
+
+const title = `Conversation ${conversations.length + 1}`;
+
+conversations.unshift({
+
+title,
+messages,
+timestamp: Date.now()
+
+});
+
+localStorage.setItem(
+"conversations",
+JSON.stringify(conversations)
+);
+
+renderSavedGrants();
+
+}
+
 function startNewConversation(){
 
 if(chat.innerHTML.trim() !== ""){
@@ -1410,7 +1450,7 @@ async function sendMessage(){
 
 const selectedState =
 document.getElementById("stateSelect").value;
-
+  
 const text =
 userInput.value.trim();
 
@@ -1474,7 +1514,8 @@ startup: "yes"
 }
 );
 
-const data = await response.json();
+const data =
+await response.json();
 
 const loadingMessage =
 document.getElementById(`loading-${loadingId}`);
@@ -1487,8 +1528,6 @@ if(data.grants && data.grants.length > 0){
 
 showGrantCards(data.grants);
 
-saveConversation();
-
 }else{
 
 chat.innerHTML += `
@@ -1499,25 +1538,11 @@ No grants found.
 
 `;
 
-saveConversation();
-
 }
-
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
 
 }catch(error){
 
 console.error(error);
-
-const loadingMessage =
-document.getElementById(`loading-${loadingId}`);
-
-if(loadingMessage){
-loadingMessage.remove();
-}
 
 chat.innerHTML += `
 
@@ -1917,40 +1942,35 @@ alert("Error generating PDF.");
 
 }
 
-/* SAVE CONVERSATION */
-
-function saveConversation(){
-
-const messages =
-chat.innerHTML;
-
-const title =
-"Conversation " + (conversations.length + 1);
-
-conversations.push({
-title,
-messages
-});
-
-localStorage.setItem(
-"conversations",
-JSON.stringify(conversations)
-);
-
-renderSavedGrants();
-
-}
-
 /* OPEN CONVERSATION */
 
 function openConversation(index){
 
+const conversation =
+conversations[index];
+
+if(!conversation) return;
+
 chat.innerHTML =
-conversations[index].messages;
+conversation.messages;
+
+chat.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
 /* INITIALIZE */
+window.addEventListener(
+"resize",
+()=>{
+
+document.body.style.height =
+window.innerHeight + "px";
+
+}
+);
 
 renderSavedGrants();
 
