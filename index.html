@@ -20,6 +20,7 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
+-webkit-tap-highlight-color:transparent;
 }
 
 html{
@@ -516,7 +517,7 @@ outline:none;
 
 color:white;
 
-font-size:16px;
+font-size:16px !important;
 
 padding:14px 10px;
 
@@ -904,37 +905,9 @@ JSON.parse(
 localStorage.getItem("savedGrants")
 ) || [];
 
-/* SAVED CONVERSATIONS */
-
-let conversations =
-JSON.parse(
-localStorage.getItem("conversations")
-) || [];
-
-let currentConversationId = null;
-
 /* START NEW CONVERSATION */
 
 function startNewConversation(){
-
-const cleanText =
-chat.innerText.trim();
-
-/* SAVE CURRENT CHAT FIRST */
-
-if(
-cleanText &&
-!cleanText.includes(
-"Tell me about your business"
-)
-){
-saveConversation();
-}
-
-/* CREATE NEW ACTIVE ID */
-
-currentConversationId =
-Date.now();
 
 chat.innerHTML = `
 
@@ -1080,8 +1053,6 @@ if(data.grants && data.grants.length > 0){
 
 showGrantCards(data.grants);
 
-saveConversation();
-
 }else{
 
 chat.innerHTML += `
@@ -1091,8 +1062,6 @@ No grants found.
 </div>
 
 `;
-
-saveConversation();
 
 }
 
@@ -1134,12 +1103,21 @@ grants.map(grant => {
 const encodedGrant =
 encodeURIComponent(JSON.stringify(grant));
 
+const matchScore =
+Math.max(
+70,
+Math.min(
+Number(grant.matchScore) || 85,
+98
+)
+);
+
 return `
 
 <div class="grant-card">
 
 <div class="badge">
-AI Match ${Math.max(70, Math.min(grant.matchScore || 85, 98))}%
+AI Match ${matchScore}%
 </div>
 
 <div class="grant-title">
@@ -1157,8 +1135,8 @@ class="btn primary"
 onclick="
 openGrantModal(
 '${grant.grantName}',
-'AI Match ${Math.max(70, Math.min(grant.matchScore || 85, 98))}%,
-'${grant.description}',
+'AI Match ${matchScore}%',
+'${grant.description.replace(/'/g, "\\'")}',
 '${grant.applicationUrl}'
 )
 "
@@ -1223,7 +1201,9 @@ function saveGrant(grant){
 
 const exists =
 savedGrants.find(
-g => g.grantName === grant.grantName
+g =>
+g.applicationUrl ===
+grant.applicationUrl
 );
 
 if(exists){
@@ -1261,33 +1241,6 @@ document.getElementById("savedContainer");
 
 let html = "";
 
-/* CONVERSATIONS */
-
-conversations.forEach((conv,index)=>{
-
-html += `
-
-<div
-class="saved-card"
-onclick="
-openConversation(${index})
-"
->
-
-<h3>
-💬 ${conv.title}
-</h3>
-
-<p>
-Saved Conversation
-</p>
-
-</div>
-
-`;
-
-});
-
 /* SAVED GRANTS */
 
 savedGrants.forEach((grant)=>{
@@ -1321,9 +1274,18 @@ container.innerHTML = html;
 
 function openSavedGrant(grant){
 
+const matchScore =
+Math.max(
+70,
+Math.min(
+Number(grant.matchScore) || 85,
+98
+)
+);
+
 openGrantModal(
 grant.grantName,
-"AI Match " + grant.matchScore + "%",
+"AI Match " + matchScore + "%",
 grant.description,
 grant.applicationUrl
 );
@@ -1453,6 +1415,14 @@ prompt("Enter Funding Purpose:");
 const requestedAmount =
 prompt("Enter Requested Amount:");
 
+if(
+!ownerName ||
+!businessName
+){
+alert("Missing required fields.");
+return;
+}
+
 const response = await fetch(
 "https://grant-simone-backend-production.up.railway.app/generate-proposal",
 {
@@ -1508,109 +1478,6 @@ console.error(error);
 alert("Error generating PDF.");
 
 }
-
-}
-
-/* SAVE CONVERSATION */
-
-function saveConversation(){
-
-const messages =
-chat.innerHTML.trim();
-
-const cleanText =
-chat.innerText.trim();
-
-if(
-cleanText === "" ||
-cleanText.includes(
-"Tell me about your business"
-)
-){
-return;
-}
-
-/* CREATE ID IF NONE */
-
-if(!currentConversationId){
-
-currentConversationId =
-Date.now();
-
-}
-
-/* CHECK IF EXISTING */
-
-const existingIndex =
-conversations.findIndex(
-c => c.id === currentConversationId
-);
-
-if(existingIndex !== -1){
-
-/* UPDATE EXISTING */
-
-conversations[existingIndex].messages =
-messages;
-
-conversations[existingIndex].timestamp =
-Date.now();
-
-}else{
-
-/* CREATE NEW */
-
-conversations.unshift({
-
-id:currentConversationId,
-
-title:
-"Conversation " +
-(conversations.length + 1),
-
-messages,
-
-timestamp:Date.now()
-
-});
-
-}
-
-localStorage.setItem(
-"conversations",
-JSON.stringify(conversations)
-);
-
-renderSavedGrants();
-
-}
-
-/* OPEN CONVERSATION */
-
-function openConversation(index){
-
-const conversation =
-conversations[index];
-
-if(
-!conversation ||
-!conversation.messages
-){
-return;
-}
-
-/* SET ACTIVE CONVERSATION */
-
-currentConversationId =
-conversation.id;
-
-chat.innerHTML =
-conversation.messages;
-
-chat.scrollTo({
-top:0,
-behavior:"smooth"
-});
 
 }
 
