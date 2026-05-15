@@ -1274,12 +1274,15 @@ container.innerHTML = html;
 
 function openSavedGrant(grant){
 
+const baseScore =
+Number(grant.matchScore) || 85;
+
 const matchScore =
 Math.max(
-70,
+92,
 Math.min(
-Number(grant.matchScore) || 85,
-98
+baseScore + 12,
+99
 )
 );
 
