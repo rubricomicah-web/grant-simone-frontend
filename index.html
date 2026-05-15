@@ -1139,7 +1139,7 @@ return `
 <div class="grant-card">
 
 <div class="badge">
-AI Match ${Math.min(grant.matchScore + 35, 98)}%
+AI Match ${Math.max(70, Math.min(grant.matchScore || 85, 98))}%
 </div>
 
 <div class="grant-title">
@@ -1157,7 +1157,7 @@ class="btn primary"
 onclick="
 openGrantModal(
 '${grant.grantName}',
-'Match ${grant.matchScore}%',
+'AI Match ${Math.max(70, Math.min(grant.matchScore || 85, 98))}%,
 '${grant.description}',
 '${grant.applicationUrl}'
 )
