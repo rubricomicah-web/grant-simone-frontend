@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,7 +15,8 @@
 --card:#08170d;
 --border:#163320;
 --accent:#7EE787;
---text:#f5f5f5;
+--text:#ffffff;
+--muted:#b8b8b8;
 }
 
 *{
@@ -41,12 +41,11 @@ justify-content:space-between;
 align-items:center;
 padding:24px 60px;
 border-bottom:1px solid rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
 }
 
 .logo{
-font-size:24px;
-font-weight:800;
+font-size:26px;
+font-weight:900;
 }
 
 .nav-buttons{
@@ -65,8 +64,7 @@ transition:.25s;
 
 .btn-primary{
 background:var(--accent);
-color:#000;
-box-shadow:0 0 30px rgba(126,231,135,.25);
+color:black;
 }
 
 .btn-secondary{
@@ -76,12 +74,12 @@ border:1px solid rgba(255,255,255,.15);
 }
 
 .hero{
-min-height:85vh;
+min-height:90vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
-padding:80px 20px;
+padding:60px 20px;
 }
 
 .hero-content{
@@ -95,22 +93,22 @@ border-radius:999px;
 background:rgba(126,231,135,.08);
 border:1px solid rgba(126,231,135,.18);
 color:var(--accent);
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 .hero h1{
-font-size:78px;
-line-height:1;
+font-size:82px;
 font-weight:900;
+line-height:1;
 margin-bottom:25px;
 }
 
 .hero p{
 font-size:22px;
-color:#b8b8b8;
-line-height:1.7;
-max-width:800px;
+line-height:1.8;
+max-width:850px;
 margin:auto;
+color:var(--muted);
 margin-bottom:40px;
 }
 
@@ -121,101 +119,100 @@ gap:20px;
 flex-wrap:wrap;
 }
 
-.stats{
+.features{
+max-width:1300px;
+margin:auto;
+padding:100px 20px;
+}
+
+.section-title{
+font-size:56px;
+font-weight:900;
+text-align:center;
+margin-bottom:60px;
+}
+
+.feature-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:24px;
-max-width:1000px;
-margin:0 auto 100px;
-padding:0 20px;
+gap:25px;
+}
+
+.feature{
+background:rgba(8,23,13,.8);
+border:1px solid var(--border);
+border-radius:24px;
+padding:30px;
+}
+
+.feature h3{
+font-size:22px;
+margin-bottom:15px;
+}
+
+.feature p{
+color:var(--muted);
+line-height:1.8;
+}
+
+.stats{
+max-width:1200px;
+margin:auto;
+padding:40px 20px 100px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
 }
 
 .stat{
-background:rgba(8,23,13,.75);
+background:rgba(8,23,13,.8);
 border:1px solid var(--border);
 border-radius:24px;
-padding:35px;
-backdrop-filter:blur(20px);
+padding:30px;
+text-align:center;
 }
 
 .stat h2{
 font-size:48px;
 color:var(--accent);
+margin-bottom:10px;
 }
 
-.stat p{
-margin-top:10px;
-color:#aaa;
-}
-
-.pricing{
-padding:120px 20px;
+.cta{
 max-width:1200px;
-margin:auto;
-}
-
-.section-title{
+margin:0 auto 120px;
+padding:70px;
 text-align:center;
-font-size:56px;
-font-weight:800;
-margin-bottom:60px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:24px;
-}
-
-.card{
-background:rgba(8,23,13,.75);
+background:rgba(8,23,13,.8);
 border:1px solid var(--border);
 border-radius:30px;
-padding:40px;
-transition:.3s;
-position:relative;
-overflow:hidden;
 }
 
-.card:hover{
-transform:translateY(-8px);
-border-color:var(--accent);
+.cta h2{
+font-size:54px;
+margin-bottom:20px;
 }
 
-.featured{
-border:2px solid var(--accent);
-}
-
-.price{
-font-size:56px;
-font-weight:800;
-margin:25px 0;
-}
-
-.card ul{
-list-style:none;
-margin:25px 0;
-}
-
-.card li{
-padding:10px 0;
-color:#bbb;
+.cta p{
+color:var(--muted);
+font-size:18px;
+margin-bottom:30px;
 }
 
 .footer{
-padding:60px;
+padding:50px;
 text-align:center;
 border-top:1px solid rgba(255,255,255,.05);
-color:#777;
+color:#888;
 }
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
 .hero h1{
-font-size:48px;
+font-size:52px;
 }
 
-.cards,
+.feature-grid,
 .stats{
 grid-template-columns:1fr;
 }
@@ -231,7 +228,6 @@ padding:20px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -243,13 +239,19 @@ Mogul Grant System
 </div>
 
 <div class="nav-buttons">
-<button class="btn btn-secondary">
+
+<button
+class="btn btn-secondary"
+onclick="window.location.href='login.html'">
 Login
 </button>
 
-<button class="btn btn-primary">
-Get Started
+<button
+class="btn btn-primary"
+onclick="window.location.href='pricing.html'">
+View Plans
 </button>
+
 </div>
 
 </nav>
@@ -263,27 +265,90 @@ AI Funding Operating System
 </div>
 
 <h1>
-Win More Grants.<br>
-Scale Faster.
+Find Funding.<br>
+Win More Grants.
 </h1>
 
 <p>
-An AI-powered funding platform for entrepreneurs,
-nonprofits, consultants and white-label partners.
-Search grants, generate proposals and manage
-funding opportunities in one system.
+The complete AI-powered funding operating system for entrepreneurs,
+businesses, nonprofits, consultants, and white-label partners.
+Discover opportunities, generate proposals, and manage funding
+in one platform.
 </p>
 
 <div class="hero-actions">
 
-<button class="btn btn-primary">
-View Plans
+<button
+class="btn btn-primary"
+onclick="window.location.href='pricing.html'">
+Choose Your Plan
 </button>
 
-<button class="btn btn-secondary">
-Watch Demo
+<button
+class="btn btn-secondary"
+onclick="window.location.href='login.html'">
+Login
 </button>
 
+</div>
+
+</div>
+
+</section>
+<section class="features">
+
+<h2 class="section-title">
+Everything You Need To Secure Funding
+</h2>
+
+<div class="feature-grid">
+
+<div class="feature">
+<h3>🤖 AI Funding Assistant</h3>
+<p>
+Get instant answers about grants, funding strategies,
+eligibility requirements, and proposal development.
+</p>
+</div>
+
+<div class="feature">
+<h3>🔍 Grant Discovery Engine</h3>
+<p>
+Search thousands of funding opportunities from
+government, nonprofit, private, and corporate sources.
+</p>
+</div>
+
+<div class="feature">
+<h3>📄 Proposal Generator</h3>
+<p>
+Generate professional grant proposals,
+executive summaries, and narratives in minutes.
+</p>
+</div>
+
+<div class="feature">
+<h3>📊 Funding Dashboard</h3>
+<p>
+Track applications, deadlines,
+submission status, and funding history.
+</p>
+</div>
+
+<div class="feature">
+<h3>🏢 Business Intelligence</h3>
+<p>
+Organize your funding data, business profile,
+documents, and grant readiness information.
+</p>
+</div>
+
+<div class="feature">
+<h3>🚀 White Label Platform</h3>
+<p>
+Launch your own branded funding platform
+for clients, agencies, accelerators, and consultants.
+</p>
 </div>
 
 </div>
@@ -304,82 +369,42 @@ Watch Demo
 
 <div class="stat">
 <h2>24/7</h2>
-<p>AI Grant Assistant</p>
+<p>AI Funding Assistant</p>
+</div>
+
+<div class="stat">
+<h2>99%</h2>
+<p>Faster Funding Research</p>
 </div>
 
 </section>
 
-<section class="pricing">
+<section class="cta">
 
-<h2 class="section-title">
-Choose Your Plan
+<h2>
+Ready To Win More Funding?
 </h2>
 
-<div class="cards">
+<p>
+Join entrepreneurs, nonprofits, consultants,
+and organizations using Mogul Grant System
+to discover grants, generate proposals,
+and scale funding operations.
+</p>
 
-<div class="card">
-
-<h3>Individual Elite</h3>
-
-<div class="price">$99</div>
-
-<ul>
-<li>Grant Search</li>
-<li>AI Proposal Generator</li>
-<li>Funding Dashboard</li>
-<li>Email Support</li>
-</ul>
-
-<button class="btn btn-primary">
-Start Plan
+<button
+class="btn btn-primary"
+onclick="window.location.href='pricing.html'">
+Choose Your Plan
 </button>
-
-</div>
-
-<div class="card featured">
-
-<h3>Business Owner</h3>
-
-<div class="price">$299</div>
-
-<ul>
-<li>Everything in Elite</li>
-<li>Advanced Proposal AI</li>
-<li>Priority Support</li>
-<li>Team Access</li>
-</ul>
-
-<button class="btn btn-primary">
-Start Plan
-</button>
-
-</div>
-
-<div class="card">
-
-<h3>White Label Platform</h3>
-
-<div class="price">$5000</div>
-
-<ul>
-<li>Full Rebranding</li>
-<li>Agency Dashboard</li>
-<li>Unlimited Clients</li>
-<li>White Label Access</li>
-</ul>
-
-<button class="btn btn-primary">
-Start Plan
-</button>
-
-</div>
-
-</div>
 
 </section>
 
 <footer class="footer">
-© 2026 Mogul Grant System. All Rights Reserved.
+
+© 2026 Mogul Grant System.
+All Rights Reserved.
+
 </footer>
 
 </body>
