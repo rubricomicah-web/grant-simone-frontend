@@ -1,1494 +1,386 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8" />
+<title>Mogul Grant System</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-/>
-
-<title>Grant Simone</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+
+:root{
+--bg:#050805;
+--card:#08170d;
+--border:#163320;
+--accent:#7EE787;
+--text:#f5f5f5;
+}
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
--webkit-tap-highlight-color:transparent;
-}
-
-html{
-scroll-behavior:smooth;
+font-family:'Inter',sans-serif;
 }
 
 body{
-
-background:#000;
-color:white;
-overflow-x:hidden;
-
-text-rendering:optimizeLegibility;
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
-
-background-image:
-
-linear-gradient(
-rgba(0,0,0,0.82),
-rgba(0,0,0,0.88)
-),
-
-url('https://storage.googleapis.com/funnel-ai-production/image-generation/xc65ADkcJNt4QcMqV6QQ/hero-section-WtR-x4zxkO.png');
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-background-attachment:fixed;
-
-}
-
-.app{
-display:flex;
-height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-
-width:320px;
-
 background:
-rgba(5,5,5,0.82);
+radial-gradient(circle at top right,#10351f 0%,transparent 35%),
+radial-gradient(circle at bottom left,#0d2415 0%,transparent 30%),
+var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
 
-backdrop-filter:blur(14px);
-
--webkit-backdrop-filter:blur(14px);
-
-border-right:
-1px solid rgba(255,255,255,0.05);
-
-padding:24px;
-
-overflow-y:auto;
-
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:24px 60px;
+border-bottom:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
 }
 
 .logo{
-
-display:flex;
-align-items:center;
-gap:14px;
-
-margin-bottom:28px;
-
-}
-
-.logo img{
-
-width:62px;
-height:62px;
-
-border-radius:50%;
-object-fit:cover;
-
-}
-
-.logo h1{
-font-size:18px;
+font-size:24px;
 font-weight:800;
 }
 
-.logo p{
-color:#999;
-margin-top:6px;
-}
-
-.new-chat{
-
-width:100%;
-
-padding:14px 18px;
-
-border:none;
-
-border-radius:16px;
-
-background:#FFD54F;
-
-font-size:16px;
-font-weight:700;
-
-cursor:pointer;
-
-margin-bottom:24px;
-
-}
-
-.sidebar-title{
-
-font-size:12px;
-
-letter-spacing:2px;
-
-color:#666;
-
-margin-bottom:16px;
-}
-
-.saved-card{
-
-background:#0d0d0d;
-
-border:
-1px solid rgba(255,213,79,0.12);
-
-border-radius:20px;
-
-padding:18px;
-
-margin-bottom:16px;
-
-cursor:pointer;
-
-transition:0.25s;
-
-}
-
-.saved-card:hover{
-
-border-color:#FFD54F;
-
-transform:translateY(-3px);
-
-}
-
-.saved-card h3{
-
-font-size:18px;
-
-margin-bottom:8px;
-}
-
-.saved-card p{
-
-color:#777;
-
-font-size:14px;
-}
-
-/* MAIN */
-
-.main{
-
-height:100dvh;
-
+.nav-buttons{
 display:flex;
-
-flex-direction:column;
-
-width:100%;
-
-overflow:hidden;
-}
-
-.topbar{
-
-padding:16px 24px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-border-bottom:
-1px solid rgba(255,255,255,0.05);
-
-background:
-rgba(5,5,5,0.45);
-
-backdrop-filter:blur(12px);
-
--webkit-backdrop-filter:blur(12px);
-
-}
-
-.top-left{
-
-display:flex;
-align-items:center;
-gap:14px;
-}
-
-.top-left img{
-
-width:48px;
-height:48px;
-
-border-radius:50%;
-object-fit:cover;
-}
-
-.top-left h1{
-
-font-size:18px;
-
-font-weight:700;
-}
-
-.top-left p{
-
-color:#999;
-
-margin-top:4px;
-
-font-size:13px;
-}
-
-.online{
-
-padding:8px 16px;
-
-border-radius:999px;
-
-border:
-1px solid rgba(255,213,79,0.2);
-
-background:
-rgba(255,213,79,0.08);
-
-color:#FFD54F;
-
-font-size:14px;
-
-font-weight:600;
-
-}
-
-/* CHAT */
-
-.chat{
-
-flex:1;
-
-overflow-y:auto;
-
-scrollbar-gutter:stable;
-
-scroll-behavior:smooth;
-
-padding:16px 20px 180px 16px;
-
-min-height:0;
-}
-
-.message{
-
-max-width:920px;
-
-padding:28px;
-
-border-radius:30px;
-
-margin-bottom:24px;
-
-line-height:1.9;
-
-font-size:18px;
-
-word-wrap:break-word;
-
-overflow-wrap:break-word;
-}
-
-.bot{
-
-background:
-rgba(10,10,10,0.55);
-
-backdrop-filter:blur(12px);
-
-border:
-1px solid rgba(255,255,255,0.05);
-
-}
-
-.user{
-
-background:#FFD54F;
-
-color:black;
-
-margin-left:auto;
-
-font-weight:bold;
-}
-
-/* GRANTS */
-
-.grants-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
-
-gap:24px;
-
-margin-top:24px;
-
-align-items:stretch;
-}
-
-.grant-card{
-
-background:
-rgba(10,10,10,0.55);
-
-backdrop-filter:blur(14px);
-
-border:
-1px solid rgba(255,213,79,0.12);
-
-border-radius:30px;
-
-padding:28px;
-
-transition:0.25s;
-
-}
-
-.grant-card:hover{
-
-transform:translateY(-4px);
-
-border-color:#FFD54F;
-
-}
-
-.badge{
-
-display:inline-block;
-
-padding:10px 18px;
-
-border-radius:999px;
-
-background:
-rgba(255,213,79,0.08);
-
-border:
-1px solid rgba(255,213,79,0.14);
-
-color:#FFD54F;
-
-margin-bottom:22px;
-}
-
-.grant-title{
-
-font-size:22px;
-
-font-weight:bold;
-
-margin-bottom:18px;
-}
-
-.grant-desc{
-
-color:#bbb;
-
-line-height:1.8;
-
-margin-bottom:28px;
-}
-
-.actions{
-
-display:flex;
-
 gap:12px;
-
-flex-wrap:wrap;
 }
 
 .btn{
-
-padding:14px 20px;
-
+padding:14px 24px;
+border-radius:14px;
 border:none;
-
-border-radius:16px;
-
 cursor:pointer;
-
-font-size:16px;
-font-weight:bold;
-
-transition:0.2s;
-
+font-weight:700;
+transition:.25s;
 }
 
-.btn:hover{
-transform:translateY(-2px);
+.btn-primary{
+background:var(--accent);
+color:#000;
+box-shadow:0 0 30px rgba(126,231,135,.25);
 }
 
-.primary{
-
-background:#FFD54F;
-
-color:black;
-}
-
-.secondary{
-
-background:#1b1b1b;
-
-color:white;
-}
-
-/* INPUT */
-
-.input-area{
-
-position:fixed;
-
-bottom:12px;
-
-left:0;
-right:0;
-
-width:100%;
-
-padding:0 16px;
-
+.btn-secondary{
 background:transparent;
-
-z-index:9999;
-}
-
-.input-wrap{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-max-width:1000px;
-
-margin:0 auto;
-
-padding:14px 16px;
-
-border-radius:32px;
-
-background:
-rgba(10,10,10,0.82);
-
-backdrop-filter:blur(16px);
-
-border:
-1px solid rgba(255,255,255,0.06);
-
-box-shadow:
-0 0 25px rgba(0,0,0,0.4);
-
-min-height:72px;
-
-}
-
-.input-wrap textarea{
-
-flex:1;
-
-background:none;
-
-border:none;
-
-outline:none;
-
 color:white;
-
-font-size:16px !important;
-
-padding:14px 10px;
-
-resize:none;
-
-overflow-y:auto;
-
-min-height:52px;
-
-height:52px;
-
-max-height:140px;
-
-line-height:1.6;
-
+border:1px solid rgba(255,255,255,.15);
 }
 
-.send-btn{
-
-min-width:56px;
-
-width:56px;
-
-height:56px;
-
-border:none;
-
-border-radius:50%;
-
-background:#FFD54F;
-
-font-size:24px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-/* MODAL */
-
-.custom-modal-overlay{
-
-position:fixed;
-
-inset:0;
-
-background:
-rgba(0,0,0,0.84);
-
+.hero{
+min-height:85vh;
 display:flex;
-
+align-items:center;
 justify-content:center;
-
-align-items:center;
-
-padding:20px;
-
-z-index:999999;
-
-backdrop-filter:blur(4px);
+text-align:center;
+padding:80px 20px;
 }
 
-.custom-modal{
-
-width:100%;
-
-max-width:650px;
-
-background:
-rgba(15,15,15,0.7);
-
-backdrop-filter:blur(18px);
-
-border-radius:30px;
-
-border:
-1px solid rgba(255,213,79,0.14);
-
-padding:40px;
-
-position:relative;
+.hero-content{
+max-width:1000px;
 }
 
-.close-modal{
-
-position:absolute;
-
-top:20px;
-right:20px;
-
-width:42px;
-height:42px;
-
-border:none;
-
-border-radius:50%;
-
-background:#222;
-
-color:white;
-
-cursor:pointer;
+.badge{
+display:inline-block;
+padding:10px 20px;
+border-radius:999px;
+background:rgba(126,231,135,.08);
+border:1px solid rgba(126,231,135,.18);
+color:var(--accent);
+margin-bottom:30px;
 }
 
-.modal-title{
-
-font-size:42px;
-
-margin-bottom:18px;
+.hero h1{
+font-size:78px;
+line-height:1;
+font-weight:900;
+margin-bottom:25px;
 }
 
-.modal-desc{
-
-color:#bbb;
-
-line-height:1.9;
-
-margin-bottom:28px;
+.hero p{
+font-size:22px;
+color:#b8b8b8;
+line-height:1.7;
+max-width:800px;
+margin:auto;
+margin-bottom:40px;
 }
 
-.modal-actions{
-
+.hero-actions{
 display:flex;
-
-gap:14px;
-
+justify-content:center;
+gap:20px;
 flex-wrap:wrap;
 }
 
-/* MOBILE */
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+max-width:1000px;
+margin:0 auto 100px;
+padding:0 20px;
+}
+
+.stat{
+background:rgba(8,23,13,.75);
+border:1px solid var(--border);
+border-radius:24px;
+padding:35px;
+backdrop-filter:blur(20px);
+}
+
+.stat h2{
+font-size:48px;
+color:var(--accent);
+}
+
+.stat p{
+margin-top:10px;
+color:#aaa;
+}
+
+.pricing{
+padding:120px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:56px;
+font-weight:800;
+margin-bottom:60px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+
+.card{
+background:rgba(8,23,13,.75);
+border:1px solid var(--border);
+border-radius:30px;
+padding:40px;
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:var(--accent);
+}
+
+.featured{
+border:2px solid var(--accent);
+}
+
+.price{
+font-size:56px;
+font-weight:800;
+margin:25px 0;
+}
+
+.card ul{
+list-style:none;
+margin:25px 0;
+}
+
+.card li{
+padding:10px 0;
+color:#bbb;
+}
+
+.footer{
+padding:60px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.05);
+color:#777;
+}
 
 @media(max-width:900px){
 
-.app{
-flex-direction:column;
+.hero h1{
+font-size:48px;
 }
 
-.sidebar{
-display:none;
-}
-
-.message{
-
-font-size:15px;
-
-padding:16px;
-
-border-radius:22px;
-
-line-height:1.7;
-}
-
-.bot{
-max-width:92%;
-}
-
-.user{
-max-width:88%;
-}
-
-.grants-grid{
+.cards,
+.stats{
 grid-template-columns:1fr;
 }
 
-.input-wrap textarea{
-
-font-size:16px !important;
-
-padding:10px 12px;
+.section-title{
+font-size:40px;
 }
 
+.nav{
+padding:20px;
 }
 
-@media(min-width:901px){
-
-.input-area{
-
-left:50%;
-
-transform:translateX(-50%);
-
-bottom:20px;
-
-width:calc(100% - 420px);
-
-max-width:980px;
-}
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="app">
-
-<div class="sidebar">
+<nav class="nav">
 
 <div class="logo">
-
-<img
-src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
-/>
-
-<div>
-
-<h1>Grant Simone</h1>
-
-<p>
-AI Grant Funding Consultant
-</p>
-
+Mogul Grant System
 </div>
 
-</div>
-
-<button
-class="new-chat"
-onclick="startNewConversation()"
->
-+ New Conversation
+<div class="nav-buttons">
+<button class="btn btn-secondary">
+Login
 </button>
 
-<div class="sidebar-title">
-SAVED GRANTS
-</div>
-
-<div id="savedContainer"></div>
-
-</div>
-
-<div class="main">
-
-<div class="topbar">
-
-<div class="top-left">
-
-<img
-src="https://i.postimg.cc/MGLNZT5C/Grant-Simone.jpg"
-/>
-
-<div>
-
-<h1>Grant Simone</h1>
-
-<p>
-AI Grant Funding Consultant
-</p>
-
-</div>
-
-</div>
-
-<div class="online">
-● Online
-</div>
-
-</div>
-
-<div
-class="chat"
-id="chat"
->
-
-<div class="message bot">
-
-Hi! I'm Grant Simone.
-
-<br><br>
-
-Tell me about your business,
-nonprofit,
-startup,
-or funding goals
-and I'll help you find
-the best grants available.
-
-</div>
-
-</div>
-
-<div class="input-area">
-
-<div class="input-wrap">
-
-<select id="stateSelect" style="
-background:#111;
-color:white;
-border:none;
-padding:12px;
-border-radius:12px;
-margin-right:10px;
-">
-
-<option value="USA">All USA</option>
-<option value="Alabama">Alabama</option>
-<option value="Alaska">Alaska</option>
-<option value="Arizona">Arizona</option>
-<option value="Arkansas">Arkansas</option>
-<option value="California">California</option>
-<option value="Colorado">Colorado</option>
-<option value="Connecticut">Connecticut</option>
-<option value="Delaware">Delaware</option>
-<option value="District of Columbia">District of Columbia</option>
-<option value="Florida">Florida</option>
-<option value="Georgia">Georgia</option>
-<option value="Hawaii">Hawaii</option>
-<option value="Idaho">Idaho</option>
-<option value="Illinois">Illinois</option>
-<option value="Indiana">Indiana</option>
-<option value="Iowa">Iowa</option>
-<option value="Kansas">Kansas</option>
-<option value="Kentucky">Kentucky</option>
-<option value="Louisiana">Louisiana</option>
-<option value="Maine">Maine</option>
-<option value="Maryland">Maryland</option>
-<option value="Massachusetts">Massachusetts</option>
-<option value="Michigan">Michigan</option>
-<option value="Minnesota">Minnesota</option>
-<option value="Mississippi">Mississippi</option>
-<option value="Missouri">Missouri</option>
-<option value="Montana">Montana</option>
-<option value="Nebraska">Nebraska</option>
-<option value="Nevada">Nevada</option>
-<option value="New Hampshire">New Hampshire</option>
-<option value="New Jersey">New Jersey</option>
-<option value="New Mexico">New Mexico</option>
-<option value="New York">New York</option>
-<option value="North Carolina">North Carolina</option>
-<option value="North Dakota">North Dakota</option>
-<option value="Ohio">Ohio</option>
-<option value="Oklahoma">Oklahoma</option>
-<option value="Oregon">Oregon</option>
-<option value="Pennsylvania">Pennsylvania</option>
-<option value="Puerto Rico">Puerto Rico</option>
-<option value="Rhode Island">Rhode Island</option>
-<option value="South Carolina">South Carolina</option>
-<option value="South Dakota">South Dakota</option>
-<option value="Tennessee">Tennessee</option>
-<option value="Texas">Texas</option>
-<option value="Utah">Utah</option>
-<option value="Vermont">Vermont</option>
-<option value="Virginia">Virginia</option>
-<option value="Washington">Washington</option>
-<option value="West Virginia">West Virginia</option>
-<option value="Wisconsin">Wisconsin</option>
-<option value="Wyoming">Wyoming</option>
-
-</select>
-
-<textarea
-id="userInput"
-placeholder="Ask about grants, funding, nonprofits..."
-rows="1"
-></textarea>
-
-<button
-class="send-btn"
-onclick="sendMessage()"
->
-↑
+<button class="btn btn-primary">
+Get Started
 </button>
-
 </div>
 
-</div>
+</nav>
 
-</div>
+<section class="hero">
 
-</div>
-
-<script>
-
-const chat =
-document.getElementById("chat");
-
-const userInput =
-document.getElementById("userInput");
-
-/* SAVED GRANTS */
-
-let savedGrants =
-JSON.parse(
-localStorage.getItem("savedGrants")
-) || [];
-
-/* START NEW CONVERSATION */
-
-function startNewConversation(){
-
-chat.innerHTML = `
-
-<div class="message bot">
-
-Hi! I'm Grant Simone.
-
-<br><br>
-
-Tell me about your business,
-nonprofit,
-startup,
-or funding goals
-and I'll help you find
-the best grants available.
-
-</div>
-
-`;
-
-userInput.value = "";
-userInput.style.height = "52px";
-
-chat.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-/* ENTER TO SEND */
-
-userInput.addEventListener(
-"keydown",
-function(e){
-
-if(
-e.key === "Enter" &&
-!e.shiftKey
-){
-e.preventDefault();
-sendMessage();
-}
-
-}
-);
-
-/* AUTO EXPAND */
-
-userInput.addEventListener(
-"input",
-function(){
-
-this.style.height = "52px";
-
-if(this.scrollHeight > 52){
-this.style.height =
-this.scrollHeight + "px";
-}
-
-}
-);
-
-/* SEND MESSAGE */
-
-async function sendMessage(){
-
-const selectedState =
-document.getElementById("stateSelect").value;
-
-const text =
-userInput.value.trim();
-
-if(!text) return;
-
-chat.innerHTML += `
-
-<div class="message user">
-${text}
-</div>
-
-`;
-
-const loadingId = Date.now();
-
-chat.innerHTML += `
-
-<div class="message bot" id="loading-${loadingId}">
-
-<div style="font-size:20px;font-weight:bold;margin-bottom:12px;">
-🤖 Grant Simone AI
-</div>
-
-<div style="color:#FFD54F;">
-Searching live grant databases...
-</div>
-
-</div>
-
-`;
-
-userInput.value = "";
-userInput.style.height = "52px";
-
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
-
-try{
-
-const response = await fetch(
-"https://grant-simone-backend-production.up.railway.app/grant-search",
-{
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body: JSON.stringify({
-
-businessType: text,
-keywords: text,
-state: selectedState,
-startup: "yes"
-
-})
-
-}
-);
-
-const data = await response.json();
-
-const loadingMessage =
-document.getElementById(`loading-${loadingId}`);
-
-if(loadingMessage){
-loadingMessage.remove();
-}
-
-if(data.grants && data.grants.length > 0){
-
-showGrantCards(data.grants);
-
-}else{
-
-chat.innerHTML += `
-
-<div class="message bot">
-No grants found.
-</div>
-
-`;
-
-}
-
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
-
-}catch(error){
-
-console.error(error);
-
-const loadingMessage =
-document.getElementById(`loading-${loadingId}`);
-
-if(loadingMessage){
-loadingMessage.remove();
-}
-
-chat.innerHTML += `
-
-<div class="message bot">
-❌ Unable to fetch grants.
-</div>
-
-`;
-
-}
-
-}
-
-/* SHOW GRANTS */
-
-function showGrantCards(grants){
-
-const cardsHTML =
-grants.map(grant => {
-
-const encodedGrant =
-encodeURIComponent(JSON.stringify(grant));
-
-const matchScore =
-Math.max(
-70,
-Math.min(
-Number(grant.matchScore) || 85,
-98
-)
-);
-
-return `
-
-<div class="grant-card">
+<div class="hero-content">
 
 <div class="badge">
-AI Match ${matchScore}%
+AI Funding Operating System
 </div>
 
-<div class="grant-title">
-${grant.grantName}
-</div>
-
-<div class="grant-desc">
-${grant.description}
-</div>
-
-<div class="actions">
-
-<button
-class="btn primary"
-onclick="
-openGrantModal(
-'${grant.grantName}',
-'AI Match ${matchScore}%',
-'${grant.description.replace(/'/g, "\\'")}',
-'${grant.applicationUrl}'
-)
-"
->
-View Details
-</button>
-
-<button
-class="btn secondary"
-onclick='saveGrantFromEncoded("${encodedGrant}")'
->
-Save
-</button>
-
-<button
-class="btn secondary"
-onclick="
-downloadPDF(
-'${grant.grantName}'
-)
-"
->
-Generate Proposal
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-chat.innerHTML += `
-
-<div class="message bot">
-
-<p>
-Here are the best grant opportunities:
-</p>
-
-<div class="grants-grid">
-
-${cardsHTML}
-
-</div>
-
-</div>
-
-`;
-
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
-
-}
-
-/* SAVE GRANT */
-
-function saveGrant(grant){
-
-const exists =
-savedGrants.find(
-g =>
-g.applicationUrl ===
-grant.applicationUrl
-);
-
-if(exists){
-return;
-}
-
-savedGrants.push(grant);
-
-localStorage.setItem(
-"savedGrants",
-JSON.stringify(savedGrants)
-);
-
-renderSavedGrants();
-
-}
-
-function saveGrantFromEncoded(encoded){
-
-const grant =
-JSON.parse(
-decodeURIComponent(encoded)
-);
-
-saveGrant(grant);
-
-}
-
-/* RENDER SIDEBAR */
-
-function renderSavedGrants(){
-
-const container =
-document.getElementById("savedContainer");
-
-let html = "";
-
-/* SAVED GRANTS */
-
-savedGrants.forEach((grant)=>{
-
-html += `
-
-<div
-class="saved-card"
-onclick='openSavedGrantFromEncoded("${encodeURIComponent(JSON.stringify(grant))}")'
->
-
-<h3>
-⭐ ${grant.grantName}
-</h3>
-
-<p>
-Saved Grant
-</p>
-
-</div>
-
-`;
-
-});
-
-container.innerHTML = html;
-
-}
-
-/* OPEN SAVED */
-
-function openSavedGrant(grant){
-
-const baseScore =
-Number(grant.matchScore) || 85;
-
-const matchScore =
-Math.max(
-92,
-Math.min(
-baseScore + 12,
-99
-)
-);
-
-openGrantModal(
-grant.grantName,
-"AI Match " + matchScore + "%",
-grant.description,
-grant.applicationUrl
-);
-
-}
-
-function openSavedGrantFromEncoded(encoded){
-
-const grant =
-JSON.parse(
-decodeURIComponent(encoded)
-);
-
-openSavedGrant(grant);
-
-}
-
-/* MODAL */
-
-function openGrantModal(
-title,
-amount,
-desc,
-link
-){
-
-closeGrantModal();
-
-const modal =
-document.createElement("div");
-
-modal.id = "grantModal";
-
-modal.innerHTML = `
-
-<div class="custom-modal-overlay">
-
-<div class="custom-modal">
-
-<button
-class="close-modal"
-onclick="closeGrantModal()"
->
-✕
-</button>
-
-<div class="badge">
-${amount}
-</div>
-
-<h1 class="modal-title">
-${title}
+<h1>
+Win More Grants.<br>
+Scale Faster.
 </h1>
 
-<p class="modal-desc">
-${desc}
+<p>
+An AI-powered funding platform for entrepreneurs,
+nonprofits, consultants and white-label partners.
+Search grants, generate proposals and manage
+funding opportunities in one system.
 </p>
 
-<div class="modal-actions">
+<div class="hero-actions">
 
-<a
-href="${link}"
-target="_blank"
-class="btn primary"
-style="text-decoration:none;"
->
-Official Website
-</a>
+<button class="btn btn-primary">
+View Plans
+</button>
 
-<button
-class="btn secondary"
-onclick="
-downloadPDF(
-'${title}'
-)
-"
->
-Download PDF
+<button class="btn btn-secondary">
+Watch Demo
 </button>
 
 </div>
 
 </div>
 
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<h2>$50M+</h2>
+<p>Funding Opportunities Indexed</p>
 </div>
 
-`;
+<div class="stat">
+<h2>10,000+</h2>
+<p>Businesses & Nonprofits Served</p>
+</div>
 
-document.body.appendChild(modal);
+<div class="stat">
+<h2>24/7</h2>
+<p>AI Grant Assistant</p>
+</div>
 
-}
+</section>
 
-/* CLOSE MODAL */
+<section class="pricing">
 
-function closeGrantModal(){
+<h2 class="section-title">
+Choose Your Plan
+</h2>
 
-const modal =
-document.getElementById("grantModal");
+<div class="cards">
 
-if(modal){
-modal.remove();
-}
+<div class="card">
 
-}
+<h3>Individual Elite</h3>
 
-/* PDF */
+<div class="price">$99</div>
 
-async function downloadPDF(name){
+<ul>
+<li>Grant Search</li>
+<li>AI Proposal Generator</li>
+<li>Funding Dashboard</li>
+<li>Email Support</li>
+</ul>
 
-try{
+<button class="btn btn-primary">
+Start Plan
+</button>
 
-const ownerName =
-prompt("Enter Owner Name:");
+</div>
 
-const businessYears =
-prompt("Years In Business:");
+<div class="card featured">
 
-const businessName =
-prompt("Enter Business Name:");
+<h3>Business Owner</h3>
 
-const businessType =
-prompt("Enter Business Type:");
+<div class="price">$299</div>
 
-const fundingPurpose =
-prompt("Enter Funding Purpose:");
+<ul>
+<li>Everything in Elite</li>
+<li>Advanced Proposal AI</li>
+<li>Priority Support</li>
+<li>Team Access</li>
+</ul>
 
-const requestedAmount =
-prompt("Enter Requested Amount:");
+<button class="btn btn-primary">
+Start Plan
+</button>
 
-if(
-!ownerName ||
-!businessName
-){
-alert("Missing required fields.");
-return;
-}
+</div>
 
-const response = await fetch(
-"https://grant-simone-backend-production.up.railway.app/generate-proposal",
-{
-method:"POST",
+<div class="card">
 
-headers:{
-"Content-Type":"application/json"
-},
+<h3>White Label Platform</h3>
 
-body:JSON.stringify({
+<div class="price">$5000</div>
 
-businessName,
-ownerName,
-businessYears,
-businessType,
-fundingPurpose,
-grantName:name,
-requestedAmount
+<ul>
+<li>Full Rebranding</li>
+<li>Agency Dashboard</li>
+<li>Unlimited Clients</li>
+<li>White Label Access</li>
+</ul>
 
-})
+<button class="btn btn-primary">
+Start Plan
+</button>
 
-}
-);
+</div>
 
-if(!response.ok){
-throw new Error("PDF failed");
-}
+</div>
 
-const blob =
-await response.blob();
+</section>
 
-const url =
-window.URL.createObjectURL(blob);
-
-const a =
-document.createElement("a");
-
-a.href = url;
-a.download = `${name}.pdf`;
-
-document.body.appendChild(a);
-
-a.click();
-
-a.remove();
-
-window.URL.revokeObjectURL(url);
-
-}catch(error){
-
-console.error(error);
-
-alert("Error generating PDF.");
-
-}
-
-}
-
-/* INITIALIZE */
-
-renderSavedGrants();
-
-</script>
+<footer class="footer">
+© 2026 Mogul Grant System. All Rights Reserved.
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mogul Grant System - Create Account</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#050805;
+--card:#08170d;
+--border:#163320;
+--accent:#7EE787;
+--text:#ffffff;
+--muted:#c9d1c9;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+background:
+radial-gradient(circle at top right,#1b4d2e 0%,transparent 35%),
+radial-gradient(circle at bottom left,#0b1f12 0%,transparent 35%),
+#050805;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:30px;
+
+overflow:hidden;
+
+color:#ffffff;
+
+}
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+height:700px;
+
+background:
+radial-gradient(
+circle,
+rgba(126,231,135,.12),
+transparent 70%
+);
+
+top:-250px;
+right:-150px;
+
+}
+
+.signup-card{
+
+width:100%;
+max-width:650px;
+
+background:
+rgba(8,23,13,.82);
+
+backdrop-filter:blur(25px);
+
+border:
+1px solid rgba(126,231,135,.14);
+
+border-radius:32px;
+
+padding:50px;
+
+position:relative;
+
+z-index:2;
+
+box-shadow:
+0 0 80px rgba(0,0,0,.45);
+
+}
+
+.logo{
+
+display:flex;
+justify-content:center;
+margin-bottom:24px;
+
+}
+
+.logo-circle{
+
+width:95px;
+height:95px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+#7EE787,
+#2E7D32
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:36px;
+font-weight:900;
+
+color:white;
+
+box-shadow:
+0 0 40px rgba(126,231,135,.25);
+
+}
+
+.brand{
+
+text-align:center;
+margin-bottom:35px;
+
+}
+
+.brand h1{
+
+font-size:38px;
+font-weight:900;
+color:white;
+margin-bottom:10px;
+
+}
+
+.brand p{
+
+color:#d1d5db;
+line-height:1.8;
+
+}
+
+.plan-box{
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+rgba(126,231,135,.08);
+
+border:
+1px solid rgba(126,231,135,.15);
+
+margin-bottom:25px;
+
+}
+
+.plan-title{
+
+font-size:13px;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+color:#9bd3a0;
+
+margin-bottom:8px;
+
+}
+
+.plan-name{
+
+font-size:20px;
+font-weight:800;
+color:white;
+
+}
+
+.error{
+
+display:none;
+
+padding:14px;
+
+margin-bottom:20px;
+
+border-radius:12px;
+
+background:
+rgba(255,0,0,.08);
+
+border:
+1px solid rgba(255,0,0,.15);
+
+color:#ff9f9f;
+
+}
+
+.form-group{
+
+margin-bottom:18px;
+
+}
+
+label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:14px;
+font-weight:600;
+
+color:white;
+
+}
+
+input{
+
+width:100%;
+
+padding:16px 18px;
+
+border-radius:14px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+color:white;
+
+outline:none;
+
+font-size:15px;
+
+}
+
+input:focus{
+
+border-color:#7EE787;
+
+box-shadow:
+0 0 0 4px
+rgba(126,231,135,.08);
+
+}
+
+.signup-btn{
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+#2E7D32,
+#7EE787
+);
+
+color:white;
+
+font-size:16px;
+font-weight:800;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}
+
+.signup-btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+.footer{
+
+margin-top:25px;
+
+text-align:center;
+
+color:#cbd5cb;
+
+font-size:14px;
+
+}
+
+.footer a{
+
+color:#7EE787;
+font-weight:700;
+text-decoration:none;
+
+}
+
+@media(max-width:650px){
+
+.signup-card{
+padding:30px;
+}
+
+.brand h1{
+font-size:30px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="signup-card">
+
+<div class="logo">
+
+<div class="logo-circle">
+M
+</div>
+
+</div>
+
+<div class="brand">
+
+<h1>
+Create Your Account
+</h1>
+
+<p>
+Start using Mogul Grant System today.
+Access grant opportunities, proposal generation,
+and funding intelligence.
+</p>
+
+</div>
+
+<div class="plan-box">
+
+<div class="plan-title">
+Selected Plan
+</div>
+
+<div
+id="selectedPlan"
+class="plan-name"
+>
+Individual Elite
+</div>
+
+</div>
+
+<div
+id="errorBox"
+class="error"
+>
+Error
+</div>
+
+<form
+onsubmit="signup(event)"
+>
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+<input
+type="text"
+id="fullName"
+required
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Workspace Name
+</label>
+
+<input
+type="text"
+id="workspaceName"
+required
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input
+type="email"
+id="email"
+required
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Password
+</label>
+
+<input
+type="password"
+id="password"
+required
+
+>
+
+</div>
+
+<button
+id="signupBtn"
+class="signup-btn"
+type="submit"
+
+>
+
+Create Account </button>
+
+</form>
+
+<div class="footer">
+
+Already have an account?
+
+<a href="login.html">
+Login
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+const API_BASE =
+"https://YOUR-RAILWAY-BACKEND.up.railway.app";
+
+const selectedPlanData =
+JSON.parse(
+localStorage.getItem(
+"selectedPlan"
+)
+);
+
+const selectedPlan =
+selectedPlanData?.name ||
+"Individual Elite";
+
+document.getElementById(
+"selectedPlan"
+).innerHTML =
+
+selectedPlanData.name +
+"<br><small>" +
+selectedPlanData.price +
+"</small>";
+
+async function signup(e){
+
+e.preventDefault();
+
+const btn =
+document.getElementById(
+"signupBtn"
+);
+
+btn.innerHTML =
+"Creating Account...";
+
+const payload = {
+
+fullName:
+document.getElementById(
+"fullName"
+).value,
+
+workspaceName:
+document.getElementById(
+"workspaceName"
+).value,
+
+email:
+document.getElementById(
+"email"
+).value,
+
+password:
+document.getElementById(
+"password"
+).value,
+
+plan:selectedPlan
+
+};
+
+try{
+
+const response =
+await fetch(
+
+API_BASE +
+"/api/auth/signup",
+
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify(
+payload
+)
+
+}
+
+);
+
+const data =
+await response.json();
+
+if(data.success){
+
+localStorage.setItem(
+"token",
+data.token
+);
+
+localStorage.setItem(
+"user",
+JSON.stringify(
+data.user
+)
+);
+
+window.location.href =
+"dashboard.html";
+
+return;
+
+}
+
+showError(
+data.error
+);
+
+}catch(err){
+
+showError(
+"Unable to connect to server"
+);
+
+}
+
+btn.innerHTML =
+"Create Account";
+
+}
+
+function showError(msg){
+
+const box =
+document.getElementById(
+"errorBox"
+);
+
+box.style.display =
+"block";
+
+box.innerHTML =
+msg;
+
+}
+
+</script>
+
+</body>
+</html>

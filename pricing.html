@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mogul Grant System - Pricing</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#050805;
+--card:#08170d;
+--border:#163320;
+--accent:#7EE787;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(circle at top right,#163320 0%,transparent 35%),
+radial-gradient(circle at bottom left,#0b1f12 0%,transparent 35%),
+#050805;
+
+color:white;
+
+min-height:100vh;
+
+}
+
+.nav{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:24px 60px;
+
+border-bottom:
+1px solid rgba(255,255,255,.05);
+
+}
+
+.logo{
+
+font-size:24px;
+font-weight:900;
+
+}
+
+.hero{
+
+text-align:center;
+
+padding:100px 20px 70px;
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:10px 18px;
+
+border-radius:999px;
+
+background:
+rgba(126,231,135,.08);
+
+border:
+1px solid rgba(126,231,135,.15);
+
+color:#7EE787;
+
+margin-bottom:24px;
+
+}
+
+.hero h1{
+
+font-size:70px;
+
+font-weight:900;
+
+margin-bottom:20px;
+
+}
+
+.hero p{
+
+max-width:850px;
+
+margin:auto;
+
+font-size:20px;
+
+line-height:1.8;
+
+color:#cbd5cb;
+
+}
+
+.pricing{
+
+max-width:1300px;
+
+margin:auto;
+
+padding:30px 20px 120px;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:30px;
+
+}
+
+.card{
+
+background:
+rgba(8,23,13,.8);
+
+backdrop-filter:blur(25px);
+
+border:
+1px solid rgba(126,231,135,.12);
+
+border-radius:30px;
+
+padding:40px;
+
+position:relative;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+border-color:#7EE787;
+
+}
+
+.featured{
+
+border:2px solid #7EE787;
+
+box-shadow:
+0 0 40px
+rgba(126,231,135,.12);
+
+}
+
+.plan{
+
+font-size:28px;
+font-weight:800;
+
+margin-bottom:15px;
+
+}
+
+.price{
+
+font-size:64px;
+
+font-weight:900;
+
+margin-bottom:10px;
+
+}
+
+.price span{
+
+font-size:18px;
+
+color:#cbd5cb;
+
+}
+
+.desc{
+
+color:#cbd5cb;
+
+line-height:1.8;
+
+margin-bottom:25px;
+
+}
+
+.features{
+
+list-style:none;
+
+margin-bottom:30px;
+
+}
+
+.features li{
+
+padding:12px 0;
+
+border-bottom:
+1px solid rgba(255,255,255,.05);
+
+color:#d5d5d5;
+
+}
+
+.btn{
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+border-radius:16px;
+
+font-size:16px;
+font-weight:800;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+135deg,
+#2E7D32,
+#7EE787
+);
+
+color:white;
+
+}
+
+.btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+.popular{
+
+position:absolute;
+
+top:-14px;
+right:20px;
+
+padding:8px 16px;
+
+border-radius:999px;
+
+background:#7EE787;
+
+color:black;
+
+font-size:12px;
+font-weight:800;
+
+}
+
+@media(max-width:1000px){
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="nav">
+
+<div class="logo">
+Mogul Grant System
+</div>
+
+<a href="login.html">
+
+<button class="btn" style="
+width:auto;
+padding:12px 24px;
+">
+
+Login
+
+</button>
+
+</a>
+
+</nav>
+
+<section class="hero">
+
+<div class="badge">
+AI Funding Operating System
+</div>
+
+<h1>
+Choose Your Plan
+</h1>
+
+<p>
+Start finding grants, generating proposals,
+and managing funding opportunities with
+Mogul Grant System.
+</p>
+
+</section>
+
+<section class="pricing">
+
+<div class="cards">
+
+<!-- PLAN 1 -->
+
+<div class="card">
+
+<div class="plan">
+Individual Elite
+</div>
+
+<div class="price">
+$99
+<span>/month</span>
+</div>
+
+<div class="desc">
+
+Perfect for entrepreneurs,
+startups and nonprofits.
+
+</div>
+
+<ul class="features">
+
+<li>Grant Search Engine</li>
+
+<li>AI Funding Assistant</li>
+
+<li>Proposal Generator</li>
+
+<li>PDF Export</li>
+
+<li>Email Support</li>
+
+</ul>
+
+<button
+class="btn"
+onclick="selectPlan(
+'Individual Elite',
+'$99/month'
+)"
+
+>
+
+Start Individual Elite
+
+</button>
+
+</div>
+
+<!-- PLAN 2 -->
+
+<div class="card featured">
+
+<div class="popular">
+MOST POPULAR
+</div>
+
+<div class="plan">
+Business Owner
+</div>
+
+<div class="price">
+$299
+<span>/month</span>
+</div>
+
+<div class="desc">
+
+For established businesses
+seeking larger funding opportunities.
+
+</div>
+
+<ul class="features">
+
+<li>Everything in Elite</li>
+
+<li>Priority Support</li>
+
+<li>Advanced Proposal AI</li>
+
+<li>Funding Dashboard</li>
+
+<li>Unlimited Searches</li>
+
+</ul>
+
+<button
+class="btn"
+onclick="selectPlan(
+'Business Owner',
+'$299/month'
+)"
+
+>
+
+Start Business Owner
+
+</button>
+
+</div>
+
+<!-- PLAN 3 -->
+
+<div class="card">
+
+<div class="plan">
+White Label Platform
+</div>
+
+<div class="price">
+$5000
+<span>/year</span>
+</div>
+
+<div class="desc">
+
+Launch your own branded
+grant funding platform.
+
+</div>
+
+<ul class="features">
+
+<li>Custom Branding</li>
+
+<li>Unlimited Clients</li>
+
+<li>Admin Dashboard</li>
+
+<li>White Label Access</li>
+
+<li>Agency Management</li>
+
+</ul>
+
+<button
+class="btn"
+onclick="selectPlan(
+'White Label Platform',
+'$5000/year'
+)"
+
+>
+
+Start White Label
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function selectPlan(
+planName,
+planPrice
+){
+
+localStorage.setItem(
+
+"selectedPlan",
+
+JSON.stringify({
+
+name:planName,
+price:planPrice
+
+})
+
+);
+
+window.location.href =
+"signup.html";
+
+}
+
+</script>
+
+</body>
+</html>
