@@ -618,7 +618,7 @@ document.getElementById(
 "userName"
 ).innerText =
 "Welcome, " +
-user.name;
+(user.fullName || user.name)
 
 document.getElementById(
 "userEmail"
@@ -643,17 +643,124 @@ window.location.href =
 
 async function sendMessage(){
 
-alert(
-"Connect this button to your existing /chat endpoint."
+const prompt =
+document.getElementById(
+"chatInput"
+).value;
+
+if(!prompt){
+return;
+}
+
+document.getElementById(
+"results"
+).innerHTML =
+"<h2>Results</h2><p>Thinking...</p>";
+
+try{
+
+const response =
+await fetch(
+API_BASE + "/chat",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:prompt
+})
+}
 );
 
+const data =
+await response.json();
+
+document.getElementById(
+"results"
+).innerHTML =
+`
+<h2>AI Response</h2>
+<p>
+${data.response || JSON.stringify(data)}
+</p>
+`;
+
+}catch(error){
+
+document.getElementById(
+"results"
+).innerHTML =
+`
+<h2>Error</h2>
+<p>
+${error.message}
+</p>
+`;
+
+}
+  
 }
 
 async function searchGrants(){
 
-alert(
-"Connect this button to your existing /grant-search endpoint."
+const query =
+document.getElementById(
+"grantSearch"
+).value;
+
+if(!query){
+return;
+}
+
+document.getElementById(
+"results"
+).innerHTML =
+"<h2>Results</h2><p>Searching...</p>";
+
+try{
+
+const response =
+await fetch(
+API_BASE + "/grant-search",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+query:query
+})
+}
 );
+
+const data =
+await response.json();
+
+document.getElementById(
+"results"
+).innerHTML =
+`
+<h2>Grant Results</h2>
+<pre style="
+white-space:pre-wrap;
+color:white;
+">
+${JSON.stringify(data,null,2)}
+</pre>
+`;
+
+}catch(error){
+
+document.getElementById(
+"results"
+).innerHTML =
+`
+<h2>Error</h2>
+<p>${error.message}</p>
+`;
+
+}
 
 }
 
